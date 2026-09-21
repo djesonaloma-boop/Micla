@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Programme — MI.C.L.A Cité de Refuge</title>
+
+  <style>
+    :root {
+      --bg: #060b14;
+      --bg-2: #09111f;
+      --surface: #0e1726;
+      --surface-2: #121e30;
+      --surface-3: #17263b;
+
+      --gold: #d6ad55;
+      --gold-light: #f1d58b;
+      --gold-soft: rgba(214,173,85,.10);
+
+      --white: #ffffff;
+      --text: #e8eef7;
+      --muted: #8d9bb0;
+      --muted-2: #68778d;
+
+      --border: rgba(255,255,255,.075);
+      --border-gold: rgba(214,173,85,.24);
+
+      --success: #35c58b;
+
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,.32);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(214,173,85,.055),
+          transparent 32%
+        ),
+        var(--bg);
+
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      min-height: 76px;
+
+      padding: 12px 5%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      background: rgba(6,11,20,.86);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+
+      object-fit: contain;
+
+      border-radius: 13px;
+
+      border: 1px solid var(--border-gold);
+
+      background: rgba(255,255,255,.03);
+
+      box-shadow: 0 8px 25px rgba(0,0,0,.25);
+
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
+    .brand-text strong {
+      display: block;
+
+      color: var(--gold-light);
+
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
+
+    .brand-text span {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 10px 15px;
+
+      border-radius: 11px;
+
+      background: var(--gold-soft);
+
+      border: 1px solid var(--border-gold);
+
+      color: var(--gold-light);
+
+      text-decoration: none;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      transition: .25s ease;
+    }
+
+    .back:hover {
+      transform: translateY(-2px);
+
+      background: rgba(214,173,85,.16);
+
+      border-color: rgba(214,173,85,.4);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      position: relative;
+
+      min-height: 370px;
+
+      display: flex;
+      align-items: flex-end;
+
+      overflow: hidden;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4,8,15,.94),
+          rgba(4,8,15,.72),
+          rgba(4,8,15,.38)
+        ),
+        url("assets/images/eglise.jpg")
+        center/cover no-repeat;
+
+      transform: scale(1.03);
+
+      animation:
+        heroZoom 12s ease-in-out infinite alternate;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 70px 5% 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: rgba(214,173,85,.11);
+
+      border: 1px solid var(--border-gold);
+
+      color: var(--gold-light);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      letter-spacing: .9px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      max-width: 800px;
+
+      color: #fff;
+
+      font-size: clamp(34px, 6vw, 58px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.8px;
+
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero p {
+      max-width: 700px;
+
+      color: #c5d0df;
+
+      font-size: 15px;
+
+      line-height: 1.8;
+    }
+
+    .hero-line {
+      width: 80px;
+      height: 3px;
+
+      margin-top: 24px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--gold),
+          transparent
+        );
+
+      border-radius: 20px;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    main {
+      width: 92%;
+      max-width: 1100px;
+
+      margin: 45px auto 70px;
+    }
+
+    .intro {
+      text-align: center;
+
+      max-width: 780px;
+
+      margin: 0 auto 32px;
+    }
+
+    .intro h2 {
+      color: var(--gold-light);
+
+      font-size: clamp(23px, 4vw, 30px);
+
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.8;
+    }
+
+    /* =========================
+       CARD
+    ========================== */
+
+    .card {
+      position: relative;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.025),
+          rgba(255,255,255,.008)
+        ),
+        var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 25px;
+
+      margin-bottom: 22px;
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+
+      animation: fadeUp .7s ease both;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 95px;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--gold),
+          transparent
+        );
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+
+      border-color: var(--border-gold);
+
+      box-shadow:
+        0 25px 65px rgba(0,0,0,.38);
+    }
+
+    .card > h2 {
+      color: var(--gold-light);
+
+      font-size: 19px;
+
+      margin-bottom: 18px;
+    }
+
+    /* =========================
+       WEEK
+    ========================== */
+
+    .week {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 8px 14px;
+
+      margin-bottom: 18px;
+
+      border-radius: 999px;
+
+      background: var(--gold-soft);
+
+      border: 1px solid var(--border-gold);
+
+      color: var(--gold-light);
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+    /* =========================
+       TABLE
+    ========================== */
+
+    .table-wrapper {
+      width: 100%;
+
+      overflow-x: auto;
+
+      border-radius: 15px;
+
+      border: 1px solid var(--border);
+
+      scrollbar-width: thin;
+    }
+
+    table {
+      width: 100%;
+
+      min-width: 850px;
+
+      border-collapse: collapse;
+
+      background: #091321;
+    }
+
+    thead {
+      background:
+        linear-gradient(
+          135deg,
+          #15243a,
+          #101c2e
+        );
+    }
+
+    th {
+      padding: 15px 12px;
+
+      color: var(--gold-light);
+
+      text-align: left;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: .35px;
+
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    td {
+      padding: 14px 12px;
+
+      color: #d6dfeb;
+
+      font-size: 13px;
+
+      vertical-align: top;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.055);
+
+      transition: background .25s ease;
+    }
+
+    tbody tr:hover td {
+      background: rgba(214,173,85,.035);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .day {
+      color: var(--gold-light);
+
+      font-weight: 800;
+
+      white-space: nowrap;
+    }
+
+    .activity {
+      color: #fff;
+
+      font-weight: 700;
+    }
+
+    .person {
+      color: #aebdce;
+    }
+
+    .empty {
+      color: var(--muted-2);
+
+      font-style: italic;
+    }
+
+    /* =========================
+       APPEL
+    ========================== */
+
+    .call-box {
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.08),
+          transparent
+        ),
+        var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+
+      padding: 21px;
+
+      border-radius: 15px;
+    }
+
+    .call-box h3 {
+      color: var(--gold-light);
+
+      margin-bottom: 8px;
+
+      font-size: 16px;
+    }
+
+    .call-box p {
+      color: #d4deea;
+
+      line-height: 1.75;
+
+      font-size: 14px;
+
+      white-space: pre-line;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .buttons {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 16px;
+    }
+
+    .action-btn {
+      border: 1px solid var(--border);
+
+      padding: 14px;
+
+      border-radius: 12px;
+
+      background: var(--surface-2);
+
+      color: #dce5ef;
+
+      cursor: pointer;
+
+      font-weight: 800;
+
+      font-size: 13px;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+
+      background: var(--surface-3);
+
+      border-color: var(--border-gold);
+    }
+
+    .action-btn.active {
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold-light),
+          var(--gold)
+        );
+
+      color: #07101c;
+
+      border-color: transparent;
+    }
+
+    /* =========================
+       LIST BOX
+    ========================== */
+
+    .list-box {
+      display: none;
+
+      background: #091321;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      padding: 15px;
+
+      animation: fadeUp .35s ease both;
+    }
+
+    .list-box.show {
+      display: block;
+    }
+
+    .list-item {
+      padding: 15px;
+
+      margin-bottom: 9px;
+
+      background: var(--surface-2);
+
+      border-radius: 11px;
+
+      border-left: 3px solid var(--gold);
+
+      transition: .25s ease;
+    }
+
+    .list-item:hover {
+      transform: translateX(3px);
+
+      border-color: var(--border-gold);
+    }
+
+    .list-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .list-item strong {
+      color: #fff;
+
+      display: block;
+
+      margin-bottom: 4px;
+
+      font-size: 14px;
+    }
+
+    .list-item span {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSABILITÉS
+    ========================== */
+
+    .responsibilities {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 14px;
+    }
+
+    .responsibility {
+      position: relative;
+
+      background: var(--surface-2);
+
+      padding: 18px;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease;
+    }
+
+    .responsibility:hover {
+      transform: translateY(-4px);
+
+      border-color: var(--border-gold);
+    }
+
+    .responsibility::after {
+      content: "";
+
+      position: absolute;
+
+      right: 15px;
+      top: 15px;
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      box-shadow:
+        0 0 15px rgba(214,173,85,.35);
+    }
+
+    .responsibility h3 {
+      color: var(--gold-light);
+
+      font-size: 15px;
+
+      margin-bottom: 7px;
+    }
+
+    .responsibility p {
+      color: #c3cedc;
+
+      font-size: 13px;
+
+      line-height: 1.65;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      text-align: center;
+
+      padding: 35px 15px;
+
+      color: var(--muted-2);
+
+      font-size: 12px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    footer::first-line {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    @keyframes heroZoom {
+      from {
+        transform: scale(1.03);
+      }
+
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 800px) {
+
+      .hero {
+        min-height: 340px;
+      }
+
+      .hero-content {
+        padding: 60px 5% 45px;
+      }
+
+      .responsibilities {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      header {
+        padding: 11px 4%;
+      }
+
+      .brand img {
+        width: 43px;
+        height: 43px;
+      }
+
+      .brand-text strong {
+        font-size: 13px;
+      }
+
+      .brand-text span {
+        font-size: 10px;
+      }
+
+      .back {
+        padding: 9px 11px;
+
+        font-size: 11px;
+      }
+
+      main {
+        width: 94%;
+
+        margin-top: 32px;
+      }
+
+      .card {
+        padding: 17px;
+
+        border-radius: 16px;
+      }
+
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .intro p {
+        font-size: 13px;
+      }
+
+      .week {
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 430px) {
+
+      .brand-text span {
+        display: none;
+      }
+
+      .back {
+        font-size: 0;
+
+        width: 40px;
+        height: 40px;
+
+        padding: 0;
+      }
+
+      .back::after {
+        content: "←";
+
+        font-size: 17px;
+      }
+
+      .hero {
+        min-height: 320px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero-content {
+        padding-bottom: 38px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .card > h2 {
+        font-size: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+
+  <a href="index.html" class="brand">
+
+    <img
+      src="logo.png"
+      alt="Logo MI.C.L.A"
+    >
+
+    <div class="brand-text">
+
+      <strong>MI.C.L.A</strong>
+
+      <span>
+        Cité de Refuge · Programme
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <a href="index.html" class="back">
+    ← Accueil
+  </a>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      📅 Programme officiel
+    </div>
+
+    <h1>
+      Le programme de
+      <span>l'Église</span>
+    </h1>
+
+    <p>
+      Retrouvez le programme hebdomadaire de MI.C.L.A
+      — Cité de Refuge, ainsi que les différentes
+      responsabilités, prédicateurs, modérateurs et
+      services organisés au cours de la semaine.
+    </p>
+
+    <div class="hero-line"></div>
+
+  </div>
+
+</section>
+
+
+<main>
+
+  <!-- =========================
+       INTRODUCTION
+  ========================== -->
+
+  <section class="intro">
+
+    <h2>📅 Programme de la semaine</h2>
+
+    <p>
+      Retrouvez ici les activités, les prédicateurs,
+      les modérateurs et les différentes responsabilités
+      de la semaine.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       PROGRAMME
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🗓️ Tableau hebdomadaire</h2>
+
+    <div class="week" id="week-title">
+      Programme de la semaine
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Jour</th>
+            <th>Activité</th>
+            <th>Heure</th>
+            <th>Prédicateur</th>
+            <th>Modérateur</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody id="program-table">
+
+          <tr>
+            <td class="day">Lundi</td>
+            <td class="activity">
+              Une Heure avec Jésus
+            </td>
+            <td>17h00 – 18h00</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Mardi</td>
+            <td class="activity">
+              Partage biblique
+            </td>
+            <td>17h00 – 18h00</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Mercredi</td>
+            <td class="activity">
+              Culte d'enseignement
+            </td>
+            <td>17h30 – 19h30</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Jeudi</td>
+            <td class="activity">
+              Intercession des serviteurs de Dieu
+            </td>
+            <td>17h00 – 18h00</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Vendredi</td>
+            <td class="activity">
+              Culte de combat spirituel
+            </td>
+            <td>17h30 – 19h30</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Samedi</td>
+            <td class="activity">
+              Réunion du département des Mamans
+            </td>
+            <td>08h30 – 12h00</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Samedi</td>
+            <td class="activity">
+              Suivi et évangélisation
+            </td>
+            <td>14h30</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Samedi</td>
+            <td class="activity">
+              Département de jeunesse
+            </td>
+            <td>16h30 – 17h30</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+
+          <tr>
+            <td class="day">Dimanche</td>
+            <td class="activity">
+              Culte d'adoration et d'action de grâce
+            </td>
+            <td>07h30 – 10h30</td>
+            <td class="person">—</td>
+            <td class="person">—</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       APPEL
+  ========================== -->
+
+  <section class="card">
+
+    <div class="call-box">
+
+      <h3>📢 Appel aux membres</h3>
+
+      <p id="call-message">
+        Que chaque membre consulte le programme de la semaine
+        et se prépare selon son service et sa responsabilité.
+        Nous invitons chacun à participer avec fidélité,
+        respect et esprit de communion.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RESPONSABLES
+  ========================== -->
+
+  <section class="card">
+
+    <h2>👥 Responsables de la semaine</h2>
+
+    <div class="buttons">
+
+      <button
+        class="action-btn"
+        id="btn-preachers"
+        onclick="toggleList('preachers', this)"
+      >
+        🎙️ Afficher les prédicateurs
+      </button>
+
+
+      <button
+        class="action-btn"
+        id="btn-moderators"
+        onclick="toggleList('moderators', this)"
+      >
+        🎤 Afficher les modérateurs
+      </button>
+
+    </div>
+
+
+    <div id="preachers" class="list-box">
+
+      <div class="list-item">
+
+        <strong>
+          Prédicateurs de la semaine
+        </strong>
+
+        <span id="preachers-content">
+          Les noms seront publiés par l'administration.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div id="moderators" class="list-box">
+
+      <div class="list-item">
+
+        <strong>
+          Modérateurs de la semaine
+        </strong>
+
+        <span id="moderators-content">
+          Les noms seront publiés par l'administration.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       AUTRES RESPONSABILITÉS
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🛡️ Autres responsabilités</h2>
+
+    <div class="responsibilities">
+
+      <div class="responsibility">
+
+        <h3>🎤 Chantres</h3>
+
+        <p id="singers">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>🙏 Intercession</h3>
+
+        <p id="intercession">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>📖 Lecture biblique</h3>
+
+        <p id="bible-reader">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>🤝 Protocole</h3>
+
+        <p id="protocol">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>🛡️ Sécurité</h3>
+
+        <p id="security">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>📸 Média</h3>
+
+        <p id="media">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>🎹 Musique</h3>
+
+        <p id="music">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="responsibility">
+
+        <h3>👥 Accueil</h3>
+
+        <p id="welcome">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+  <strong>
+    MI.C.L.A — CITÉ DE REFUGE
+  </strong>
+
+  <br>
+
+  © <span data-year></span>
+  — Programme de l'Église
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT EXISTANT
+========================== -->
+
+<script src="programme.js"></script>
+
+
+<script>
+
+  const yearElement =
+    document.querySelector("[data-year]");
+
+  if (yearElement) {
+    yearElement.textContent =
+      new Date().getFullYear();
+  }
+
+</script>
+
+</body>
+</html>

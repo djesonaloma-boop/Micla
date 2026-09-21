@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Protocole & Sécurité — MI.C.L.A</title>
+
+  <meta name="theme-color" content="#060b14">
+
+  <style>
+    :root{
+      --bg:#060b14;
+      --bg-2:#09111f;
+      --surface:#0e1726;
+      --surface-2:#121e30;
+      --surface-3:#17263b;
+
+      --gold:#d6ad55;
+      --gold-light:#f1d58b;
+      --gold-soft:rgba(214,173,85,.10);
+
+      --white:#fff;
+      --text:#e8eef7;
+      --muted:#8d9bb0;
+      --muted-2:#68778d;
+
+      --border:rgba(255,255,255,.075);
+      --border-gold:rgba(214,173,85,.24);
+
+      --success:#35c58b;
+      --danger:#e85d6a;
+
+      --radius:18px;
+      --radius-lg:26px;
+
+      --shadow:0 20px 60px rgba(0,0,0,.32);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(214,173,85,.07), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(30,83,145,.10), transparent 30%),
+        linear-gradient(180deg,var(--bg),var(--bg-2));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom,black,transparent 75%);
+    }
+
+    a{
+      color:inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+
+      padding:12px clamp(16px,4vw,55px);
+
+      background:rgba(6,11,20,.78);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+
+      border-bottom:1px solid var(--border);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:48px;
+      height:48px;
+      object-fit:contain;
+      border-radius:14px;
+      border:1px solid var(--border-gold);
+      background:var(--surface);
+      box-shadow:0 8px 25px rgba(0,0,0,.25);
+      animation:logoFloat 5s ease-in-out infinite;
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-text strong{
+      display:block;
+      color:var(--white);
+      font-size:15px;
+      letter-spacing:.7px;
+    }
+
+    .brand-text span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      margin-top:3px;
+      letter-spacing:.5px;
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      padding:11px 17px;
+
+      border:1px solid var(--border-gold);
+      border-radius:12px;
+
+      background:linear-gradient(
+        135deg,
+        var(--gold),
+        #b98d35
+      );
+
+      color:#101010;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:800;
+
+      box-shadow:0 8px 25px rgba(214,173,85,.13);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+    }
+
+    .back:hover{
+      transform:translateY(-2px);
+      box-shadow:0 13px 30px rgba(214,173,85,.22);
+      filter:brightness(1.06);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      position:relative;
+      min-height:330px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      text-align:center;
+
+      overflow:hidden;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5,10,18,.38),
+          rgba(5,10,18,.93)
+        ),
+        url("assets/images/eglise.jpg") center/cover no-repeat;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(214,173,85,.12),
+          transparent 48%
+        );
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:min(900px,92%);
+      padding:65px 20px 55px;
+
+      animation:fadeUp .8s ease both;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+
+      padding:8px 13px;
+      margin-bottom:17px;
+
+      border:1px solid var(--border-gold);
+      border-radius:999px;
+
+      background:rgba(8,13,24,.68);
+      backdrop-filter:blur(10px);
+
+      color:var(--gold-light);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+    }
+
+    .hero h1{
+      font-size:clamp(30px,6vw,52px);
+      line-height:1.05;
+      margin-bottom:15px;
+
+      color:var(--white);
+
+      letter-spacing:-1px;
+    }
+
+    .hero h1 span{
+      color:var(--gold-light);
+    }
+
+    .hero p{
+      max-width:720px;
+      margin:auto;
+
+      color:#c2cedd;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main{
+      width:min(1150px,92%);
+      margin:45px auto 70px;
+    }
+
+    .intro{
+      text-align:center;
+      max-width:820px;
+      margin:0 auto 32px;
+
+      animation:fadeUp .8s ease both;
+    }
+
+    .intro h2{
+      color:var(--gold-light);
+      font-size:26px;
+      margin-bottom:11px;
+    }
+
+    .intro p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:14px;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card{
+      position:relative;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18,30,48,.94),
+          rgba(10,17,29,.96)
+        );
+
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+
+      padding:25px;
+      margin-bottom:24px;
+
+      box-shadow:var(--shadow);
+
+      overflow:hidden;
+
+      animation:fadeUp .75s ease both;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(214,173,85,.45),
+          transparent
+        );
+    }
+
+    .card:hover{
+      border-color:rgba(214,173,85,.16);
+    }
+
+    .card > h2{
+      display:flex;
+      align-items:center;
+      gap:9px;
+
+      color:var(--white);
+      font-size:20px;
+      margin-bottom:20px;
+    }
+
+    .card > h2::first-letter{
+      color:var(--gold);
+    }
+
+    /* =========================
+       EQUIPES
+    ========================= */
+
+    .team-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+
+    .team{
+      position:relative;
+
+      padding:21px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(23,38,59,.96),
+          rgba(13,25,42,.96)
+        );
+
+      border:1px solid var(--border);
+      border-radius:18px;
+
+      border-top:3px solid var(--gold);
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .team:hover{
+      transform:translateY(-4px);
+      border-color:var(--border-gold);
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
+    }
+
+    .team h3{
+      color:var(--gold-light);
+      font-size:18px;
+      margin-bottom:17px;
+    }
+
+    .members{
+      display:grid;
+      gap:12px;
+    }
+
+    .member{
+      display:flex;
+      align-items:center;
+      gap:13px;
+
+      padding:13px;
+
+      background:rgba(6,12,22,.58);
+
+      border:1px solid rgba(255,255,255,.055);
+      border-radius:14px;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .member:hover{
+      transform:translateX(3px);
+      background:rgba(255,255,255,.035);
+      border-color:var(--border-gold);
+    }
+
+    .member-photo{
+      width:66px;
+      height:66px;
+
+      flex-shrink:0;
+
+      object-fit:cover;
+
+      border-radius:50%;
+
+      border:2px solid var(--gold);
+
+      background:var(--surface-3);
+
+      box-shadow:
+        0 0 0 5px rgba(214,173,85,.06),
+        0 8px 22px rgba(0,0,0,.25);
+
+      transition:transform .3s ease;
+    }
+
+    .member:hover .member-photo{
+      transform:scale(1.05);
+    }
+
+    .member-info{
+      min-width:0;
+    }
+
+    .member-info h4{
+      color:var(--white);
+      font-size:15px;
+      margin-bottom:5px;
+    }
+
+    .member-info p{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+      margin-bottom:8px;
+    }
+
+    .whatsapp{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+
+      padding:7px 10px;
+
+      background:rgba(37,211,102,.10);
+      border:1px solid rgba(37,211,102,.20);
+
+      color:#b9f4cf;
+      text-decoration:none;
+
+      border-radius:9px;
+      font-size:11px;
+      font-weight:700;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
+    }
+
+    .whatsapp:hover{
+      background:rgba(37,211,102,.18);
+      transform:translateY(-1px);
+    }
+
+    .empty{
+      color:var(--muted-2);
+      font-size:13px;
+      padding:13px 0;
+      line-height:1.6;
+    }
+
+    /* =========================
+       TABLEAU
+    ========================= */
+
+    .table-wrapper{
+      width:100%;
+      overflow-x:auto;
+
+      border:1px solid var(--border);
+      border-radius:15px;
+
+      scrollbar-width:thin;
+    }
+
+    table{
+      width:100%;
+      min-width:760px;
+      border-collapse:collapse;
+    }
+
+    th{
+      padding:15px 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #172c47,
+          #102238
+        );
+
+      color:var(--gold-light);
+
+      text-align:left;
+
+      font-size:12px;
+      font-weight:800;
+
+      letter-spacing:.3px;
+
+      border-bottom:1px solid var(--border-gold);
+    }
+
+    td{
+      padding:14px 12px;
+
+      color:#cbd6e3;
+      font-size:13px;
+      line-height:1.5;
+
+      border-bottom:1px solid rgba(255,255,255,.055);
+
+      vertical-align:top;
+    }
+
+    tbody tr{
+      transition:background .2s ease;
+    }
+
+    tbody tr:nth-child(even){
+      background:rgba(255,255,255,.018);
+    }
+
+    tbody tr:hover{
+      background:rgba(214,173,85,.045);
+    }
+
+    tbody tr:last-child td{
+      border-bottom:0;
+    }
+
+    /* =========================
+       NOTE
+    ========================= */
+
+    .important-note{
+      position:relative;
+
+      padding:21px 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.10),
+          rgba(12,27,48,.92)
+        );
+
+      border:1px solid rgba(214,173,85,.16);
+      border-left:4px solid var(--gold);
+
+      border-radius:15px;
+
+      color:#d9e2ed;
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .important-note strong{
+      display:block;
+
+      color:var(--gold-light);
+
+      font-size:17px;
+      margin-bottom:9px;
+    }
+
+    /* =========================
+       ANNONCES
+    ========================= */
+
+    .announcement{
+      padding:16px 17px;
+      margin-bottom:12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(23,38,59,.95),
+          rgba(12,24,40,.95)
+        );
+
+      border:1px solid var(--border);
+      border-left:4px solid var(--gold);
+
+      border-radius:13px;
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease;
+    }
+
+    .announcement:hover{
+      transform:translateX(3px);
+      border-color:var(--border-gold);
+    }
+
+    .announcement h3{
+      color:var(--white);
+      font-size:15px;
+      margin-bottom:7px;
+    }
+
+    .announcement p{
+      color:#c3cfdd;
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .announcement small{
+      display:block;
+      color:var(--muted-2);
+      margin-top:9px;
+      font-size:11px;
+    }
+
+    /* =========================
+       CONSIGNES
+    ========================= */
+
+    .instructions{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:13px;
+    }
+
+    .instruction{
+      position:relative;
+
+      padding:18px;
+
+      background:rgba(23,38,59,.72);
+
+      border:1px solid var(--border);
+      border-radius:14px;
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+    }
+
+    .instruction:hover{
+      transform:translateY(-3px);
+      background:rgba(23,38,59,.95);
+      border-color:var(--border-gold);
+    }
+
+    .instruction h3{
+      color:var(--gold-light);
+      font-size:14px;
+      margin-bottom:8px;
+    }
+
+    .instruction p{
+      color:#c3cfdd;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* =========================
+       GALERIE
+    ========================= */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+    }
+
+    .gallery-item{
+      overflow:hidden;
+
+      background:var(--surface-2);
+
+      border:1px solid var(--border);
+      border-radius:15px;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .gallery-item:hover{
+      transform:translateY(-4px);
+      border-color:var(--border-gold);
+      box-shadow:0 15px 35px rgba(0,0,0,.25);
+    }
+
+    .gallery-item img{
+      display:block;
+
+      width:100%;
+      height:190px;
+
+      object-fit:cover;
+
+      transition:transform .45s ease;
+    }
+
+    .gallery-item:hover img{
+      transform:scale(1.04);
+    }
+
+    .gallery-item p{
+      padding:12px;
+
+      color:#c8d4df;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-box{
+      padding:25px;
+
+      text-align:center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(214,173,85,.09),
+          transparent 65%
+        ),
+        var(--surface-2);
+
+      border:1px solid var(--border-gold);
+      border-radius:17px;
+    }
+
+    .contact-icon{
+      width:52px;
+      height:52px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      margin:0 auto 13px;
+
+      border-radius:50%;
+
+      background:var(--gold-soft);
+      border:1px solid var(--border-gold);
+
+      font-size:23px;
+    }
+
+    .contact-box p{
+      max-width:700px;
+      margin:0 auto;
+
+      color:#c5d2df;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer{
+      padding:30px 20px 35px;
+
+      text-align:center;
+
+      border-top:1px solid var(--border);
+
+      color:var(--muted-2);
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    footer strong{
+      color:var(--gold-light);
+      letter-spacing:.8px;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(18px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes logoFloat{
+      0%,100%{
+        transform:translateY(0);
+      }
+
+      50%{
+        transform:translateY(-3px);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:800px){
+
+      header{
+        padding:11px 15px;
+      }
+
+      .brand img{
+        width:43px;
+        height:43px;
+      }
+
+      .brand-text strong{
+        font-size:14px;
+      }
+
+      .brand-text span{
+        font-size:10px;
+      }
+
+      .back{
+        padding:9px 12px;
+        font-size:12px;
+      }
+
+      .hero{
+        min-height:300px;
+      }
+
+      .hero-content{
+        padding:55px 15px 45px;
+      }
+
+      main{
+        width:94%;
+        margin-top:32px;
+      }
+
+      .team-grid{
+        grid-template-columns:1fr;
+      }
+
+      .instructions{
+        grid-template-columns:1fr;
+      }
+
+      .gallery{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .card{
+        padding:19px;
+        border-radius:20px;
+      }
+    }
+
+    @media(max-width:500px){
+
+      .brand-text span{
+        display:none;
+      }
+
+      .brand img{
+        width:40px;
+        height:40px;
+      }
+
+      .back{
+        padding:8px 10px;
+        font-size:11px;
+      }
+
+      .hero h1{
+        font-size:31px;
+      }
+
+      .hero p{
+        font-size:13px;
+      }
+
+      .intro h2{
+        font-size:22px;
+      }
+
+      .card{
+        padding:15px;
+      }
+
+      .card > h2{
+        font-size:18px;
+      }
+
+      .member-photo{
+        width:56px;
+        height:56px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .gallery-item img{
+        height:210px;
+      }
+
+      .important-note{
+        padding:17px;
+        font-size:13px;
+      }
+    }
+
+    @media(max-width:370px){
+
+      .brand-text strong{
+        font-size:12px;
+      }
+
+      .back{
+        padding:7px 8px;
+      }
+
+      .hero h1{
+        font-size:28px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto !important;
+        animation:none !important;
+        transition:none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+
+    <div class="brand">
+
+      <img
+        src="logo.png"
+        alt="Logo MI.C.L.A"
+      >
+
+      <div class="brand-text">
+        <strong>MI.C.L.A</strong>
+        <span>Cité de Refuge · Protocole & Sécurité</span>
+      </div>
+
+    </div>
+
+    <a href="index.html" class="back">
+      ← Accueil
+    </a>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        🛡️ Service & responsabilité
+      </div>
+
+      <h1>
+        Protocole <span>&</span> Sécurité
+      </h1>
+
+      <p>
+        Découvrez l'organisation des équipes chargées
+        de l'accueil, de l'ordre, de l'accompagnement
+        et de la sécurité au sein de
+        MI.C.L.A — Cité de Refuge.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <main>
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <section class="intro">
+
+      <h2>🛡️ Nos équipes de service</h2>
+
+      <p>
+        Le protocole et la sécurité contribuent au bon
+        déroulement des activités de l'église, dans un
+        esprit de respect, de discipline, de disponibilité
+        et de responsabilité.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         EQUIPES
+    ========================== -->
+
+    <section class="card">
+
+      <h2>👥 Nos équipes</h2>
+
+      <div class="team-grid">
+
+        <!-- PROTOCOLE -->
+
+        <div class="team">
+
+          <h3>🛡️ Équipe Protocole</h3>
+
+          <div
+            id="protocol-members"
+            class="members"
+          >
+
+            <p class="empty">
+              Aucun membre du protocole n'a encore été publié.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- SECURITE -->
+
+        <div class="team">
+
+          <h3>🚨 Équipe Sécurité</h3>
+
+          <div
+            id="security-members"
+            class="members"
+          >
+
+            <p class="empty">
+              Aucun membre de la sécurité n'a encore été publié.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROGRAMME
+    ========================== -->
+
+    <section class="card">
+
+      <h2>📅 Programme de service de la semaine</h2>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Jour</th>
+              <th>Heure</th>
+              <th>Activité</th>
+              <th>🛡️ Protocole</th>
+              <th>🚨 Sécurité</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="service-table">
+
+            <tr>
+              <td>Lundi</td>
+              <td>17h00–18h00</td>
+              <td>Intercession — Une Heure avec Jésus</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Mardi</td>
+              <td>17h00–18h00</td>
+              <td>Partage biblique</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Mercredi</td>
+              <td>17h30–19h30</td>
+              <td>Culte d'enseignement</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Jeudi</td>
+              <td>17h00–18h00</td>
+              <td>Intercession des serviteurs de Dieu</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Vendredi</td>
+              <td>17h30–19h30</td>
+              <td>Culte de combat spirituel</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Samedi</td>
+              <td>16h30–17h30</td>
+              <td>Département de jeunesse</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>Dimanche</td>
+              <td>07h30–10h30</td>
+              <td>Culte d'adoration et d'action de grâce</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOTE
+    ========================== -->
+
+    <section class="card">
+
+      <div
+        class="important-note"
+        id="discipline-note"
+      >
+
+        <strong>
+          ⏰ Note importante — Respect du programme
+        </strong>
+
+        Tous les membres du Protocole et de la Sécurité
+        doivent respecter leur programme et leur responsabilité.
+
+        Chaque membre doit arriver suffisamment tôt,
+        avant le début du programme, afin de se préparer
+        et d'être déjà à son poste lorsque le programme commence.
+
+        En cas d'empêchement, le responsable doit être
+        informé à l'avance afin qu'une organisation puisse
+        être faite.
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ANNONCES
+    ========================== -->
+
+    <section class="card">
+
+      <h2>📢 Annonces du Protocole & de la Sécurité</h2>
+
+      <div id="announcements">
+
+        <p class="empty">
+          Aucune annonce publiée pour le moment.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONSIGNES
+    ========================== -->
+
+    <section class="card">
+
+      <h2>📋 Consignes générales</h2>
+
+      <div
+        id="instructions"
+        class="instructions"
+      >
+
+        <div class="instruction">
+
+          <h3>⏰ Ponctualité</h3>
+
+          <p>
+            Arriver avant le début du programme
+            et être prêt à son poste.
+          </p>
+
+        </div>
+
+
+        <div class="instruction">
+
+          <h3>🤝 Respect</h3>
+
+          <p>
+            Servir avec respect, calme,
+            discipline et esprit de responsabilité.
+          </p>
+
+        </div>
+
+
+        <div class="instruction">
+
+          <h3>📋 Programme</h3>
+
+          <p>
+            Respecter les affectations et
+            les horaires communiqués.
+          </p>
+
+        </div>
+
+
+        <div class="instruction">
+
+          <h3>📢 Communication</h3>
+
+          <p>
+            Informer le responsable à l'avance
+            en cas d'empêchement.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PHOTOS
+    ========================== -->
+
+    <section class="card">
+
+      <h2>📸 Photos des équipes</h2>
+
+      <div
+        id="gallery"
+        class="gallery"
+      >
+
+        <p class="empty">
+          Aucune photo supplémentaire publiée pour le moment.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section class="card">
+
+      <h2>📞 Informations</h2>
+
+      <div class="contact-box">
+
+        <div class="contact-icon">
+          🛡️
+        </div>
+
+        <p>
+          Pour toute information concernant le Protocole
+          ou la Sécurité, veuillez vous adresser aux
+          responsables désignés par l'église.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <strong>MI.C.L.A — CITÉ DE REFUGE</strong>
+
+    <br>
+
+    © <span id="year"></span>
+    — Protocole & Sécurité
+
+  </footer>
+
+
+  <!-- JS EXISTANT : NE PAS MODIFIER -->
+  <script src="protocole-et-securite.js"></script>
+
+  <script>
+    const year = document.getElementById("year");
+
+    if(year){
+      year.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+</html>

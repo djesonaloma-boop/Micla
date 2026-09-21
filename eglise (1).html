@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MI.C.L.A — Pasteur & Berger</title>
+
+<style>
+:root{
+  --blue:#06152f;
+  --blue2:#0b2145;
+  --blue3:#102d59;
+  --gold:#d8b45a;
+  --gold-light:#f1d98b;
+  --white:#fff;
+  --text:#dce5f4;
+  --muted:#91a2bc;
+  --border:rgba(216,180,90,.18);
+  --danger:#ef6675;
+  --success:#42d39b;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(216,180,90,.10),transparent 30%),
+    linear-gradient(135deg,#030b19,#06152f 50%,#081a36);
+  color:var(--text);
+  min-height:100vh;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(3,11,25,.88);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
+  width:48px;
+  height:48px;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--gold);
+}
+
+.brand strong{
+  color:var(--gold-light);
+  font-size:17px;
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+nav a{
+  padding:10px 13px;
+  border-radius:10px;
+  color:var(--text);
+  transition:.2s;
+}
+
+nav a:hover{
+  background:var(--blue2);
+  color:var(--gold-light);
+}
+
+.hero{
+  min-height:390px;
+  background:
+    linear-gradient(90deg,rgba(3,11,25,.95),rgba(3,11,25,.55)),
+    url("assets/images/eglise.jpg") center/cover;
+  display:flex;
+  align-items:center;
+}
+
+.hero-content{
+  max-width:1200px;
+  width:100%;
+  margin:auto;
+  padding:70px 20px;
+}
+
+.badge{
+  display:inline-block;
+  border:1px solid var(--border);
+  background:rgba(216,180,90,.08);
+  color:var(--gold-light);
+  padding:8px 14px;
+  border-radius:50px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(34px,6vw,65px);
+  color:#fff;
+  max-width:750px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  max-width:700px;
+  color:var(--text);
+  line-height:1.7;
+  font-size:17px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  color:var(--gold-light);
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+.people{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:25px;
+}
+
+.person{
+  background:linear-gradient(145deg,rgba(11,33,69,.95),rgba(6,21,47,.96));
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 15px 45px rgba(0,0,0,.22);
+  transition:.25s;
+}
+
+.person:hover{
+  transform:translateY(-3px);
+}
+
+.person-top{
+  padding:25px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.person-top img{
+  width:105px;
+  height:105px;
+  border-radius:18px;
+  object-fit:cover;
+  border:2px solid var(--gold);
+}
+
+.person h3{
+  color:#fff;
+  font-size:24px;
+}
+
+.role{
+  color:var(--gold);
+  margin-top:5px;
+}
+
+.phone{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.actions{
+  padding:0 25px 25px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.btn{
+  border:0;
+  cursor:pointer;
+  min-height:48px;
+  border-radius:12px;
+  padding:12px 14px;
+  font-weight:700;
+  color:#fff;
+  background:var(--blue3);
+  border:1px solid var(--border);
+  transition:.2s;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+}
+
+.btn.gold{
+  color:#071326;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+}
+
+.btn.whatsapp{
+  background:#087c58;
+}
+
+.btn.call{
+  background:#1768ad;
+}
+
+.panel{
+  padding:25px;
+  border-top:1px solid var(--border);
+}
+
+.panel h4{
+  color:var(--gold-light);
+  margin-bottom:12px;
+}
+
+.message-box{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:16px;
+  line-height:1.7;
+  color:var(--text);
+  white-space:pre-wrap;
+}
+
+.empty{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.audio-list{
+  display:grid;
+  gap:12px;
+}
+
+.audio-card{
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.07);
+  padding:15px;
+  border-radius:14px;
+}
+
+.audio-card strong{
+  color:#fff;
+  display:block;
+  margin-bottom:8px;
+}
+
+.audio-card small{
+  color:var(--muted);
+  display:block;
+  margin-bottom:10px;
+}
+
+.audio-card audio{
+  width:100%;
+}
+
+.prayer-area{
+  margin-top:40px;
+  background:linear-gradient(145deg,rgba(11,33,69,.95),rgba(6,21,47,.96));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+}
+
+.prayer-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.prayer-box{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  padding:22px;
+}
+
+.prayer-box h3{
+  color:var(--gold-light);
+  margin-bottom:10px;
+}
+
+.prayer-box p{
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0a172d;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+}
+
+.modal-card h3{
+  color:var(--gold-light);
+  margin-bottom:15px;
+}
+
+textarea,
+input{
+  width:100%;
+  background:#071326;
+  border:1px solid rgba(255,255,255,.1);
+  color:#fff;
+  border-radius:12px;
+  padding:14px;
+  outline:none;
+  margin-bottom:12px;
+}
+
+textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.modal-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.recorder{
+  margin-top:15px;
+  padding:18px;
+  background:#071326;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:15px;
+}
+
+.timer{
+  font-size:28px;
+  font-weight:bold;
+  color:var(--gold-light);
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.status{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.notice{
+  margin-top:15px;
+  padding:13px;
+  border-radius:12px;
+  background:rgba(66,211,155,.08);
+  border:1px solid rgba(66,211,155,.2);
+  color:#bdf5df;
+  display:none;
+}
+
+footer{
+  margin-top:30px;
+  padding:35px 20px;
+  text-align:center;
+  background:#030a17;
+  border-top:1px solid var(--border);
+}
+
+footer strong{
+  color:var(--gold-light);
+}
+
+footer p{
+  color:var(--muted);
+  margin-top:7px;
+}
+
+@media(max-width:850px){
+
+  nav{
+    display:none;
+  }
+
+  .people,
+  .prayer-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .person-top{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    min-height:350px;
+  }
+
+  .hero-content{
+    padding:55px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a class="brand" href="index.html">
+
+      <img src="logo.png" alt="MI.C.L.A">
+
+      <div>
+        <strong>MI.C.L.A</strong>
+        <small>Cité de Refuge</small>
+      </div>
+
+    </a>
+
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="programme.html">Programme</a>
+      <a href="jeunesse.html">Jeunesse</a>
+      <a href="chantres.html">Chantres</a>
+      <a href="support.html">Support</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="badge">
+      MI.C.L.A — CITÉ DE REFUGE
+    </span>
+
+    <h1>
+      Pasteur & Berger
+    </h1>
+
+    <p>
+      Retrouvez les messages, prières, annonces et vocaux
+      de nos responsables. Vous pouvez également leur écrire
+      directement ou les appeler.
+    </p>
+
+  </div>
+
+</section>
+
+
+<main class="container">
+
+  <div class="section-title">
+
+    <h2>
+      Nos responsables
+    </h2>
+
+    <p>
+      Écoutez, écrivez, priez et restez connecté avec l'Église.
+    </p>
+
+  </div>
+
+
+  <section class="people">
+
+
+    <!-- PASTEUR -->
+
+    <article class="person">
+
+      <div class="person-top">
+
+        <img
+          src="pasteur.jpg"
+          alt="Pasteur Jérémie Bakadisanga"
+        >
+
+        <div>
+
+          <h3 id="pasteur-name">
+            Pasteur Jérémie Bakadisanga
+          </h3>
+
+          <div class="role">
+            Pasteur
+          </div>
+
+          <div class="phone" id="pasteur-phone">
+            +243 904 490 937
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn gold"
+          onclick="openMessage('pasteur')"
+        >
+          💬 Message
+        </button>
+
+
+        <button
+          class="btn"
+          onclick="scrollToAudio('pasteur')"
+        >
+          🎙️ Vocal
+        </button>
+
+
+        <button
+          class="btn"
+          onclick="openPrayer('pasteur')"
+        >
+          🙏 Prière
+        </button>
+
+
+        <a
+          class="btn whatsapp"
+          id="pasteur-whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp
+        </a>
+
+
+        <a
+          class="btn call"
+          id="pasteur-call"
+        >
+          📞 Appeler
+        </a>
+
+
+        <button
+          class="btn"
+          onclick="scrollToAnnouncements('pasteur')"
+        >
+          📢 Annonces
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          Message du Pasteur
+        </h4>
+
+        <div
+          class="message-box"
+          id="pasteur-message"
+        >
+          Aucun message publié pour le moment.
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          🎙️ Vocaux du Pasteur
+        </h4>
+
+        <div
+          class="audio-list"
+          id="pasteur-audio"
+        >
+          <div class="empty">
+            Aucun vocal publié pour le moment.
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          📢 Annonces du Pasteur
+        </h4>
+
+        <div
+          class="message-box"
+          id="pasteur-announcements"
+        >
+          Aucune annonce publiée pour le moment.
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          🙏 Prière du Pasteur
+        </h4>
+
+        <div
+          class="message-box"
+          id="pasteur-prayer"
+        >
+          Aucune prière publiée pour le moment.
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- BERGER -->
+
+    <article class="person">
+
+      <div class="person-top">
+
+        <img
+          src="berger.jpg"
+          alt="Berger Chardin Vuanda"
+        >
+
+        <div>
+
+          <h3 id="berger-name">
+            Chardin Vuanda
+          </h3>
+
+          <div class="role">
+            Berger
+          </div>
+
+          <div class="phone" id="berger-phone">
+            +243 896 039 439
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn gold"
+          onclick="openMessage('berger')"
+        >
+          💬 Message
+        </button>
+
+
+        <button
+          class="btn"
+          onclick="scrollToAudio('berger')"
+        >
+          🎙️ Vocal
+        </button>
+
+
+        <button
+          class="btn"
+          onclick="openPrayer('berger')"
+        >
+          🙏 Prière
+        </button>
+
+
+        <a
+          class="btn whatsapp"
+          id="berger-whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp
+        </a>
+
+
+        <a
+          class="btn call"
+          id="berger-call"
+        >
+          📞 Appeler
+        </a>
+
+
+        <button
+          class="btn"
+          onclick="scrollToAnnouncements('berger')"
+        >
+          📢 Annonces
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          Message du Berger
+        </h4>
+
+        <div
+          class="message-box"
+          id="berger-message"
+        >
+          Aucun message publié pour le moment.
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          🎙️ Vocaux du Berger
+        </h4>
+
+        <div
+          class="audio-list"
+          id="berger-audio"
+        >
+          <div class="empty">
+            Aucun vocal publié pour le moment.
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          📢 Annonces du Berger
+        </h4>
+
+        <div
+          class="message-box"
+          id="berger-announcements"
+        >
+          Aucune annonce publiée pour le moment.
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h4>
+          🙏 Prière du Berger
+        </h4>
+
+        <div
+          class="message-box"
+          id="berger-prayer"
+        >
+          Aucune prière publiée pour le moment.
+        </div>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+
+  <!-- PRIÈRE -->
+
+  <section class="prayer-area">
+
+    <div class="section-title">
+
+      <h2>
+        🙏 Demande de prière
+      </h2>
+
+      <p>
+        Vous pouvez envoyer votre demande à l'administration.
+      </p>
+
+    </div>
+
+
+    <div class="prayer-grid">
+
+
+      <div class="prayer-box">
+
+        <h3>
+          Demander une prière au Pasteur
+        </h3>
+
+        <p>
+          Écrivez votre demande ou enregistrez un vocal
+          avant de l'envoyer.
+        </p>
+
+        <button
+          class="btn gold"
+          onclick="openPrayer('pasteur')"
+        >
+          🙏 Envoyer une prière
+        </button>
+
+      </div>
+
+
+      <div class="prayer-box">
+
+        <h3>
+          Demander une prière au Berger
+        </h3>
+
+        <p>
+          Écrivez votre demande ou enregistrez un vocal
+          avant de l'envoyer.
+        </p>
+
+        <button
+          class="btn gold"
+          onclick="openPrayer('berger')"
+        >
+          🙏 Envoyer une prière
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<!-- MODAL MESSAGE -->
+
+<div
+  class="modal"
+  id="messageModal"
+>
+
+  <div class="modal-card">
+
+    <h3 id="messageTitle">
+      Écrire au responsable
+    </h3>
+
+    <textarea
+      id="messageText"
+      placeholder="Écrivez votre message ici..."
+    ></textarea>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn gold"
+        onclick="sendMessageWhatsApp()"
+      >
+        💬 Envoyer sur WhatsApp
+      </button>
+
+      <button
+        class="btn"
+        onclick="closeModal('messageModal')"
+      >
+        Fermer
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- MODAL PRIÈRE -->
+
+<div
+  class="modal"
+  id="prayerModal"
+>
+
+  <div class="modal-card">
+
+    <h3 id="prayerTitle">
+      Demande de prière
+    </h3>
+
+
+    <textarea
+      id="prayerText"
+      placeholder="Écrivez votre demande de prière..."
+    ></textarea>
+
+
+    <div class="recorder">
+
+      <div
+        class="timer"
+        id="prayerTimer"
+      >
+        00:00
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="btn gold"
+          id="startPrayerRecord"
+        >
+          🎙️ Enregistrer
+        </button>
+
+        <button
+          class="btn"
+          id="stopPrayerRecord"
+        >
+          ⏹️ Arrêter
+        </button>
+
+        <button
+          class="btn"
+          id="deletePrayerRecord"
+        >
+          🗑️ Supprimer
+        </button>
+
+      </div>
+
+
+      <audio
+        id="prayerPreview"
+        controls
+        style="width:100%;margin-top:15px;display:none"
+      ></audio>
+
+
+      <div
+        class="status"
+        id="prayerRecordStatus"
+      >
+        Vous pouvez écrire ou enregistrer un vocal.
+      </div>
+
+    </div>
+
+
+    <div
+      class="modal-actions"
+      style="margin-top:15px"
+    >
+
+      <button
+        class="btn whatsapp"
+        onclick="sendPrayerWhatsApp()"
+      >
+        📤 Envoyer la demande
+      </button>
+
+      <button
+        class="btn"
+        onclick="closePrayer()"
+      >
+        Fermer
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<footer>
+
+  <strong>
+    MI.C.L.A — Cité de Refuge
+  </strong>
+
+  <p>
+    Une communauté de foi, de prière et de communion.
+  </p>
+
+  <p>
+    © <span id="year"></span> MI.C.L.A
+  </p>
+
+</footer>
+
+
+<script src="Eglise.js"></script>
+
+</body>
+</html>

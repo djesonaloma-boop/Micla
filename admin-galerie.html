@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Galerie — Administration MI.C.L.A</title>
+
+<style>
+:root{
+  --bg:#080d18;
+  --bg2:#0b1220;
+  --surface:#101827;
+  --surface2:#151f30;
+  --surface3:#1b273a;
+
+  --gold:#d6ad55;
+  --gold2:#f0d58b;
+
+  --white:#fff;
+  --text:#edf2f8;
+  --muted:#96a4b8;
+  --muted2:#68758a;
+
+  --border:rgba(255,255,255,.07);
+  --goldBorder:rgba(214,173,85,.24);
+
+  --success:#38c793;
+  --danger:#e85d6a;
+
+  --radius:18px;
+  --shadow:0 15px 45px rgba(0,0,0,.30);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(214,173,85,.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(40,91,160,.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #080d18,
+      #050912 70%,
+      #03060c
+    );
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:rgba(8,13,24,.90);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  width:100%;
+  max-width:1200px;
+  min-height:72px;
+
+  margin:auto;
+  padding:12px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:47px;
+  height:47px;
+
+  object-fit:cover;
+  border-radius:13px;
+
+  border:1px solid var(--goldBorder);
+
+  box-shadow:
+    0 7px 22px rgba(0,0,0,.30);
+
+  transition:.3s ease;
+}
+
+.brand:hover img{
+  transform:
+    translateY(-2px)
+    rotate(-2deg);
+
+  box-shadow:
+    0 10px 28px rgba(214,173,85,.15);
+}
+
+.brand strong{
+  display:block;
+  color:white;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.brand span{
+  display:block;
+  color:var(--gold);
+  font-size:10px;
+  margin-top:4px;
+  letter-spacing:.4px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+nav a{
+  color:#cbd5e3;
+  text-decoration:none;
+
+  padding:10px 13px;
+  border-radius:10px;
+
+  font-size:12px;
+  font-weight:700;
+
+  border:1px solid transparent;
+
+  transition:.25s ease;
+}
+
+nav a:hover{
+  color:white;
+  background:rgba(214,173,85,.08);
+  border-color:rgba(214,173,85,.13);
+  transform:translateY(-1px);
+}
+
+nav a:first-child{
+  color:var(--gold2);
+  background:rgba(214,173,85,.08);
+  border-color:rgba(214,173,85,.15);
+}
+
+.menu{
+  display:none;
+
+  background:rgba(255,255,255,.04);
+  color:white;
+
+  border:1px solid var(--goldBorder);
+  border-radius:11px;
+
+  padding:9px 12px;
+
+  font-size:18px;
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+.menu:hover{
+  background:rgba(214,173,85,.10);
+  transform:translateY(-1px);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  width:100%;
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:38px 20px 70px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  padding:30px;
+
+  border-radius:23px;
+
+  border:1px solid var(--goldBorder);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(21,43,78,.94),
+      rgba(9,16,29,.98)
+    );
+
+  box-shadow:var(--shadow);
+
+  animation:fadeUp .5s ease both;
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  right:-120px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:rgba(214,173,85,.07);
+
+  filter:blur(4px);
+}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:170px;
+  height:170px;
+
+  left:-90px;
+  bottom:-100px;
+
+  border-radius:50%;
+
+  background:rgba(48,99,170,.08);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero small{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  color:var(--gold2);
+
+  text-transform:uppercase;
+  letter-spacing:2px;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+.hero small::before{
+  content:"";
+
+  width:24px;
+  height:1px;
+
+  background:var(--gold);
+}
+
+.hero h1{
+  color:white;
+
+  font-size:36px;
+  line-height:1.15;
+
+  margin:10px 0;
+
+  letter-spacing:-.7px;
+}
+
+.hero p{
+  max-width:760px;
+
+  color:var(--muted);
+
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.layout{
+  display:grid;
+
+  grid-template-columns:370px 1fr;
+
+  gap:22px;
+
+  margin-top:23px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,24,39,.97),
+      rgba(10,16,28,.97)
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:21px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.18);
+
+  animation:fadeUp .55s ease both;
+
+  transition:.3s ease;
+}
+
+.card:hover{
+  border-color:rgba(214,173,85,.14);
+  transform:translateY(-1px);
+}
+
+.card h2{
+  color:white;
+
+  font-size:17px;
+
+  margin-bottom:18px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.group{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+
+  color:#cbd5e3;
+
+  font-size:12px;
+  font-weight:700;
+
+  margin-bottom:7px;
+}
+
+input,
+textarea{
+  width:100%;
+
+  padding:13px 14px;
+
+  color:white;
+
+  background:#0a1424;
+
+  border:1px solid var(--border);
+
+  border-radius:12px;
+
+  outline:none;
+
+  font-family:inherit;
+  font-size:13px;
+
+  transition:.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#56657a;
+}
+
+input:hover,
+textarea:hover{
+  border-color:rgba(214,173,85,.16);
+}
+
+input:focus,
+textarea:focus{
+  border-color:var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(214,173,85,.07);
+}
+
+textarea{
+  min-height:105px;
+
+  resize:vertical;
+
+  line-height:1.6;
+}
+
+.file{
+  padding:14px;
+
+  background:rgba(255,255,255,.018);
+
+  border:1px dashed rgba(214,173,85,.30);
+
+  border-radius:13px;
+}
+
+input[type="file"]{
+  padding:10px;
+
+  cursor:pointer;
+}
+
+input[type="file"]::file-selector-button{
+  border:0;
+
+  border-radius:8px;
+
+  padding:8px 11px;
+
+  margin-right:8px;
+
+  background:rgba(214,173,85,.12);
+
+  color:var(--gold2);
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+.preview{
+  width:100%;
+
+  max-height:210px;
+
+  object-fit:cover;
+
+  border-radius:13px;
+
+  margin-top:12px;
+
+  display:none;
+
+  border:1px solid var(--goldBorder);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+  animation:previewIn .35s ease;
+}
+
+@keyframes previewIn{
+  from{
+    opacity:0;
+    transform:scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+  display:flex;
+
+  gap:9px;
+
+  margin-top:18px;
+}
+
+button{
+  border:1px solid var(--border);
+
+  border-radius:11px;
+
+  padding:12px 15px;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:12px;
+  font-weight:800;
+
+  transition:.25s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+button:active{
+  transform:translateY(0);
+}
+
+.primary{
+  flex:1;
+
+  border:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold2)
+    );
+
+  color:#07142b;
+
+  box-shadow:
+    0 8px 22px rgba(214,173,85,.12);
+}
+
+.primary:hover{
+  box-shadow:
+    0 11px 28px rgba(214,173,85,.20);
+}
+
+.secondary{
+  background:rgba(255,255,255,.04);
+
+  color:var(--text);
+
+  border:1px solid var(--border);
+}
+
+.secondary:hover{
+  border-color:var(--goldBorder);
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:none;
+
+  padding:11px 12px;
+
+  border-radius:11px;
+
+  margin-bottom:14px;
+
+  font-size:12px;
+}
+
+.status.show{
+  display:block;
+
+  background:rgba(56,199,147,.08);
+
+  border:1px solid rgba(56,199,147,.14);
+
+  color:#8ee2b5;
+
+  animation:fadeUp .25s ease;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:15px;
+}
+
+.photo{
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,17,32,.98),
+      rgba(7,13,24,.98)
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  transition:.3s ease;
+}
+
+.photo:hover{
+  transform:translateY(-4px);
+
+  border-color:var(--goldBorder);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.28);
+}
+
+.photo img{
+  width:100%;
+  height:180px;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.45s ease;
+}
+
+.photo:hover img{
+  transform:scale(1.035);
+}
+
+.body{
+  padding:14px;
+}
+
+.body h3{
+  color:white;
+
+  font-size:15px;
+
+  margin-bottom:7px;
+}
+
+.body p{
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.55;
+}
+
+.buttons{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+
+  margin-top:12px;
+}
+
+.edit,
+.toggle,
+.delete{
+  padding:10px;
+
+  font-size:11px;
+
+  border-radius:10px;
+}
+
+.edit{
+  background:rgba(214,173,85,.08);
+
+  color:var(--gold2);
+
+  border:1px solid rgba(214,173,85,.16);
+}
+
+.edit:hover{
+  background:rgba(214,173,85,.14);
+}
+
+.toggle{
+  background:rgba(56,199,147,.08);
+
+  color:#72d6a6;
+
+  border:1px solid rgba(56,199,147,.10);
+}
+
+.toggle.off{
+  background:rgba(232,93,106,.08);
+
+  color:#ffaaa6;
+
+  border-color:rgba(232,93,106,.12);
+}
+
+.delete{
+  grid-column:1/-1;
+
+  background:rgba(232,93,106,.07);
+
+  color:#ffaaa6;
+
+  border:1px solid rgba(232,93,106,.10);
+}
+
+.delete:hover{
+  background:rgba(232,93,106,.13);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  grid-column:1/-1;
+
+  text-align:center;
+
+  padding:50px 20px;
+
+  color:var(--muted);
+
+  border:1px dashed rgba(214,173,85,.18);
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.015);
+}
+
+.empty::before{
+  content:"🖼️";
+
+  display:block;
+
+  font-size:38px;
+
+  margin-bottom:12px;
+
+  opacity:.8;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
+
+  .header-inner{
+    padding:12px 14px;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  nav{
+    display:none;
+
+    position:absolute;
+
+    top:68px;
+
+    left:12px;
+    right:12px;
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:5px;
+
+    padding:8px;
+
+    background:#0b1424;
+
+    border:1px solid var(--goldBorder);
+
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+  }
+
+  nav.open{
+    display:flex;
+
+    animation:fadeUp .2s ease;
+  }
+
+  nav a{
+    width:100%;
+  }
+
+  main{
+    padding:25px 14px 50px;
+  }
+
+  .hero{
+    padding:23px 20px;
+
+    border-radius:19px;
+  }
+
+  .hero h1{
+    font-size:29px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+
+    gap:18px;
+  }
+
+  .card{
+    padding:18px;
+
+    border-radius:17px;
+  }
+
+  .gallery{
+    grid-template-columns:1fr;
+  }
+
+  .photo img{
+    height:210px;
+  }
+}
+
+@media(max-width:390px){
+
+  .brand strong{
+    font-size:14px;
+  }
+
+  .brand span{
+    font-size:9px;
+  }
+
+  .hero h1{
+    font-size:26px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions button{
+    width:100%;
+  }
+
+  .photo img{
+    height:190px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">
+
+      <!-- MÊME LOGO ADMIN QUE LES AUTRES PAGES -->
+      <img
+        src="admin-logo.png"
+        alt="MI.C.L.A"
+      >
+
+      <div>
+        <strong>MI.C.L.A</strong>
+        <span>Cité de Refuge · Administration</span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="menu"
+      id="menu"
+      type="button"
+      aria-label="Ouvrir le menu"
+    >
+      ☰
+    </button>
+
+
+    <nav id="nav">
+
+      <a href="admin.html">
+        Dashboard
+      </a>
+
+      <a href="galerie.html">
+        Voir la galerie
+      </a>
+
+      <a href="index.html">
+        Accueil
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <small>
+        Administration
+      </small>
+
+      <h1>
+        Galerie photos
+      </h1>
+
+      <p>
+        Ajoutez et gérez les photos des cultes,
+        événements et activités de la Cité de Refuge.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTENU -->
+
+  <div class="layout">
+
+    <!-- FORMULAIRE -->
+
+    <section class="card">
+
+      <h2 id="formTitle">
+        ➕ Ajouter une photo
+      </h2>
+
+
+      <div
+        id="status"
+        class="status"
+      ></div>
+
+
+      <form id="form">
+
+        <input
+          type="hidden"
+          id="id"
+        >
+
+
+        <div class="group">
+
+          <label for="title">
+            Titre
+          </label>
+
+          <input
+            id="title"
+            type="text"
+            placeholder="Ex : Culte d'adoration"
+          >
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="description">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            placeholder="Description de la photo..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="photo">
+            Photo *
+          </label>
+
+          <div class="file">
+
+            <input
+              type="file"
+              id="photo"
+              accept="image/*"
+              required
+            >
+
+            <img
+              id="preview"
+              class="preview"
+              alt="Aperçu de la photo"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="primary"
+            type="submit"
+            id="save"
+          >
+            ✓ Publier la photo
+          </button>
+
+          <button
+            class="secondary hidden"
+            type="button"
+            id="cancel"
+          >
+            Annuler
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <!-- GALERIE -->
+
+    <section class="card">
+
+      <h2>
+        🖼️ Photos enregistrées
+      </h2>
+
+      <div
+        class="gallery"
+        id="gallery"
+      ></div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+const menu =
+  document.getElementById("menu");
+
+const nav =
+  document.getElementById("nav");
+
+
+if(menu && nav){
+
+  menu.addEventListener("click", () => {
+
+    nav.classList.toggle("open");
+
+  });
+
+}
+
+
+/* Fermer le menu après clic */
+
+document
+  .querySelectorAll("#nav a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      nav.classList.remove("open");
+
+    });
+
+  });
+
+
+/* =========================
+   APERÇU PHOTO
+========================= */
+
+const photoInput =
+  document.getElementById("photo");
+
+const preview =
+  document.getElementById("preview");
+
+
+if(photoInput && preview){
+
+  photoInput.addEventListener(
+    "change",
+    function(){
+
+      const file = this.files?.[0];
+
+      if(!file){
+
+        preview.style.display = "none";
+        preview.removeAttribute("src");
+
+        return;
+      }
+
+
+      if(!file.type.startsWith("image/")){
+
+        preview.style.display = "none";
+
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = function(event){
+
+        preview.src =
+          event.target.result;
+
+        preview.style.display =
+          "block";
+
+      };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+</script>
+
+
+<!--
+  JS PRINCIPAL DE LA GALERIE
+
+  Les IDs originaux sont conservés :
+
+  form
+  id
+  title
+  description
+  photo
+  preview
+  save
+  cancel
+  status
+  gallery
+  formTitle
+
+  Ton fichier existant
+  admin-galerie.js
+  reste donc compatible.
+-->
+
+<script src="admin-galerie.js"></script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chantres — Administration | MI.C.L.A</title>
+
+<style>
+
+:root{
+  --bg:#050912;
+  --bg2:#08101d;
+  --surface:#0d1727;
+  --surface2:#111d30;
+  --surface3:#172338;
+
+  --gold:#d8b45a;
+  --gold2:#f1d98b;
+
+  --white:#fff;
+  --text:#dfe7f2;
+  --muted:#8997aa;
+
+  --success:#35c58b;
+  --danger:#e85d6a;
+
+  --border:rgba(255,255,255,.07);
+  --gold-border:rgba(216,180,90,.20);
+
+  --radius:18px;
+  --shadow:0 18px 50px rgba(0,0,0,.32);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  font-family:Arial,Helvetica,sans-serif;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 70% 0%,
+      rgba(30,80,150,.28),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #071327,
+      #050912
+    );
+
+  overflow-x:hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:rgba(5,9,18,.90);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  width:100%;
+  max-width:1180px;
+
+  margin:auto;
+
+  min-height:70px;
+
+  padding:10px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  position:relative;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  color:white;
+  text-decoration:none;
+}
+
+.brand img{
+  width:45px;
+  height:45px;
+
+  object-fit:cover;
+
+  border-radius:13px;
+
+  border:1.5px solid var(--gold);
+
+  box-shadow:
+    0 0 0 4px rgba(216,180,90,.05);
+
+  animation:logoFloat 4s ease-in-out infinite;
+}
+
+.brand strong{
+  display:block;
+
+  color:white;
+
+  font-size:15px;
+  letter-spacing:1.5px;
+}
+
+.brand small{
+  display:block;
+
+  color:var(--gold);
+
+  font-size:10px;
+
+  margin-top:4px;
+}
+
+.links{
+  display:flex;
+  gap:7px;
+}
+
+.links a{
+  color:#dce5f4;
+
+  text-decoration:none;
+
+  font-size:12px;
+  font-weight:bold;
+
+  padding:10px 13px;
+
+  border-radius:11px;
+
+  transition:.25s ease;
+}
+
+.links a:hover{
+  color:var(--gold2);
+
+  background:rgba(216,180,90,.07);
+
+  transform:translateY(-2px);
+}
+
+.menu{
+  display:none;
+
+  color:white;
+
+  background:rgba(255,255,255,.04);
+
+  border:1px solid var(--gold-border);
+
+  padding:9px 13px;
+
+  border-radius:11px;
+
+  cursor:pointer;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  width:100%;
+  max-width:1180px;
+
+  margin:auto;
+
+  padding:35px 20px 70px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  display:grid;
+
+  grid-template-columns:
+    1.45fr .75fr;
+
+  gap:20px;
+
+  margin-bottom:25px;
+}
+
+.hero-card{
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    ),
+    var(--surface);
+
+  border:1px solid var(--gold-border);
+
+  border-radius:22px;
+
+  box-shadow:var(--shadow);
+
+  padding:27px;
+
+  transition:.35s ease;
+}
+
+.hero-card:hover{
+  transform:translateY(-4px);
+
+  border-color:rgba(216,180,90,.35);
+}
+
+.hero-card:first-child{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero-card::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:15%;
+  right:15%;
+
+  height:1px;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(241,217,139,.65),
+    transparent
+  );
+}
+
+.hero-card img{
+  width:100%;
+  height:100%;
+
+  min-height:200px;
+
+  object-fit:cover;
+
+  border-radius:16px;
+
+  transition:
+    transform .6s ease,
+    filter .6s ease;
+}
+
+.hero-card:hover img{
+  transform:scale(1.025);
+  filter:brightness(1.05);
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  color:var(--gold2);
+
+  font-size:11px;
+  font-weight:bold;
+
+  letter-spacing:1.8px;
+
+  text-transform:uppercase;
+}
+
+.eyebrow::before{
+  content:"";
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  box-shadow:
+    0 0 12px rgba(216,180,90,.7);
+}
+
+h1{
+  color:white;
+
+  font-size:40px;
+
+  line-height:1.15;
+
+  margin:11px 0;
+}
+
+.hero p{
+  color:var(--muted);
+
+  font-size:13px;
+
+  line-height:1.75;
+
+  margin:0;
+}
+
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+  position:relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    ),
+    var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:23px;
+
+  margin-bottom:25px;
+
+  box-shadow:var(--shadow);
+}
+
+.panel h2{
+  color:white;
+
+  font-size:18px;
+
+  margin:0 0 20px;
+}
+
+.panel h2::after{
+  content:"";
+
+  display:block;
+
+  width:40px;
+  height:2px;
+
+  margin-top:9px;
+
+  background:linear-gradient(
+    90deg,
+    var(--gold),
+    transparent
+  );
+}
+
+
+/* =========================
+   FORMULAIRE
+========================= */
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:15px;
+}
+
+.field{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+label{
+  color:#cfd8e5;
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+
+  padding:13px 14px;
+
+  border-radius:12px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  background:#091321;
+
+  color:white;
+
+  outline:none;
+
+  font-family:inherit;
+
+  font-size:13px;
+
+  transition:.25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:rgba(216,180,90,.60);
+
+  box-shadow:
+    0 0 0 3px rgba(216,180,90,.07);
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#5f6d82;
+}
+
+textarea{
+  min-height:115px;
+
+  resize:vertical;
+}
+
+input[type="file"]{
+  padding:10px;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-top:19px;
+}
+
+.btn{
+  min-height:44px;
+
+  padding:0 17px;
+
+  border-radius:12px;
+
+  border:1px solid var(--border);
+
+  background:var(--surface2);
+
+  color:white;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  transition:.25s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+
+  border-color:var(--gold-border);
+}
+
+.primary{
+  color:#07101d;
+
+  border:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold2),
+      var(--gold)
+    );
+
+  box-shadow:
+    0 8px 25px rgba(216,180,90,.08);
+}
+
+.primary:hover{
+  box-shadow:
+    0 12px 30px rgba(216,180,90,.16);
+}
+
+.danger{
+  color:#ffc8ce;
+
+  border-color:
+    rgba(232,93,106,.25);
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  min-height:20px;
+
+  margin-top:13px;
+
+  color:var(--gold2);
+
+  font-size:12px;
+}
+
+
+/* =========================
+   LISTE DES CHANTRES
+========================= */
+
+.singer-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:17px;
+}
+
+.singer-card{
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.01)
+    ),
+    var(--surface2);
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
+}
+
+.singer-card:hover{
+  transform:translateY(-5px);
+
+  border-color:var(--gold-border);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.30);
+}
+
+
+/* =========================
+   PHOTO
+========================= */
+
+.singer-photo{
+  width:100%;
+  height:225px;
+
+  object-fit:cover;
+
+  display:block;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b2145,
+      #06152f
+    );
+
+  transition:
+    transform .6s ease,
+    filter .6s ease;
+}
+
+.singer-card:hover .singer-photo{
+  transform:scale(1.025);
+
+  filter:brightness(1.04);
+}
+
+
+/* =========================
+   CONTENU
+========================= */
+
+.singer-content{
+  padding:18px;
+}
+
+.singer-content h3{
+  color:white;
+
+  font-size:17px;
+
+  margin:0 0 6px;
+}
+
+.role{
+  color:var(--gold2);
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+.phone{
+  color:#cbd8eb;
+
+  font-size:12px;
+
+  margin-top:9px;
+}
+
+.description{
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.65;
+
+  margin-top:11px;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  margin-top:11px;
+
+  padding:6px 10px;
+
+  border-radius:30px;
+
+  font-size:10px;
+
+  font-weight:bold;
+}
+
+.active{
+  color:#c9f5dd;
+
+  background:rgba(53,197,139,.09);
+
+  border:1px solid rgba(53,197,139,.16);
+}
+
+.inactive{
+  color:#ffd1d5;
+
+  background:rgba(232,93,106,.08);
+
+  border:1px solid rgba(232,93,106,.15);
+}
+
+.main-badge{
+  color:#07101d;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold2),
+      var(--gold)
+    );
+
+  border:none;
+}
+
+
+/* =========================
+   AUDIO / VIDEO
+========================= */
+
+audio{
+  width:100%;
+
+  margin-top:13px;
+}
+
+video{
+  width:100%;
+
+  max-height:230px;
+
+  margin-top:13px;
+
+  border-radius:12px;
+
+  background:#000;
+
+  display:block;
+}
+
+
+/* =========================
+   ACTIONS CHANTRE
+========================= */
+
+.singer-actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:15px;
+}
+
+.singer-actions .btn{
+  min-height:38px;
+
+  padding:0 12px;
+
+  font-size:11px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  grid-column:1/-1;
+
+  padding:45px 25px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  border:1px dashed var(--gold-border);
+
+  border-radius:17px;
+
+  background:rgba(255,255,255,.015);
+}
+
+.empty-icon{
+  font-size:38px;
+
+  margin-bottom:13px;
+
+  animation:floating 3s ease-in-out infinite;
+}
+
+.empty strong{
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:15px;
+
+  margin-bottom:7px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  text-align:center;
+
+  color:#647187;
+
+  font-size:11px;
+
+  line-height:1.7;
+
+  border-top:1px solid var(--border);
+
+  padding:25px 15px;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes logoFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-3px);
+  }
+
+}
+
+@keyframes floating{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-5px);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .singer-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+
+@media(max-width:650px){
+
+  .nav{
+    padding:10px 13px;
+  }
+
+  .brand img{
+    width:40px;
+    height:40px;
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .links{
+    display:none;
+
+    position:absolute;
+
+    top:65px;
+
+    left:13px;
+    right:13px;
+
+    flex-direction:column;
+
+    gap:3px;
+
+    padding:8px;
+
+    background:#081426;
+
+    border:1px solid var(--gold-border);
+
+    border-radius:15px;
+
+    box-shadow:
+      0 20px 45px rgba(0,0,0,.40);
+  }
+
+  .links.open{
+    display:flex;
+  }
+
+  main{
+    padding:25px 13px 55px;
+  }
+
+  .hero-card,
+  .panel{
+    padding:19px;
+  }
+
+  h1{
+    font-size:30px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .singer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .singer-photo{
+    height:250px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions .btn{
+    width:100%;
+  }
+
+}
+
+
+@media(max-width:380px){
+
+  h1{
+    font-size:27px;
+  }
+
+  .singer-photo{
+    height:220px;
+  }
+
+}
+
+</style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="nav">
+
+    <a href="admin.html" class="brand">
+
+      <img
+        src="admin-logo.png"
+        alt="MI.C.L.A Administration"
+      >
+
+      <span>
+
+        <strong>
+          MI.C.L.A
+        </strong>
+
+        <small>
+          Cité de Refuge · Administration
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <button
+      class="menu"
+      id="menu"
+      type="button"
+    >
+      ☰ Menu
+    </button>
+
+
+    <nav
+      class="links"
+      id="links"
+    >
+
+      <a href="admin.html">
+        Administration
+      </a>
+
+      <a href="chantres.html">
+        Voir les chantres
+      </a>
+
+      <a href="index.html">
+        Site
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-card">
+
+      <div class="eyebrow">
+        Gestion des chantres
+      </div>
+
+      <h1>
+        Chantres
+      </h1>
+
+      <p>
+        Ajoutez et gérez les chantres de MI.C.L.A.
+        Enregistrez leur nom, rôle, numéro,
+        photo, audio et vidéo.
+        Vous pouvez également définir un chantre
+        comme membre principal.
+      </p>
+
+    </div>
+
+
+    <div class="hero-card">
+
+      <img
+        src="chantres.jpg"
+        alt="Chantres MI.C.L.A"
+        onerror="this.src='assets/images/eglise.jpg'"
+      >
+
+    </div>
+
+  </section>
+
+
+
+  <!-- FORMULAIRE -->
+
+  <section class="panel">
+
+    <h2>
+      Ajouter un chantre
+    </h2>
+
+
+    <div class="form-grid">
+
+
+      <div class="field">
+
+        <label for="name">
+          Nom complet
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Ex : Sœur Betty Bakadisanga"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="role">
+          Rôle
+        </label>
+
+        <input
+          id="role"
+          type="text"
+          placeholder="Ex : Chantre"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="phone">
+          Téléphone / WhatsApp
+        </label>
+
+        <input
+          id="phone"
+          type="text"
+          placeholder="+243..."
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="main">
+          Statut
+        </label>
+
+        <select id="main">
+
+          <option value="false">
+            Membre
+          </option>
+
+          <option value="true">
+            Chantre principal
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="description">
+          Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Présentation du chantre..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="photo">
+          Photo
+        </label>
+
+        <input
+          id="photo"
+          type="file"
+          accept="image/*"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="audio">
+          Audio
+        </label>
+
+        <input
+          id="audio"
+          type="file"
+          accept="audio/*"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="video">
+          Vidéo
+        </label>
+
+        <input
+          id="video"
+          type="file"
+          accept="video/*"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="btn primary"
+        id="saveSinger"
+        type="button"
+      >
+        ✨ Ajouter le chantre
+      </button>
+
+      <button
+        class="btn"
+        id="clearForm"
+        type="button"
+      >
+        Effacer
+      </button>
+
+    </div>
+
+
+    <div
+      class="status"
+      id="status"
+    ></div>
+
+  </section>
+
+
+
+  <!-- LISTE -->
+
+  <section class="panel">
+
+    <h2>
+      Chantres enregistrés
+    </h2>
+
+
+    <div
+      class="singer-grid"
+      id="singerGrid"
+    ></div>
+
+  </section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  MI.C.L.A — Cité de Refuge · Administration ·
+
+  <span id="year"></span>
+
+</footer>
+
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+const menu =
+  document.getElementById("menu");
+
+const links =
+  document.getElementById("links");
+
+if(menu){
+
+  menu.addEventListener(
+    "click",
+    function(){
+
+      links.classList.toggle("open");
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ANNÉE
+========================= */
+
+const year =
+  document.getElementById("year");
+
+if(year){
+
+  year.textContent =
+    new Date().getFullYear();
+
+}
+
+</script>
+
+
+<!-- SCRIPT EXISTANT -->
+
+<script src="admin-chantres.js"></script>
+
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

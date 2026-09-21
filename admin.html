@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MI.C.L.A — Administration</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#06152f;color:#fff;min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:24px}
+.card{background:#0b2145;border:1px solid #244b7c;border-radius:18px;padding:22px;margin:16px 0}
+h1{margin-top:0}.muted{color:#b9c7d9}
+input,button{width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:0;margin-top:10px}
+input{background:#fff;color:#111}button{background:#d8b35a;color:#06152f;font-weight:bold;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+a{display:block;text-decoration:none;background:#102d59;color:#fff;padding:16px;border-radius:12px}
+#panel{display:none}
+.error{color:#ffb3b3}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="login" class="card">
+    <h1>🔐 Administration MI.C.L.A</h1>
+    <p class="muted">Cité de Refuge</p>
+    <input id="code" type="password" placeholder="Code secret">
+    <button id="loginBtn">Entrer dans l'administration</button>
+    <p id="error" class="error"></p>
+  </div>
+
+  <div id="panel">
+    <div class="card">
+      <h1>Administration</h1>
+      <p class="muted">Bienvenue dans l'espace administrateur.</p>
+      <button data-micla-logout>Déconnexion</button>
+    </div>
+    <div class="card">
+      <h2>Pages d'administration</h2>
+      <div class="grid">
+        <a href="admin-eglise.html">⛪ Église</a>
+        <a href="admin-annonces.html">📢 Annonces</a>
+        <a href="admin-prieres.html">🙏 Prières</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="admin.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const login=document.getElementById("login");
+  const panel=document.getElementById("panel");
+  const code=document.getElementById("code");
+  const error=document.getElementById("error");
+
+  function show(){
+    if(sessionStorage.getItem("micla_admin_auth")==="1"){
+      login.style.display="none"; panel.style.display="block";
+    } else {
+      login.style.display="block"; panel.style.display="none";
+    }
+  }
+  document.getElementById("loginBtn").onclick=()=>{
+    if(miclaLogin(code.value.trim())){error.textContent="";show();}
+    else error.textContent="Code secret incorrect.";
+  };
+  code.addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("loginBtn").click()});
+  show();
+});
+</script>
+</body>
+</html>

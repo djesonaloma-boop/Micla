@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Jeunesse — MI.C.L.A Cité de Refuge</title>
+
+  <style>
+    :root {
+      --bg: #060b14;
+      --bg-2: #09111f;
+      --surface: #0e1726;
+      --surface-2: #121e30;
+      --surface-3: #17263b;
+
+      --gold: #d6ad55;
+      --gold-light: #f1d58b;
+      --gold-soft: rgba(214,173,85,.10);
+
+      --white: #ffffff;
+      --text: #e8eef7;
+      --muted: #8d9bb0;
+      --muted-2: #68778d;
+
+      --border: rgba(255,255,255,.075);
+      --border-gold: rgba(214,173,85,.24);
+
+      --success: #35c58b;
+
+      --radius: 18px;
+      --radius-lg: 26px;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.32);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(214,173,85,.06),
+          transparent 30%
+        ),
+        var(--bg);
+
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      padding: 14px 5%;
+
+      background: rgba(6,11,20,.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+
+      border-radius: 13px;
+
+      border: 1px solid var(--border-gold);
+
+      background: rgba(255,255,255,.03);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      color: var(--gold-light);
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 10px 15px;
+
+      border: 1px solid var(--border-gold);
+      border-radius: 11px;
+
+      background: var(--gold-soft);
+      color: var(--gold-light);
+
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .back:hover {
+      transform: translateY(-2px);
+      background: rgba(214,173,85,.16);
+      border-color: rgba(214,173,85,.4);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      position: relative;
+      min-height: 390px;
+
+      display: flex;
+      align-items: flex-end;
+
+      overflow: hidden;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4,8,15,.94) 0%,
+          rgba(4,8,15,.74) 45%,
+          rgba(4,8,15,.38) 100%
+        ),
+        url("CHADRACK.jpg") center/cover no-repeat;
+
+      transform: scale(1.03);
+
+      animation: heroZoom 12s ease-in-out infinite alternate;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-width: 1100px;
+
+      margin: auto;
+      padding: 70px 5% 55px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: rgba(214,173,85,.11);
+      border: 1px solid var(--border-gold);
+
+      color: var(--gold-light);
+
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      max-width: 800px;
+
+      color: #fff;
+
+      font-size: clamp(32px, 6vw, 58px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.8px;
+
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero p {
+      max-width: 680px;
+
+      color: #c4cfde;
+
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .hero-line {
+      width: 75px;
+      height: 3px;
+
+      margin-top: 24px;
+
+      background: linear-gradient(
+        90deg,
+        var(--gold),
+        transparent
+      );
+
+      border-radius: 20px;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    main {
+      width: 92%;
+      max-width: 1100px;
+
+      margin: 45px auto 70px;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 760px;
+
+      margin: 0 auto 32px;
+    }
+
+    .intro h2 {
+      color: var(--gold-light);
+
+      font-size: clamp(23px, 4vw, 30px);
+
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       CARDS
+    ========================== */
+
+    .card {
+      position: relative;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.025),
+          rgba(255,255,255,.008)
+        ),
+        var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 25px;
+
+      margin-bottom: 22px;
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+
+      animation: fadeUp .7s ease both;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 90px;
+      height: 2px;
+
+      background: linear-gradient(
+        90deg,
+        var(--gold),
+        transparent
+      );
+
+      opacity: .8;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+
+      border-color: var(--border-gold);
+
+      box-shadow:
+        0 25px 65px rgba(0,0,0,.38);
+    }
+
+    .card > h2 {
+      color: var(--gold-light);
+
+      font-size: 19px;
+
+      margin-bottom: 18px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* =========================
+       PHOTO PRINCIPALE
+    ========================== */
+
+    .main-photo {
+      text-align: center;
+    }
+
+    .main-photo img {
+      display: block;
+
+      width: 100%;
+      max-width: 900px;
+
+      height: 410px;
+
+      object-fit: cover;
+
+      margin: auto;
+
+      border-radius: 18px;
+
+      border: 1px solid var(--border-gold);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.4);
+
+      transition:
+        transform .45s ease,
+        filter .45s ease;
+    }
+
+    .main-photo:hover img {
+      transform: scale(1.012);
+      filter: brightness(1.05);
+    }
+
+    .photo-caption {
+      margin-top: 13px;
+
+      color: var(--muted-2);
+
+      font-size: 12px;
+    }
+
+    /* =========================
+       MESSAGE
+    ========================== */
+
+    .message-box {
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.07),
+          rgba(255,255,255,.015)
+        ),
+        var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+
+      border-radius: 14px;
+
+      padding: 20px;
+
+      color: #dce5ef;
+
+      line-height: 1.8;
+
+      white-space: pre-line;
+    }
+
+    /* =========================
+       AUDIO
+    ========================== */
+
+    .audio-card {
+      background: var(--surface-2);
+
+      padding: 17px;
+
+      border-radius: 14px;
+
+      margin-bottom: 12px;
+
+      border: 1px solid var(--border);
+
+      transition: .3s ease;
+    }
+
+    .audio-card:hover {
+      border-color: var(--border-gold);
+      transform: translateX(3px);
+    }
+
+    .audio-card h3 {
+      color: #fff;
+
+      font-size: 15px;
+
+      margin-bottom: 5px;
+    }
+
+    .audio-card small {
+      display: block;
+
+      color: var(--muted);
+
+      margin-bottom: 11px;
+
+      font-size: 12px;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    /* =========================
+       ANNONCES
+    ========================== */
+
+    .announcement {
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+
+      padding: 17px;
+
+      border-radius: 13px;
+
+      margin-bottom: 11px;
+
+      transition: .3s ease;
+    }
+
+    .announcement:hover {
+      transform: translateX(3px);
+      border-color: var(--border-gold);
+    }
+
+    .announcement strong {
+      display: block;
+
+      color: #fff;
+
+      margin-bottom: 6px;
+    }
+
+    .announcement p {
+      color: #c4cfdd;
+
+      line-height: 1.65;
+
+      font-size: 14px;
+    }
+
+    .announcement small {
+      display: block;
+
+      color: var(--muted-2);
+
+      margin-top: 8px;
+
+      font-size: 11px;
+    }
+
+    /* =========================
+       RESPONSABLES
+    ========================== */
+
+    .leaders {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 16px;
+    }
+
+    .leader {
+      position: relative;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(214,173,85,.045),
+          transparent
+        ),
+        var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 20px;
+
+      overflow: hidden;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease;
+    }
+
+    .leader:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-gold);
+    }
+
+    .leader::after {
+      content: "JEUNESSE";
+
+      position: absolute;
+
+      right: -17px;
+      top: 15px;
+
+      font-size: 8px;
+
+      letter-spacing: 1px;
+
+      color: rgba(214,173,85,.16);
+
+      transform: rotate(90deg);
+    }
+
+    .leader h3 {
+      color: #fff;
+
+      font-size: 16px;
+
+      margin-bottom: 7px;
+    }
+
+    .leader p {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      margin-bottom: 15px;
+    }
+
+    /* =========================
+       WHATSAPP
+    ========================== */
+
+    .whatsapp {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      padding: 10px 14px;
+
+      background: rgba(53,197,139,.09);
+
+      border: 1px solid rgba(53,197,139,.20);
+
+      color: #dff8ed;
+
+      text-decoration: none;
+
+      border-radius: 10px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      transition:
+        transform .25s ease,
+        background .25s ease;
+    }
+
+    .whatsapp:hover {
+      transform: translateY(-2px);
+
+      background: rgba(53,197,139,.16);
+    }
+
+    /* =========================
+       PROGRAMME
+    ========================== */
+
+    .schedule {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.08),
+          transparent
+        ),
+        var(--surface-2);
+
+      padding: 21px;
+
+      border-radius: 15px;
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+    }
+
+    .schedule h3 {
+      color: #fff;
+
+      margin-bottom: 8px;
+
+      font-size: 17px;
+    }
+
+    .schedule p {
+      color: #c4cfdd;
+
+      line-height: 1.75;
+
+      font-size: 14px;
+    }
+
+    .time {
+      color: var(--gold-light);
+
+      font-weight: 800;
+
+      font-size: 15px;
+    }
+
+    /* =========================
+       RESPONSABILITÉS
+    ========================== */
+
+    .roles {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 16px;
+    }
+
+    .role-box {
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      padding: 19px;
+
+      border-top: 2px solid var(--gold);
+
+      transition: .3s ease;
+    }
+
+    .role-box:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-gold);
+    }
+
+    .role-box h3 {
+      color: var(--gold-light);
+
+      margin-bottom: 9px;
+
+      font-size: 15px;
+    }
+
+    .role-box p {
+      color: #c5d0dd;
+
+      line-height: 1.65;
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       ACTIVITÉS
+    ========================== */
+
+    .activities {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 14px;
+    }
+
+    .activity {
+      background: var(--surface-2);
+
+      padding: 18px;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease;
+    }
+
+    .activity:hover {
+      transform: translateY(-4px);
+
+      border-color: var(--border-gold);
+    }
+
+    .activity h3 {
+      color: var(--gold-light);
+
+      font-size: 15px;
+
+      margin-bottom: 7px;
+    }
+
+    .activity p {
+      color: #bdc9d7;
+
+      font-size: 13px;
+
+      line-height: 1.65;
+    }
+
+    /* =========================
+       GALERIE
+    ========================== */
+
+    .gallery {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 12px;
+    }
+
+    .gallery img {
+      width: 100%;
+
+      height: 175px;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform .35s ease,
+        border-color .35s ease,
+        filter .35s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.025);
+
+      border-color: var(--border-gold);
+
+      filter: brightness(1.08);
+    }
+
+    /* =========================
+       VIDÉOS
+    ========================== */
+
+    .video-card {
+      background: var(--surface-2);
+
+      padding: 16px;
+
+      border-radius: 14px;
+
+      margin-bottom: 12px;
+
+      border: 1px solid var(--border);
+    }
+
+    .video-card h3 {
+      color: #fff;
+
+      margin-bottom: 10px;
+
+      font-size: 15px;
+    }
+
+    .video-card video {
+      width: 100%;
+
+      border-radius: 10px;
+
+      background: #000;
+    }
+
+    /* =========================
+       VERSET
+    ========================== */
+
+    .verse {
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(214,173,85,.09),
+          transparent 65%
+        ),
+        var(--surface-2);
+
+      padding: 27px 22px;
+
+      border-radius: 16px;
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+    }
+
+    .verse p {
+      color: #e0e7ef;
+
+      line-height: 1.85;
+
+      font-style: italic;
+
+      font-size: 15px;
+    }
+
+    .verse strong {
+      display: block;
+
+      color: var(--gold-light);
+
+      margin-top: 13px;
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       NOTE
+    ========================== */
+
+    .note {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.08),
+          transparent
+        ),
+        var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--gold);
+
+      padding: 21px;
+
+      border-radius: 14px;
+
+      color: #d4deea;
+
+      line-height: 1.75;
+
+      white-space: pre-line;
+    }
+
+    .note strong {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       EMPTY
+    ========================== */
+
+    .empty {
+      color: var(--muted-2);
+
+      font-size: 13px;
+
+      padding: 5px 0;
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact-text {
+      color: #c2cedc;
+
+      line-height: 1.75;
+
+      font-size: 14px;
+
+      margin-bottom: 15px;
+    }
+
+    /* =========================
+       WHATSAPP FLOATING
+    ========================== */
+
+    .floating-whatsapp {
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      width: 54px;
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #25D366;
+
+      color: #fff;
+
+      border-radius: 50%;
+
+      text-decoration: none;
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.4);
+
+      z-index: 200;
+
+      animation:
+        whatsappFloat 3s ease-in-out infinite,
+        whatsappPulse 2.5s infinite;
+    }
+
+    .floating-whatsapp svg {
+      width: 27px;
+      height: 27px;
+      fill: currentColor;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      text-align: center;
+
+      padding: 35px 15px;
+
+      color: var(--muted-2);
+
+      font-size: 12px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    footer strong {
+      display: block;
+
+      color: var(--gold-light);
+
+      margin-bottom: 6px;
+
+      letter-spacing: .5px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    @keyframes heroZoom {
+      from {
+        transform: scale(1.03);
+      }
+
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    @keyframes whatsappFloat {
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes whatsappPulse {
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(37,211,102,.30),
+          0 12px 35px rgba(0,0,0,.4);
+      }
+
+      70% {
+        box-shadow:
+          0 0 0 13px rgba(37,211,102,0),
+          0 12px 35px rgba(0,0,0,.4);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(37,211,102,0),
+          0 12px 35px rgba(0,0,0,.4);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .leaders {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .main-photo img {
+        height: 330px;
+      }
+
+      .hero {
+        min-height: 350px;
+      }
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 11px 4%;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-text strong {
+        font-size: 13px;
+      }
+
+      .brand-text span {
+        font-size: 10px;
+      }
+
+      .back {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .hero-content {
+        padding: 60px 5% 42px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      main {
+        width: 94%;
+        margin-top: 32px;
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 16px;
+      }
+
+      .roles,
+      .activities {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main-photo img {
+        height: 260px;
+      }
+    }
+
+    @media (max-width: 430px) {
+
+      .brand-text span {
+        display: none;
+      }
+
+      .back {
+        font-size: 0;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+      }
+
+      .back:first-letter {
+        font-size: 16px;
+      }
+
+      .hero {
+        min-height: 330px;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .main-photo img {
+        height: 225px;
+      }
+
+      .floating-whatsapp {
+        width: 50px;
+        height: 50px;
+        right: 15px;
+        bottom: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+
+  <a href="index.html" class="brand">
+
+    <img
+      src="logo.png"
+      alt="Logo MI.C.L.A"
+    >
+
+    <div class="brand-text">
+      <strong>MI.C.L.A</strong>
+      <span>Cité de Refuge · Jeunesse</span>
+    </div>
+
+  </a>
+
+  <a href="index.html" class="back">
+    ← Accueil
+  </a>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      👥 Département de la Jeunesse
+    </div>
+
+    <h1>
+      Une jeunesse
+      <span>engagée</span>
+      pour Dieu
+    </h1>
+
+    <p>
+      Bienvenue dans l'espace officiel de la jeunesse
+      de MI.C.L.A — Cité de Refuge. Retrouvez ici les
+      informations, activités, responsables, messages,
+      programmes et contenus du département.
+    </p>
+
+    <div class="hero-line"></div>
+
+  </div>
+
+</section>
+
+
+<main>
+
+  <!-- =========================
+       INTRO
+  ========================== -->
+
+  <section class="intro">
+
+    <h2>Jeunesse de Cité de Refuge</h2>
+
+    <p>
+      Un espace dédié à la communion, à la prière,
+      à l'enseignement de la Parole de Dieu,
+      à l'évangélisation et aux projets de la jeunesse.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       PHOTO PRINCIPALE
+  ========================== -->
+
+  <section class="card main-photo">
+
+    <img
+      id="youth-main-photo"
+      src="CHADRACK.jpg"
+      alt="Jeunesse de MI.C.L.A — Cité de Refuge"
+    >
+
+    <p class="photo-caption">
+      Département de la Jeunesse — MI.C.L.A Cité de Refuge
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       MESSAGE
+  ========================== -->
+
+  <section class="card">
+
+    <h2>💬 Message de la jeunesse</h2>
+
+    <div id="youth-message" class="message-box">
+
+      Aucun message publié pour le moment.
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MESSAGES VOCAUX
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🎙️ Messages vocaux</h2>
+
+    <div id="youth-audios">
+
+      <p class="empty">
+        Aucun message vocal publié pour le moment.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ANNONCES
+  ========================== -->
+
+  <section class="card">
+
+    <h2>📢 Annonces de la jeunesse</h2>
+
+    <div id="youth-announcements">
+
+      <p class="empty">
+        Aucune annonce publiée pour le moment.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PRIÈRE
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🙏 Prière / Exhortation</h2>
+
+    <div id="youth-prayer" class="message-box">
+
+      Aucune prière ou exhortation publiée pour le moment.
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RESPONSABLES
+  ========================== -->
+
+  <section class="card">
+
+    <h2>👥 Responsables de la jeunesse</h2>
+
+    <div class="leaders">
+
+      <div class="leader">
+
+        <h3>Chadrack Mutombo</h3>
+
+        <p>
+          Responsable de la jeunesse
+        </p>
+
+        <a
+          href="https://wa.me/243979677507"
+          class="whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 WhatsApp
+        </a>
+
+      </div>
+
+
+      <div class="leader">
+
+        <h3>Yannick Mutombo</h3>
+
+        <p>
+          Responsable de la jeunesse
+        </p>
+
+        <a
+          href="https://wa.me/243851646637"
+          class="whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 WhatsApp
+        </a>
+
+      </div>
+
+
+      <div class="leader">
+
+        <h3>Samuel Eyambela</h3>
+
+        <p>
+          Responsable de la jeunesse
+        </p>
+
+        <a
+          href="https://wa.me/243899163144"
+          class="whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROGRAMME
+  ========================== -->
+
+  <section class="card">
+
+    <h2>📅 Programme de la jeunesse</h2>
+
+    <div class="schedule">
+
+      <h3>Département de jeunesse</h3>
+
+      <p>
+        <span class="time">
+          Samedi — 16h30 à 17h30
+        </span>
+      </p>
+
+      <br>
+
+      <p>
+        Réunion du département de jeunesse,
+        échanges, enseignement, prière et
+        préparation des activités.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RESPONSABILITÉS
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🎙️ Responsabilités de la semaine</h2>
+
+    <div class="roles">
+
+      <div class="role-box">
+
+        <h3>🎤 Prédicateur</h3>
+
+        <p id="youth-preacher">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+
+      <div class="role-box">
+
+        <h3>🎙️ Modérateur</h3>
+
+        <p id="youth-moderator">
+          À définir par l'administration.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ACTIVITÉS
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🔥 Activités de la jeunesse</h2>
+
+    <div id="youth-activities" class="activities">
+
+      <div class="activity">
+
+        <h3>🙏 Prière</h3>
+
+        <p>
+          Temps de prière et de communion
+          entre les jeunes.
+        </p>
+
+      </div>
+
+
+      <div class="activity">
+
+        <h3>📖 Étude biblique</h3>
+
+        <p>
+          Étude et partage de la Parole
+          de Dieu.
+        </p>
+
+      </div>
+
+
+      <div class="activity">
+
+        <h3>🎤 Louange</h3>
+
+        <p>
+          Participation des jeunes aux
+          moments de louange et d'adoration.
+        </p>
+
+      </div>
+
+
+      <div class="activity">
+
+        <h3>🤝 Évangélisation</h3>
+
+        <p>
+          Actions d'évangélisation et
+          partage de la foi.
+        </p>
+
+      </div>
+
+
+      <div class="activity">
+
+        <h3>👥 Communion fraternelle</h3>
+
+        <p>
+          Rencontres et activités permettant
+          aux jeunes de rester unis.
+        </p>
+
+      </div>
+
+
+      <div class="activity">
+
+        <h3>🎯 Projets de jeunesse</h3>
+
+        <p>
+          Organisation des projets et activités
+          du département de jeunesse.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       GALERIE
+  ========================== -->
+
+  <section class="card">
+
+    <h2>📸 Photos de la jeunesse</h2>
+
+    <div id="youth-gallery" class="gallery">
+
+      <p class="empty">
+        Aucune photo supplémentaire publiée.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VIDÉOS
+  ========================== -->
+
+  <section class="card">
+
+    <h2>🎬 Vidéos de la jeunesse</h2>
+
+    <div id="youth-videos">
+
+      <p class="empty">
+        Aucune vidéo publiée pour le moment.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VERSET
+  ========================== -->
+
+  <section class="card">
+
+    <h2>📖 Verset / Pensée de la semaine</h2>
+
+    <div class="verse">
+
+      <p id="youth-verse">
+        Aucune pensée publiée pour le moment.
+      </p>
+
+      <strong id="youth-verse-reference"></strong>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NOTE À LA JEUNESSE
+  ========================== -->
+
+  <section class="card">
+
+    <div class="note" id="youth-note">
+
+      <strong>📢 Message à la jeunesse</strong>
+
+      <br><br>
+
+      Que chaque jeune participe aux activités
+      et reste connecté à la vie de l'église.
+
+      Les informations concernant les prochaines
+      activités seront publiées ici.
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section class="card">
+
+    <h2>📞 Contacter la jeunesse</h2>
+
+    <p class="contact-text">
+
+      Pour une information concernant la jeunesse,
+      vous pouvez contacter les responsables.
+
+    </p>
+
+    <a
+      href="https://wa.me/243979677507"
+      class="whatsapp"
+      target="_blank"
+      rel="noopener"
+    >
+      💬 Contacter Chadrack
+    </a>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     WHATSAPP FLOTTANT
+========================== -->
+
+<a
+  href="https://chat.whatsapp.com/DkNLg4tKx3t7NM8N1wVZxI?s=sw&p=a&mlu=4&ilr=4"
+  class="floating-whatsapp"
+  target="_blank"
+  rel="noopener"
+  aria-label="Groupe WhatsApp MI.C.L.A"
+>
+
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.55 0 .26 5.29.26 11.79c0 2.08.54 4.11 1.57 5.9L.16 24l6.45-1.64a11.78 11.78 0 0 0 5.43 1.3h.01c6.5 0 11.79-5.29 11.79-11.79 0-3.15-1.23-6.11-3.32-8.39ZM12.05 21.6h-.01a9.8 9.8 0 0 1-5-.?"/>
+  </svg>
+
+</a>
+
+
+<footer>
+
+  <strong>MI.C.L.A — CITÉ DE REFUGE</strong>
+
+  © <span id="year"></span>
+  — Département de la Jeunesse
+
+</footer>
+
+
+<script src="jeunesse.js"></script>
+
+<script>
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+</script>
+
+</body>
+</html>

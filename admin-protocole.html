@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>Protocole — Administration | MI.C.L.A</title>
+
+<style>
+:root{
+  --bg:#080d18;
+  --surface:#101827;
+  --surface2:#151f30;
+  --surface3:#1a2639;
+  --gold:#d6ad55;
+  --gold2:#f0d58b;
+  --white:#f5f7fb;
+  --text:#dce5f4;
+  --muted:#8f9db2;
+  --muted2:#69778c;
+  --border:rgba(255,255,255,.07);
+  --gold-border:rgba(214,173,85,.23);
+  --success:#38c793;
+  --danger:#e85d6a;
+  --radius:17px;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(214,173,85,.06),transparent 28%),
+    radial-gradient(circle at 100% 15%,rgba(60,110,190,.07),transparent 30%),
+    var(--bg);
+  overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(8,13,24,.88);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  max-width:1250px;
+  min-height:76px;
+  margin:auto;
+  padding:10px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.brand img{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  border-radius:12px;
+  border:1px solid var(--gold-border);
+  box-shadow:0 0 25px rgba(214,173,85,.08);
+  transition:.3s ease;
+}
+
+.brand img:hover{
+  transform:scale(1.05) rotate(-2deg);
+}
+
+.brand strong{
+  display:block;
+  color:var(--white);
+  font-size:15px;
+  letter-spacing:.2px;
+}
+
+.brand span{
+  display:block;
+  color:var(--gold);
+  font-size:11px;
+  margin-top:3px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+nav a{
+  color:var(--muted);
+  font-size:12px;
+  padding:10px 13px;
+  border:1px solid transparent;
+  border-radius:10px;
+  transition:.25s ease;
+}
+
+nav a:hover{
+  color:var(--gold2);
+  background:rgba(214,173,85,.06);
+  border-color:var(--gold-border);
+  transform:translateY(-1px);
+}
+
+.menu-btn{
+  display:none;
+  width:43px;
+  height:43px;
+  border:1px solid var(--gold-border);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--gold2);
+  font-size:20px;
+}
+
+/* ================= MAIN ================= */
+
+main{
+  max-width:1250px;
+  margin:auto;
+  padding:35px 22px 70px;
+}
+
+.page-title{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:25px;
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:23px;
+  background:
+    linear-gradient(90deg,rgba(8,13,24,.97),rgba(8,13,24,.72)),
+    url("assets/images/eglise.jpg") center/cover;
+  box-shadow:var(--shadow);
+  animation:fadeUp .6s ease both;
+}
+
+.page-title::after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  right:-100px;
+  top:-130px;
+  border-radius:50%;
+  background:rgba(214,173,85,.07);
+}
+
+.badge{
+  position:relative;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(214,173,85,.08);
+  border:1px solid var(--gold-border);
+  color:var(--gold2);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:13px;
+}
+
+.badge::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 12px rgba(214,173,85,.7);
+}
+
+.page-title h1{
+  position:relative;
+  z-index:2;
+  color:var(--white);
+  font-size:clamp(27px,4vw,39px);
+  margin-bottom:9px;
+  line-height:1.1;
+}
+
+.page-title p{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:21px;
+}
+
+.card{
+  background:
+    linear-gradient(145deg,rgba(16,24,39,.97),rgba(11,18,31,.97));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:23px;
+  box-shadow:var(--shadow);
+  transition:.3s ease;
+  animation:fadeUp .65s ease both;
+}
+
+.card:hover{
+  border-color:var(--gold-border);
+  transform:translateY(-3px);
+}
+
+.card.full{
+  grid-column:1/-1;
+}
+
+.card h2{
+  color:var(--white);
+  font-size:18px;
+  margin-bottom:7px;
+}
+
+.card h2::after{
+  content:"";
+  display:block;
+  width:35px;
+  height:2px;
+  margin-top:9px;
+  border-radius:5px;
+  background:var(--gold);
+}
+
+.description{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin:13px 0 20px;
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  outline:none;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#0b1321;
+  color:var(--white);
+  padding:12px 13px;
+  font-size:13px;
+  transition:.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#5f6c80;
+}
+
+input:hover,
+textarea:hover,
+select:hover{
+  border-color:rgba(255,255,255,.12);
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:rgba(214,173,85,.48);
+  box-shadow:0 0 0 3px rgba(214,173,85,.07);
+  background:#0d1727;
+}
+
+textarea{
+  min-height:115px;
+  resize:vertical;
+  line-height:1.6;
+}
+
+input[type="file"]{
+  padding:9px;
+}
+
+/* ================= BUTTONS ================= */
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:19px;
+}
+
+button{
+  border-radius:11px;
+  padding:11px 16px;
+  font-size:12px;
+  font-weight:750;
+  transition:.25s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+.btn-primary{
+  border:1px solid transparent;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#0a1323;
+  box-shadow:0 8px 25px rgba(214,173,85,.12);
+}
+
+.btn-primary:hover{
+  box-shadow:0 12px 30px rgba(214,173,85,.2);
+}
+
+.btn-secondary{
+  background:var(--surface2);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-secondary:hover{
+  border-color:var(--gold-border);
+  background:var(--surface3);
+}
+
+.btn-danger{
+  background:rgba(232,93,106,.07);
+  color:#ffabb3;
+  border:1px solid rgba(232,93,106,.18);
+}
+
+.btn-success{
+  background:rgba(56,199,147,.07);
+  color:#8be5c2;
+  border:1px solid rgba(56,199,147,.18);
+}
+
+/* ================= STATUS ================= */
+
+.status{
+  display:none;
+  margin-top:15px;
+  padding:12px 14px;
+  border-radius:11px;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.status.show{
+  display:block;
+  animation:fadeUp .3s ease;
+}
+
+.status.success{
+  background:rgba(56,199,147,.08);
+  color:#8be5c2;
+  border:1px solid rgba(56,199,147,.18);
+}
+
+.status.error{
+  background:rgba(232,93,106,.08);
+  color:#ffabb3;
+  border:1px solid rgba(232,93,106,.18);
+}
+
+/* ================= INFO ================= */
+
+.info-box{
+  position:relative;
+  overflow:hidden;
+  padding:19px;
+  border-radius:14px;
+  background:rgba(214,173,85,.045);
+  border:1px solid var(--gold-border);
+  color:var(--muted);
+  line-height:1.7;
+  font-size:12px;
+}
+
+.info-box::before{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  right:-40px;
+  bottom:-50px;
+  border-radius:50%;
+  background:rgba(214,173,85,.06);
+}
+
+.info-box strong{
+  color:var(--gold2);
+}
+
+/* ================= MEMBERS ================= */
+
+.items{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.item{
+  position:relative;
+  overflow:hidden;
+  background:#0b1321;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px;
+  transition:.3s ease;
+}
+
+.item:hover{
+  border-color:var(--gold-border);
+  transform:translateY(-3px);
+  background:#0d1727;
+}
+
+.item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:var(--gold);
+  opacity:.6;
+}
+
+.item-top{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-bottom:13px;
+}
+
+.avatar{
+  width:64px;
+  height:64px;
+  flex:0 0 64px;
+  object-fit:cover;
+  border-radius:50%;
+  background:var(--surface3);
+  border:2px solid rgba(214,173,85,.28);
+  box-shadow:0 7px 20px rgba(0,0,0,.25);
+}
+
+.item h3{
+  color:var(--white);
+  font-size:15px;
+  line-height:1.3;
+}
+
+.role{
+  color:var(--gold2);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.item p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  margin:6px 0;
+}
+
+.item-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:13px;
+}
+
+.item-actions button{
+  font-size:11px;
+  padding:8px 10px;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  color:var(--muted2);
+  padding:30px 15px;
+  border:1px dashed rgba(255,255,255,.1);
+  border-radius:13px;
+}
+
+/* ================= PREVIEW ================= */
+
+.preview{
+  margin-top:18px;
+  display:none;
+  overflow:hidden;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#0b1321;
+}
+
+.preview img{
+  display:block;
+  width:100%;
+  max-height:270px;
+  object-fit:cover;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+  .header-inner{
+    padding:10px 16px;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  nav{
+    position:absolute;
+    top:70px;
+    left:14px;
+    right:14px;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    padding:9px;
+    background:rgba(11,18,31,.98);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+  }
+
+  nav.open{
+    display:flex;
+    animation:fadeUp .25s ease both;
+  }
+
+  nav a{
+    padding:13px;
+  }
+
+  .grid,
+  .items{
+    grid-template-columns:1fr;
+  }
+
+  .card.full{
+    grid-column:auto;
+  }
+}
+
+@media(max-width:600px){
+
+  main{
+    padding:20px 13px 50px;
+  }
+
+  .page-title{
+    padding:23px 18px;
+    border-radius:19px;
+  }
+
+  .page-title h1{
+    font-size:27px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:15px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions button{
+    width:100%;
+  }
+
+  .brand span{
+    display:none;
+  }
+
+  .brand strong{
+    font-size:13px;
+  }
+
+  .brand img{
+    width:42px;
+    height:42px;
+  }
+}
+
+@media(max-width:380px){
+
+  .page-title{
+    padding:20px 15px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .item-top{
+    align-items:flex-start;
+  }
+
+  .avatar{
+    width:55px;
+    height:55px;
+    flex-basis:55px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <a href="admin.html" class="brand">
+
+      <img
+        src="admin-logo.png"
+        alt="Logo MI.C.L.A"
+      >
+
+      <div>
+        <strong>MI.C.L.A</strong>
+        <span>Cité de Refuge · Administration</span>
+      </div>
+
+    </a>
+
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Ouvrir le menu"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+      <a href="admin.html">
+        Tableau de bord
+      </a>
+
+      <a href="protocole-et-securite.html">
+        Voir le public
+      </a>
+
+      <a href="index.html">
+        Site public
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- ================= TITRE ================= -->
+
+  <section class="page-title">
+
+    <span class="badge">
+      ADMINISTRATION · PROTOCOLE
+    </span>
+
+    <h1>
+      Département du protocole
+    </h1>
+
+    <p>
+      Gérez les membres du protocole, leurs fonctions,
+      leurs contacts et les informations affichées
+      sur le site officiel de MI.C.L.A — Cité de Refuge.
+    </p>
+
+  </section>
+
+
+  <div class="grid">
+
+
+    <!-- ================= PRESENTATION ================= -->
+
+    <section class="card">
+
+      <h2>
+        Présentation du protocole
+      </h2>
+
+      <p class="description">
+        Modifiez la présentation générale du département
+        et les informations visibles par les visiteurs.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field full">
+
+          <label for="protocolTitle">
+            Titre du département
+          </label>
+
+          <input
+            id="protocolTitle"
+            type="text"
+            placeholder="Département du protocole"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="protocolDescription">
+            Présentation
+          </label>
+
+          <textarea
+            id="protocolDescription"
+            placeholder="Présentez le rôle du protocole dans l'église..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="protocolMission">
+            Mission
+          </label>
+
+          <input
+            id="protocolMission"
+            type="text"
+            placeholder="Accueil et organisation"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="protocolSchedule">
+            Service
+          </label>
+
+          <input
+            id="protocolSchedule"
+            type="text"
+            placeholder="Selon le programme de l'église"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="protocolPhoto">
+            Photo principale
+          </label>
+
+          <input
+            id="protocolPhoto"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          type="button"
+          class="btn-primary"
+          id="saveProtocol"
+        >
+          ✓ Enregistrer
+        </button>
+
+        <button
+          type="button"
+          class="btn-secondary"
+          id="resetProtocol"
+        >
+          ↺ Réinitialiser
+        </button>
+
+      </div>
+
+
+      <div
+        class="status"
+        id="protocolStatus"
+      ></div>
+
+
+      <div
+        class="preview"
+        id="protocolPreviewBox"
+      >
+
+        <img
+          id="protocolPreview"
+          alt="Photo du protocole"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ROLE ================= -->
+
+    <section class="card">
+
+      <h2>
+        Rôle du protocole
+      </h2>
+
+      <p class="description">
+        Présentation des principales responsabilités
+        du département au sein de l'église.
+      </p>
+
+
+      <div class="info-box">
+
+        <strong>Accueil</strong><br>
+        Accueillir les fidèles et les visiteurs avec
+        respect et disponibilité.
+
+        <br><br>
+
+        <strong>Orientation</strong><br>
+        Orienter les membres vers les différents espaces
+        et services de l'église.
+
+        <br><br>
+
+        <strong>Organisation</strong><br>
+        Participer à l'ordre et au bon déroulement
+        des cultes et activités.
+
+        <br><br>
+
+        <strong>Service</strong><br>
+        Servir avec respect, disponibilité et esprit
+        chrétien.
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= MEMBRES ================= -->
+
+    <section class="card full">
+
+      <h2>
+        Membres du protocole
+      </h2>
+
+      <p class="description">
+        Ajoutez et gérez les membres qui servent dans
+        le département du protocole.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label for="memberName">
+            Nom complet
+          </label>
+
+          <input
+            id="memberName"
+            type="text"
+            placeholder="Nom du membre"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="memberRole">
+            Fonction
+          </label>
+
+          <input
+            id="memberRole"
+            type="text"
+            placeholder="Membre du protocole"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="memberPhone">
+            Téléphone / WhatsApp
+          </label>
+
+          <input
+            id="memberPhone"
+            type="text"
+            placeholder="+243..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="memberPhoto">
+            Photo
+          </label>
+
+          <input
+            id="memberPhoto"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="memberDescription">
+            Description
+          </label>
+
+          <textarea
+            id="memberDescription"
+            placeholder="Courte présentation du membre..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          type="button"
+          class="btn-primary"
+          id="saveMember"
+        >
+          ＋ Ajouter le membre
+        </button>
+
+        <button
+          type="button"
+          class="btn-secondary"
+          id="cancelMember"
+          style="display:none"
+        >
+          Annuler
+        </button>
+
+      </div>
+
+
+      <div
+        class="status"
+        id="memberStatus"
+      ></div>
+
+
+      <div
+        class="items"
+        id="membersList"
+      >
+
+        <div class="empty">
+          Chargement des membres du protocole...
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+/* ================= MENU MOBILE ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const mainNav = document.getElementById("mainNav");
+
+if(menuBtn && mainNav){
+
+  menuBtn.addEventListener("click", () => {
+    mainNav.classList.toggle("open");
+  });
+
+  mainNav.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", () => {
+      mainNav.classList.remove("open");
+    });
+
+  });
+
+}
+
+
+/* ================= IMAGE PREVIEW ================= */
+
+const protocolPhoto =
+  document.getElementById("protocolPhoto");
+
+const protocolPreviewBox =
+  document.getElementById("protocolPreviewBox");
+
+const protocolPreview =
+  document.getElementById("protocolPreview");
+
+if(protocolPhoto){
+
+  protocolPhoto.addEventListener("change", () => {
+
+    const file = protocolPhoto.files?.[0];
+
+    if(!file){
+      protocolPreviewBox.style.display = "none";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+
+      protocolPreview.src = event.target.result;
+
+      protocolPreviewBox.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+</script>
+
+
+<!-- SCRIPT ORIGINAL CONSERVÉ -->
+
+<script src="admin-protocole.js"></script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

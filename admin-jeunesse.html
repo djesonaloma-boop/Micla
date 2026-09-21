@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jeunesse — Administration | MI.C.L.A</title>
+
+<style>
+:root{
+  --bg:#080d18;
+  --bg2:#0b1220;
+  --surface:#101827;
+  --surface2:#151f30;
+  --surface3:#1b273a;
+
+  --gold:#d6ad55;
+  --gold2:#f0d58b;
+
+  --white:#fff;
+  --text:#edf2f8;
+  --muted:#96a4b8;
+  --muted2:#68758a;
+
+  --border:rgba(255,255,255,.07);
+  --goldBorder:rgba(214,173,85,.24);
+
+  --success:#38c793;
+  --danger:#e85d6a;
+
+  --shadow:0 15px 45px rgba(0,0,0,.30);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(214,173,85,.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(40,91,160,.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #080d18,
+      #050912 70%,
+      #03060c
+    );
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:rgba(8,13,24,.90);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  width:100%;
+  max-width:1200px;
+  min-height:72px;
+
+  margin:auto;
+  padding:12px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:47px;
+  height:47px;
+
+  object-fit:cover;
+  border-radius:13px;
+
+  border:1px solid var(--goldBorder);
+
+  box-shadow:
+    0 7px 22px rgba(0,0,0,.30);
+
+  transition:.3s ease;
+}
+
+.brand:hover img{
+  transform:translateY(-2px) rotate(-2deg);
+
+  box-shadow:
+    0 10px 28px rgba(214,173,85,.15);
+}
+
+.brand strong{
+  display:block;
+  color:white;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.brand span{
+  display:block;
+  color:var(--gold);
+  font-size:10px;
+  margin-top:4px;
+  letter-spacing:.4px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+nav a{
+  color:#cbd5e3;
+  text-decoration:none;
+
+  padding:10px 13px;
+  border-radius:10px;
+
+  font-size:12px;
+  font-weight:700;
+
+  border:1px solid transparent;
+
+  transition:.25s ease;
+}
+
+nav a:hover{
+  color:white;
+  background:rgba(214,173,85,.08);
+  border-color:rgba(214,173,85,.13);
+  transform:translateY(-1px);
+}
+
+nav a:first-child{
+  color:var(--gold2);
+  background:rgba(214,173,85,.08);
+  border-color:rgba(214,173,85,.15);
+}
+
+.menu-btn{
+  display:none;
+
+  background:rgba(255,255,255,.04);
+  color:white;
+
+  border:1px solid var(--goldBorder);
+  border-radius:11px;
+
+  padding:9px 12px;
+
+  font-size:18px;
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+.menu-btn:hover{
+  background:rgba(214,173,85,.10);
+  transform:translateY(-1px);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  width:100%;
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:38px 20px 70px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.page-title{
+  position:relative;
+
+  padding:30px;
+
+  margin-bottom:23px;
+
+  border-radius:23px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(21,43,78,.94),
+      rgba(9,16,29,.98)
+    );
+
+  border:1px solid var(--goldBorder);
+
+  box-shadow:var(--shadow);
+
+  animation:fadeUp .5s ease both;
+}
+
+.page-title::before{
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  right:-120px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:rgba(214,173,85,.07);
+}
+
+.page-title::after{
+  content:"";
+
+  position:absolute;
+
+  width:170px;
+  height:170px;
+
+  left:-90px;
+  bottom:-100px;
+
+  border-radius:50%;
+
+  background:rgba(48,99,170,.08);
+}
+
+.page-title-content{
+  position:relative;
+  z-index:2;
+}
+
+.page-title .badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:7px 11px;
+
+  border-radius:30px;
+
+  background:rgba(214,173,85,.08);
+
+  color:var(--gold2);
+
+  border:1px solid rgba(214,173,85,.16);
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1.5px;
+
+  margin-bottom:12px;
+}
+
+.page-title .badge::before{
+  content:"";
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+}
+
+.page-title h1{
+  color:white;
+
+  font-size:36px;
+
+  line-height:1.15;
+
+  margin-bottom:10px;
+
+  letter-spacing:-.7px;
+}
+
+.page-title p{
+  max-width:760px;
+
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.7;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  position:relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,24,39,.97),
+      rgba(10,16,28,.97)
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:21px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.18);
+
+  animation:fadeUp .55s ease both;
+
+  transition:.3s ease;
+}
+
+.card:hover{
+  border-color:rgba(214,173,85,.14);
+
+  transform:translateY(-2px);
+}
+
+.card.full{
+  grid-column:1/-1;
+}
+
+.card h2{
+  color:white;
+
+  font-size:18px;
+
+  margin-bottom:7px;
+}
+
+.card h2::first-letter{
+  color:var(--gold);
+}
+
+.card-description{
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  margin-bottom:20px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  color:#cbd5e3;
+
+  font-size:12px;
+
+  font-weight:700;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+
+  border:1px solid var(--border);
+
+  outline:none;
+
+  background:#0a1424;
+
+  color:white;
+
+  border-radius:12px;
+
+  padding:13px 14px;
+
+  font-family:inherit;
+
+  font-size:13px;
+
+  transition:.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#56657a;
+}
+
+input:hover,
+textarea:hover,
+select:hover{
+  border-color:rgba(214,173,85,.16);
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(214,173,85,.07);
+}
+
+textarea{
+  min-height:120px;
+
+  resize:vertical;
+
+  line-height:1.6;
+}
+
+input[type="file"]{
+  padding:10px;
+
+  cursor:pointer;
+}
+
+input[type="file"]::file-selector-button{
+  border:0;
+
+  border-radius:8px;
+
+  padding:8px 11px;
+
+  margin-right:8px;
+
+  background:rgba(214,173,85,.12);
+
+  color:var(--gold2);
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions{
+  display:flex;
+
+  gap:9px;
+
+  flex-wrap:wrap;
+
+  margin-top:18px;
+}
+
+button{
+  border:1px solid var(--border);
+
+  border-radius:11px;
+
+  padding:12px 15px;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.25s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+button:active{
+  transform:translateY(0);
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold2)
+    );
+
+  color:#07142b;
+
+  border:0;
+
+  box-shadow:
+    0 8px 22px rgba(214,173,85,.12);
+}
+
+.btn-primary:hover{
+  box-shadow:
+    0 11px 28px rgba(214,173,85,.20);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.04);
+
+  color:var(--text);
+
+  border:1px solid var(--border);
+}
+
+.btn-secondary:hover{
+  border-color:var(--goldBorder);
+}
+
+.btn-danger{
+  background:rgba(232,93,106,.07);
+
+  color:#ffaaa6;
+
+  border-color:rgba(232,93,106,.14);
+}
+
+.btn-success{
+  background:rgba(56,199,147,.07);
+
+  color:#8ee2b5;
+
+  border-color:rgba(56,199,147,.14);
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:none;
+
+  padding:11px 13px;
+
+  border-radius:11px;
+
+  margin-top:15px;
+
+  font-size:12px;
+}
+
+.status.show{
+  display:block;
+
+  animation:fadeUp .25s ease;
+}
+
+.status.success{
+  background:rgba(56,199,147,.08);
+
+  color:#8ee2b5;
+
+  border:1px solid rgba(56,199,147,.14);
+}
+
+.status.error{
+  background:rgba(232,93,106,.08);
+
+  color:#ffaaa6;
+
+  border:1px solid rgba(232,93,106,.14);
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview{
+  margin-top:18px;
+
+  padding:15px;
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.018);
+
+  border:1px solid var(--border);
+}
+
+.preview h3{
+  color:var(--gold2);
+
+  font-size:12px;
+
+  margin-bottom:10px;
+}
+
+.preview img{
+  width:100%;
+
+  max-height:260px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+
+  display:none;
+
+  border:1px solid var(--goldBorder);
+}
+
+/* =========================
+   ITEMS
+========================= */
+
+.items{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:15px;
+
+  margin-top:20px;
+}
+
+.item{
+  background:
+    linear-gradient(
+      145deg,
+      #0b172b,
+      #071120
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  padding:16px;
+
+  transition:.3s ease;
+}
+
+.item:hover{
+  transform:translateY(-3px);
+
+  border-color:var(--goldBorder);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.25);
+}
+
+.item-top{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:12px;
+}
+
+.avatar{
+  width:58px;
+  height:58px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  background:#102d59;
+
+  border:1px solid var(--goldBorder);
+
+  transition:.3s ease;
+}
+
+.item:hover .avatar{
+  transform:scale(1.04);
+}
+
+.item h3{
+  color:white;
+
+  font-size:15px;
+}
+
+.item .role{
+  color:var(--gold2);
+
+  font-size:11px;
+
+  margin-top:4px;
+}
+
+.item p{
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.55;
+
+  margin:6px 0;
+}
+
+.item-actions{
+  display:flex;
+
+  gap:7px;
+
+  flex-wrap:wrap;
+
+  margin-top:13px;
+}
+
+.item-actions button{
+  font-size:11px;
+
+  padding:8px 10px;
+}
+
+.empty{
+  grid-column:1/-1;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  padding:35px 15px;
+
+  border:1px dashed rgba(214,173,85,.18);
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.015);
+}
+
+.empty::before{
+  content:"👥";
+
+  display:block;
+
+  font-size:35px;
+
+  margin-bottom:10px;
+}
+
+/* =========================
+   INFO BOX
+========================= */
+
+.info-box{
+  padding:17px;
+
+  border-radius:14px;
+
+  background:rgba(214,173,85,.055);
+
+  border:1px solid rgba(214,173,85,.15);
+
+  color:var(--text);
+
+  line-height:1.75;
+
+  font-size:12px;
+}
+
+.info-box strong{
+  color:var(--gold2);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+  .header-inner{
+    padding:12px 14px;
+  }
+
+  nav{
+    display:none;
+
+    position:absolute;
+
+    top:68px;
+
+    left:12px;
+    right:12px;
+
+    padding:8px;
+
+    background:#0b1424;
+
+    border:1px solid var(--goldBorder);
+
+    border-radius:15px;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    box-shadow:var(--shadow);
+  }
+
+  nav.open{
+    display:flex;
+
+    animation:fadeUp .2s ease;
+  }
+
+  nav a{
+    width:100%;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  main{
+    padding:25px 14px 50px;
+  }
+
+  .page-title{
+    padding:23px 20px;
+
+    border-radius:19px;
+  }
+
+  .page-title h1{
+    font-size:29px;
+  }
+
+  .page-title p{
+    font-size:13px;
+  }
+
+  .grid,
+  .form-grid,
+  .items{
+    grid-template-columns:1fr;
+  }
+
+  .card.full{
+    grid-column:auto;
+  }
+
+  .card{
+    padding:18px;
+
+    border-radius:17px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions button{
+    width:100%;
+  }
+}
+
+@media(max-width:390px){
+
+  .brand strong{
+    font-size:14px;
+  }
+
+  .brand span{
+    font-size:9px;
+  }
+
+  .page-title h1{
+    font-size:26px;
+  }
+
+  .card{
+    padding:15px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+  }
+
+}
+</style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">
+
+      <!-- MÊME LOGO POUR TOUTES LES PAGES ADMIN -->
+      <img
+        src="admin-logo.png"
+        alt="MI.C.L.A"
+      >
+
+      <div>
+        <strong>MI.C.L.A</strong>
+        <span>Cité de Refuge · Administration</span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Ouvrir le menu"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+      <a href="admin.html">
+        Tableau de bord
+      </a>
+
+      <a href="jeunesse.html">
+        Voir la jeunesse
+      </a>
+
+      <a href="index.html">
+        Site public
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- TITRE -->
+
+  <section class="page-title">
+
+    <div class="page-title-content">
+
+      <span class="badge">
+        ADMINISTRATION · JEUNESSE
+      </span>
+
+      <h1>
+        Département de jeunesse
+      </h1>
+
+      <p>
+        Gérez la présentation du département,
+        les responsables, les informations de contact
+        et les activités de la jeunesse de MI.C.L.A.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <div class="grid">
+
+    <!-- =========================
+         PRESENTATION
+    ========================== -->
+
+    <section class="card">
+
+      <h2>
+        ✨ Présentation de la jeunesse
+      </h2>
+
+      <p class="card-description">
+        Ces informations seront utilisées sur la page
+        publique de la jeunesse.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field full">
+
+          <label for="youthTitle">
+            Titre
+          </label>
+
+          <input
+            id="youthTitle"
+            type="text"
+            placeholder="Département de jeunesse"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="youthDescription">
+            Présentation
+          </label>
+
+          <textarea
+            id="youthDescription"
+            placeholder="Présentez la vision et la mission de la jeunesse..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="meetingDay">
+            Jour de réunion
+          </label>
+
+          <input
+            id="meetingDay"
+            type="text"
+            value="Samedi"
+            placeholder="Samedi"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="meetingTime">
+            Heure
+          </label>
+
+          <input
+            id="meetingTime"
+            type="text"
+            value="16h30 – 17h30"
+            placeholder="16h30 – 17h30"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="youthPhoto">
+            Photo principale
+          </label>
+
+          <input
+            id="youthPhoto"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn-primary"
+          id="saveYouth"
+        >
+          ✓ Enregistrer la présentation
+        </button>
+
+        <button
+          class="btn-secondary"
+          id="resetYouth"
+        >
+          Réinitialiser
+        </button>
+
+      </div>
+
+
+      <div
+        class="status"
+        id="youthStatus"
+      ></div>
+
+
+      <div class="preview">
+
+        <h3>
+          APERÇU DE LA PHOTO
+        </h3>
+
+        <img
+          id="youthPreview"
+          alt="Photo jeunesse"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INFORMATIONS
+    ========================== -->
+
+    <section class="card">
+
+      <h2>
+        📋 Informations du département
+      </h2>
+
+      <p class="card-description">
+        Informations générales visibles par les jeunes
+        et les visiteurs.
+      </p>
+
+
+      <div class="info-box">
+
+        <strong>
+          Réunion hebdomadaire
+        </strong>
+
+        <br>
+
+        Samedi · 16h30 – 17h30
+
+        <br><br>
+
+        <strong>
+          Responsables actuels
+        </strong>
+
+        <br>
+
+        Chadrack Mutombo
+        <br>
+
+        Yannick Mutombo
+        <br>
+
+        Samuel Eyambela
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn-secondary"
+          id="loadDefaults"
+        >
+          ↻ Charger les informations officielles
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESPONSABLES
+    ========================== -->
+
+    <section class="card full">
+
+      <h2>
+        👥 Responsables de la jeunesse
+      </h2>
+
+      <p class="card-description">
+        Ajoutez ou modifiez les responsables
+        du département de jeunesse.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label for="leaderName">
+            Nom complet
+          </label>
+
+          <input
+            id="leaderName"
+            type="text"
+            placeholder="Ex. Chadrack Mutombo"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="leaderRole">
+            Fonction
+          </label>
+
+          <input
+            id="leaderRole"
+            type="text"
+            placeholder="Responsable de la jeunesse"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="leaderPhone">
+            WhatsApp / Téléphone
+          </label>
+
+          <input
+            id="leaderPhone"
+            type="text"
+            placeholder="+243..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="leaderPhoto">
+            Photo
+          </label>
+
+          <input
+            id="leaderPhoto"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="leaderDescription">
+            Description
+          </label>
+
+          <textarea
+            id="leaderDescription"
+            placeholder="Courte présentation du responsable..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn-primary"
+          id="saveLeader"
+        >
+          + Ajouter le responsable
+        </button>
+
+        <button
+          class="btn-secondary"
+          id="cancelLeader"
+          style="display:none"
+        >
+          Annuler la modification
+        </button>
+
+      </div>
+
+
+      <div
+        class="status"
+        id="leaderStatus"
+      ></div>
+
+
+      <div
+        class="items"
+        id="leadersList"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         ACTIVITES
+    ========================== -->
+
+    <section class="card full">
+
+      <h2>
+        📅 Activités de la jeunesse
+      </h2>
+
+      <p class="card-description">
+        Publiez les réunions, sorties, évangélisations,
+        formations, programmes spéciaux et autres
+        activités de la jeunesse.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label for="activityTitle">
+            Titre de l'activité
+          </label>
+
+          <input
+            id="activityTitle"
+            type="text"
+            placeholder="Ex. Rencontre des jeunes"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="activityDate">
+            Date
+          </label>
+
+          <input
+            id="activityDate"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="activityTime">
+            Heure
+          </label>
+
+          <input
+            id="activityTime"
+            type="text"
+            placeholder="16h30"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="activityLocation">
+            Lieu
+          </label>
+
+          <input
+            id="activityLocation"
+            type="text"
+            placeholder="Église / salle..."
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="activityDescription">
+            Description
+          </label>
+
+          <textarea
+            id="activityDescription"
+            placeholder="Description de l'activité..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="activityLink">
+            Lien WhatsApp / inscription
+          </label>
+
+          <input
+            id="activityLink"
+            type="url"
+            placeholder="https://..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="activityPoster">
+            Affiche
+          </label>
+
+          <input
+            id="activityPoster"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn-primary"
+          id="saveActivity"
+        >
+          ✓ Publier l'activité
+        </button>
+
+      </div>
+
+
+      <div
+        class="status"
+        id="activityStatus"
+      ></div>
+
+
+      <div
+        class="items"
+        id="activitiesList"
+      ></div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mainNav =
+  document.getElementById("mainNav");
+
+
+if(menuBtn && mainNav){
+
+  menuBtn.addEventListener("click", () => {
+
+    mainNav.classList.toggle("open");
+
+  });
+
+}
+
+
+/* Fermer le menu */
+
+document
+  .querySelectorAll("#mainNav a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      mainNav.classList.remove("open");
+
+    });
+
+  });
+
+
+/* =========================
+   APERÇU PHOTO JEUNESSE
+========================= */
+
+const youthPhoto =
+  document.getElementById("youthPhoto");
+
+const youthPreview =
+  document.getElementById("youthPreview");
+
+
+if(youthPhoto && youthPreview){
+
+  youthPhoto.addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files?.[0];
+
+      if(!file){
+
+        youthPreview.style.display =
+          "none";
+
+        youthPreview.removeAttribute("src");
+
+        return;
+      }
+
+
+      if(!file.type.startsWith("image/")){
+
+        youthPreview.style.display =
+          "none";
+
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = function(event){
+
+        youthPreview.src =
+          event.target.result;
+
+        youthPreview.style.display =
+          "block";
+
+      };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   APERÇU PHOTO RESPONSABLE
+========================= */
+
+const leaderPhoto =
+  document.getElementById("leaderPhoto");
+
+
+if(leaderPhoto){
+
+  leaderPhoto.addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files?.[0];
+
+      if(!file) return;
+
+      if(!file.type.startsWith("image/")) return;
+
+      /*
+        Le JS principal admin-jeunesse.js
+        peut également récupérer ce fichier
+        pour l'enregistrement du responsable.
+      */
+
+    }
+  );
+
+}
+
+
+/* =========================
+   APERÇU AFFICHE
+========================= */
+
+const activityPoster =
+  document.getElementById("activityPoster");
+
+
+if(activityPoster){
+
+  activityPoster.addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files?.[0];
+
+      if(!file) return;
+
+      if(!file.type.startsWith("image/")) return;
+
+      /*
+        L'enregistrement de l'affiche
+        reste géré par admin-jeunesse.js.
+      */
+
+    }
+  );
+
+}
+
+</script>
+
+
+<!--
+  SCRIPT PRINCIPAL
+
+  Les IDs originaux sont conservés
+  pour rester compatibles avec
+  admin-jeunesse.js.
+
+  Présentation :
+  youthTitle
+  youthDescription
+  meetingDay
+  meetingTime
+  youthPhoto
+  saveYouth
+  resetYouth
+  youthStatus
+  youthPreview
+
+  Responsables :
+  leaderName
+  leaderRole
+  leaderPhone
+  leaderPhoto
+  leaderDescription
+  saveLeader
+  cancelLeader
+  leaderStatus
+  leadersList
+
+  Activités :
+  activityTitle
+  activityDate
+  activityTime
+  activityLocation
+  activityDescription
+  activityLink
+  activityPoster
+  saveActivity
+  activityStatus
+  activitiesList
+-->
+
+<script src="admin-jeunesse.js"></script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

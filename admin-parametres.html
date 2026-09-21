@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Paramètres — Administration | MI.C.L.A</title>
+
+<style>
+:root{
+  --bg:#070b13;
+  --bg2:#0a101c;
+  --surface:#0e1624;
+  --surface2:#121c2c;
+  --surface3:#172338;
+
+  --gold:#d6ad55;
+  --gold2:#f1d58b;
+  --goldSoft:rgba(214,173,85,.10);
+
+  --white:#fff;
+  --text:#e9eef7;
+  --muted:#8996aa;
+  --muted2:#647187;
+
+  --border:rgba(255,255,255,.075);
+  --goldBorder:rgba(214,173,85,.24);
+
+  --danger:#e85d6a;
+  --success:#35c58b;
+
+  --radius:18px;
+  --radiusLg:26px;
+  --shadow:0 20px 60px rgba(0,0,0,.32);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(214,173,85,.08),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(30,72,130,.15),transparent 30%),
+    linear-gradient(180deg,var(--bg),#04070d);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,11,19,.88);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 20px;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  position:relative;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:47px;
+  height:47px;
+  border-radius:13px;
+  object-fit:cover;
+  border:1px solid var(--goldBorder);
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+  transition:.3s ease;
+}
+
+.brand:hover img{
+  transform:scale(1.04) rotate(-2deg);
+}
+
+.brand strong{
+  display:block;
+  color:white;
+  font-size:15px;
+  letter-spacing:.3px;
+}
+
+.brand span{
+  display:block;
+  font-size:10px;
+  color:var(--gold);
+  margin-top:4px;
+  font-weight:700;
+  letter-spacing:.7px;
+}
+
+nav{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  border:1px solid var(--border);
+  padding:10px 13px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+  transition:.25s ease;
+}
+
+nav a:hover{
+  background:var(--goldSoft);
+  border-color:var(--goldBorder);
+  color:var(--gold2);
+  transform:translateY(-1px);
+}
+
+.menu{
+  display:none;
+  background:rgba(255,255,255,.04);
+  color:var(--gold2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  max-width:1050px;
+  margin:auto;
+  padding:42px 20px 70px;
+}
+
+.hero{
+  margin-bottom:25px;
+  animation:fadeUp .55s ease both;
+}
+
+.hero small{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--gold2);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.hero small::before{
+  content:"";
+  width:22px;
+  height:1px;
+  background:var(--gold);
+}
+
+.hero h1{
+  font-size:40px;
+  line-height:1.1;
+  color:white;
+  margin:12px 0;
+  letter-spacing:-1px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  max-width:700px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:none;
+  padding:13px 15px;
+  border-radius:12px;
+  margin-bottom:18px;
+  font-size:13px;
+  font-weight:700;
+  border:1px solid rgba(53,197,139,.22);
+}
+
+.status.show{
+  display:block;
+  background:rgba(53,197,139,.08);
+  color:#9ae7bd;
+}
+
+/* =========================
+   SETTINGS GRID
+========================= */
+
+.settings{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  animation:fadeUp .65s ease both;
+}
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,35,60,.92),
+      rgba(9,16,28,.96)
+    );
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+  transition:.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-100px;
+  top:-100px;
+  border-radius:50%;
+  background:rgba(214,173,85,.045);
+  pointer-events:none;
+}
+
+.card:hover{
+  border-color:rgba(214,173,85,.15);
+  transform:translateY(-2px);
+}
+
+.card h2{
+  color:white;
+  font-size:19px;
+  margin-bottom:19px;
+}
+
+.group{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  color:#cbd7e9;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:13px 14px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:rgba(4,11,22,.75);
+  color:white;
+  outline:none;
+  font:inherit;
+  transition:.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#617088;
+}
+
+input:hover,
+textarea:hover{
+  border-color:rgba(214,173,85,.15);
+}
+
+input:focus,
+textarea:focus{
+  border-color:var(--gold);
+  background:#071120;
+  box-shadow:0 0 0 3px rgba(214,173,85,.07);
+}
+
+textarea{
+  min-height:105px;
+  resize:vertical;
+  line-height:1.6;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+  font-family:inherit;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:13px 16px;
+  cursor:pointer;
+  font-weight:800;
+  color:#07142b;
+  background:linear-gradient(
+    135deg,
+    var(--gold),
+    var(--gold2)
+  );
+  box-shadow:0 8px 25px rgba(214,173,85,.12);
+  transition:.25s ease;
+}
+
+.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(214,173,85,.2);
+}
+
+.primary:active{
+  transform:translateY(0);
+}
+
+.danger{
+  width:100%;
+  background:rgba(232,93,106,.07);
+  border:1px solid rgba(232,93,106,.22);
+  color:#ffb1b8;
+  margin-top:10px;
+  border-radius:11px;
+  padding:13px 16px;
+  cursor:pointer;
+  font-weight:800;
+  transition:.25s ease;
+}
+
+.danger:hover{
+  background:rgba(232,93,106,.12);
+  border-color:rgba(232,93,106,.4);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   NOTICES
+========================= */
+
+.notice{
+  padding:14px 15px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin-top:14px;
+  background:rgba(255,255,255,.018);
+}
+
+.notice strong{
+  color:#dce5f4;
+}
+
+.danger-zone{
+  grid-column:1/-1;
+  border-color:rgba(232,93,106,.16);
+}
+
+.danger-zone h2{
+  color:#fff;
+}
+
+/* =========================
+   ICON HEADERS
+========================= */
+
+.card h2:first-letter{
+  color:var(--gold);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:750px){
+
+  .header-inner{
+    padding:11px 14px;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  nav{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:14px;
+    right:14px;
+    background:rgba(10,16,28,.98);
+    padding:8px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:0 18px 45px rgba(0,0,0,.4);
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  nav.open{
+    display:flex;
+    animation:fadeUp .2s ease both;
+  }
+
+  nav a{
+    padding:12px 13px;
+  }
+
+  main{
+    padding:29px 14px 55px;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+
+  .settings{
+    grid-template-columns:1fr;
+  }
+
+  .danger-zone{
+    grid-column:auto;
+  }
+
+  .card{
+    padding:20px;
+    border-radius:20px;
+  }
+}
+
+@media(max-width:380px){
+
+  .brand img{
+    width:43px;
+    height:43px;
+  }
+
+  .brand span{
+    font-size:9px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <a href="admin.html" class="brand">
+
+      <!-- Même logo que les autres pages ADMIN -->
+      <img
+        src="admin-logo.png"
+        alt="Logo MI.C.L.A"
+      >
+
+      <div>
+        <strong>MI.C.L.A</strong>
+        <span>Cité de Refuge · Administration</span>
+      </div>
+
+    </a>
+
+
+    <button
+      class="menu"
+      id="menu"
+      type="button"
+      aria-label="Ouvrir le menu"
+    >
+      ☰
+    </button>
+
+
+    <nav id="nav">
+
+      <a href="admin.html">
+        Dashboard
+      </a>
+
+      <a href="index.html">
+        Voir le site
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <section class="hero">
+
+    <small>
+      Administration
+    </small>
+
+    <h1>
+      Paramètres du site
+    </h1>
+
+    <p>
+      Configure les informations générales de MI.C.L.A
+      et gère les données utilisées par l'administration.
+    </p>
+
+  </section>
+
+
+  <div
+    id="status"
+    class="status">
+  </div>
+
+
+  <div class="settings">
+
+    <!-- INFORMATIONS -->
+
+    <section class="card">
+
+      <h2>
+        ⚙️ Informations générales
+      </h2>
+
+      <form id="form">
+
+        <div class="group">
+
+          <label for="churchName">
+            Nom de l'église
+          </label>
+
+          <input
+            id="churchName"
+            placeholder="MI.C.L.A"
+          >
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="subtitle">
+            Sous-titre
+          </label>
+
+          <input
+            id="subtitle"
+            placeholder="Cité de Refuge"
+          >
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="welcome">
+            Phrase d'accueil
+          </label>
+
+          <textarea
+            id="welcome"
+            placeholder="Bienvenue à la MI.C.L.A — Cité de Refuge"
+          ></textarea>
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="phone">
+            Téléphone principal
+          </label>
+
+          <input
+            id="phone"
+            placeholder="+243 ..."
+          >
+
+        </div>
+
+
+        <div class="group">
+
+          <label for="whatsapp">
+            WhatsApp officiel
+          </label>
+
+          <input
+            id="whatsapp"
+            placeholder="https://chat.whatsapp.com/..."
+          >
+
+        </div>
+
+
+        <button
+          class="primary"
+          type="submit"
+        >
+          💾 Enregistrer les paramètres
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- DONNÉES -->
+
+    <section class="card">
+
+      <h2>
+        🔐 Gestion des données
+      </h2>
+
+      <p style="
+        color:var(--muted);
+        font-size:13px;
+        line-height:1.7;
+      ">
+
+        Les données de cette version sont enregistrées
+        dans le <strong>localStorage</strong> du navigateur.
+        Cela convient à une démonstration locale.
+
+        Pour une véritable plateforme en ligne,
+        il faudra utiliser une base de données et une
+        authentification sécurisée.
+
+      </p>
+
+
+      <div class="notice">
+
+        ⚠️ Ne mets jamais un mot de passe administrateur,
+        une clé API ou un secret dans ce fichier
+        HTML/JavaScript côté client.
+
+      </div>
+
+
+      <div class="notice">
+
+        💡 L'export permet de sauvegarder les données
+        actuellement présentes dans le navigateur.
+
+      </div>
+
+
+      <button
+        class="primary"
+        id="export"
+        type="button"
+        style="margin-top:15px;"
+      >
+        📦 Exporter les données
+      </button>
+
+
+      <button
+        class="danger"
+        id="clear"
+        type="button"
+      >
+        🗑️ Effacer les données locales
+      </button>
+
+    </section>
+
+
+    <!-- SÉCURITÉ -->
+
+    <section class="card danger-zone">
+
+      <h2>
+        🛡️ Zone de sécurité
+      </h2>
+
+      <p style="
+        color:var(--muted);
+        font-size:13px;
+        line-height:1.7;
+      ">
+
+        Cette zone est destinée aux opérations sensibles.
+        La suppression des données locales est définitive
+        pour ce navigateur.
+
+        Effectue une exportation avant toute suppression.
+
+      </p>
+
+
+      <div class="notice">
+
+        🔒 Pour la version en ligne, utilise une authentification
+        administrateur côté serveur avec des sessions sécurisées
+        ou des tokens protégés.
+
+      </div>
+
+
+      <div class="notice">
+
+        🛡️ Les informations sensibles doivent rester côté serveur
+        et ne doivent jamais être exposées dans le code public
+        de ton site.
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menu = document.getElementById("menu");
+  const nav = document.getElementById("nav");
+
+  if(menu && nav){
+
+    menu.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+
+    });
+
+  }
+
+});
+
+</script>
+
+
+<script src="admin-parametres.js"></script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

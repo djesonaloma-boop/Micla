@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin — Activités | MI.C.L.A</title>
+
+  <style>
+    :root {
+      --bg: #050912;
+      --bg-2: #08101d;
+      --sidebar: #080f1c;
+      --surface: #0d1727;
+      --surface-2: #111d30;
+      --surface-hover: #172338;
+
+      --gold: #d8b45a;
+      --gold-light: #f1d98b;
+
+      --white: #ffffff;
+      --text: #dfe7f2;
+      --muted: #8997aa;
+
+      --success: #35c58b;
+      --danger: #e85d6a;
+      --info: #5b9df9;
+
+      --border: rgba(255,255,255,.07);
+      --border-gold: rgba(216,180,90,.20);
+
+      --radius: 18px;
+      --shadow: 0 15px 45px rgba(0,0,0,.30);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 70% 0%,
+          rgba(30,80,150,.25),
+          transparent 35%
+        ),
+        linear-gradient(
+          180deg,
+          #071327,
+          #050912
+        );
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      height: 70px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 22px;
+
+      background: rgba(5,9,18,.90);
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+
+      object-fit: cover;
+      border-radius: 50%;
+
+      border: 1.5px solid var(--gold);
+
+      box-shadow:
+        0 0 0 4px rgba(216,180,90,.06);
+    }
+
+    .brand-text strong {
+      display: block;
+
+      color: var(--gold-light);
+
+      font-size: 15px;
+      letter-spacing: 1.5px;
+    }
+
+    .brand-text span {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-top: 2px;
+    }
+
+    .back-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      color: var(--gold-light);
+
+      text-decoration: none;
+
+      font-size: 12px;
+      font-weight: bold;
+
+      padding: 10px 13px;
+
+      border-radius: 11px;
+
+      background: rgba(216,180,90,.06);
+      border: 1px solid var(--border-gold);
+
+      transition: .25s ease;
+    }
+
+    .back-site:hover {
+      transform: translateY(-2px);
+      background: rgba(216,180,90,.10);
+    }
+
+    /* =========================
+       CONTENU
+    ========================= */
+
+    .container {
+      width: 100%;
+      max-width: 1050px;
+
+      margin: auto;
+
+      padding: 30px 18px 60px;
+    }
+
+    .page-header {
+      margin-bottom: 25px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      color: var(--gold-light);
+
+      font-size: 11px;
+      font-weight: bold;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 9px;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      box-shadow: 0 0 12px rgba(216,180,90,.7);
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.2;
+
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       STATISTIQUES
+    ========================= */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 13px;
+
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      position: relative;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        ),
+        var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 17px;
+
+      overflow: hidden;
+
+      transition: .3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+
+      border-color: var(--border-gold);
+    }
+
+    .stat-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 80px;
+      height: 80px;
+
+      right: -30px;
+      bottom: -30px;
+
+      border-radius: 50%;
+
+      background: rgba(216,180,90,.05);
+    }
+
+    .stat-icon {
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    .stat-number {
+      color: var(--white);
+
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .stat-label {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      margin-top: 4px;
+    }
+
+    /* =========================
+       FORMULAIRE
+    ========================= */
+
+    .card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        ),
+        var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+
+      padding: 22px;
+
+      margin-bottom: 25px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 20px;
+    }
+
+    .card-header h2 {
+      font-size: 18px;
+    }
+
+    .card-header p {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      margin-top: 4px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .section-title-icon {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: rgba(216,180,90,.08);
+      border: 1px solid rgba(216,180,90,.15);
+    }
+
+    /* FORM GRID */
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #cfd8e5;
+
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+
+      padding: 13px 14px;
+
+      color: var(--white);
+
+      background: #091321;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 12px;
+
+      outline: none;
+
+      font-family: inherit;
+      font-size: 13px;
+
+      transition: .25s ease;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(216,180,90,.55);
+
+      box-shadow:
+        0 0 0 3px rgba(216,180,90,.07);
+    }
+
+    input[type="file"] {
+      padding: 10px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #5f6d82;
+    }
+
+    /* =========================
+       APERÇU
+    ========================= */
+
+    .preview {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 15px;
+
+      background: #060b14;
+
+      border-radius: 15px;
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      text-align: center;
+    }
+
+    .preview.active {
+      display: block;
+    }
+
+    .preview-title {
+      color: var(--gold-light);
+
+      font-size: 11px;
+      font-weight: bold;
+
+      margin-bottom: 12px;
+    }
+
+    #preview-image {
+      max-width: 100%;
+      max-height: 420px;
+
+      border-radius: 12px;
+
+      object-fit: contain;
+    }
+
+    /* =========================
+       BOUTONS
+    ========================= */
+
+    .actions {
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+
+      font-family: inherit;
+      font-weight: bold;
+
+      transition: .25s ease;
+    }
+
+    .btn {
+      min-height: 45px;
+
+      padding: 0 17px;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+    }
+
+    .btn-primary {
+      color: #07101d;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold-light),
+          var(--gold)
+        );
+
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 25px rgba(216,180,90,.16);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-gold);
+    }
+
+    /* =========================
+       LISTE
+    ========================= */
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 13px;
+
+      background: var(--surface-2);
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      transition: .3s ease;
+    }
+
+    .activity-item:hover {
+      transform: translateY(-2px);
+
+      border-color: var(--border-gold);
+    }
+
+    .activity-thumb {
+      width: 72px;
+      height: 72px;
+
+      flex-shrink: 0;
+
+      border-radius: 11px;
+
+      object-fit: cover;
+
+      background: #050912;
+    }
+
+    .activity-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-info h3 {
+      font-size: 14px;
+
+      margin-bottom: 5px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-info p {
+      color: var(--muted);
+
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      margin-top: 7px;
+
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .status::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+    }
+
+    .status-active {
+      color: var(--success);
+    }
+
+    .status-active::before {
+      background: var(--success);
+    }
+
+    .status-inactive {
+      color: var(--danger);
+    }
+
+    .status-inactive::before {
+      background: var(--danger);
+    }
+
+    .item-actions {
+      display: flex;
+
+      gap: 7px;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: #0a1424;
+
+      border: 1px solid var(--border);
+
+      font-size: 14px;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-gold);
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+      border-color: rgba(232,93,106,.35);
+    }
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    #message {
+      display: none;
+
+      padding: 13px 15px;
+
+      margin-bottom: 18px;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    #message.success {
+      display: block;
+
+      color: #a8efd0;
+
+      background: rgba(53,197,139,.08);
+
+      border: 1px solid rgba(53,197,139,.20);
+    }
+
+    #message.error {
+      display: block;
+
+      color: #ffc0c7;
+
+      background: rgba(232,93,106,.08);
+
+      border: 1px solid rgba(232,93,106,.20);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .topbar {
+        height: 64px;
+
+        padding: 0 13px;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .brand-logo {
+        width: 39px;
+        height: 39px;
+      }
+
+      .brand-text strong {
+        font-size: 13px;
+      }
+
+      .back-site {
+        font-size: 11px;
+        padding: 9px 10px;
+      }
+
+      .container {
+        padding: 24px 13px 45px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn-primary {
+        flex: none;
+      }
+
+      .activity-item {
+        align-items: flex-start;
+      }
+
+      .item-actions {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 400px) {
+
+      .activity-thumb {
+        width: 60px;
+        height: 60px;
+      }
+
+      .activity-info h3 {
+        font-size: 13px;
+      }
+
+      .item-actions {
+        gap: 5px;
+      }
+
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+  </style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- =========================
+       TOPBAR
+  ========================= -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <img
+        src="admin-logo.png"
+        alt="MI.C.L.A Administration"
+        class="brand-logo"
+      >
+
+      <div class="brand-text">
+        <strong>MI.C.L.A</strong>
+        <span>Administration — Cité de Refuge</span>
+      </div>
+
+    </div>
+
+    <a href="activites.html" class="back-site">
+      ↗ Voir le site
+    </a>
+
+  </header>
+
+
+  <!-- =========================
+       CONTENU
+  ========================= -->
+
+  <main class="container">
+
+    <div class="page-header">
+
+      <div class="eyebrow">
+        ADMINISTRATION
+      </div>
+
+      <h1>
+        Gestion des activités
+      </h1>
+
+      <p>
+        Publiez et gérez les activités, affiches et annonces
+        visibles sur la page publique de MI.C.L.A.
+      </p>
+
+    </div>
+
+
+    <!-- STATISTIQUES -->
+
+    <section class="stats">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          📋
+        </div>
+
+        <div
+          class="stat-number"
+          id="totalActivities"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Total des activités
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🟢
+        </div>
+
+        <div
+          class="stat-number"
+          id="activeActivities"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Activités publiées
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🔴
+        </div>
+
+        <div
+          class="stat-number"
+          id="inactiveActivities"
+        >
+          0
+        </div>
+
+        <div class="stat-label">
+          Activités masquées
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <div id="message"></div>
+
+
+    <!-- FORMULAIRE -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="section-title">
+
+          <div class="section-title-icon">
+            ➕
+          </div>
+
+          <div>
+            <h2 id="formTitle">
+              Ajouter une activité
+            </h2>
+
+            <p>
+              Remplissez les informations ci-dessous.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form id="activityForm">
+
+        <div class="form-grid">
+
+          <!-- TITRE -->
+
+          <div class="form-group">
+
+            <label for="title">
+              Titre de l'activité
+            </label>
+
+            <input
+              type="text"
+              id="title"
+              placeholder="Ex : Grande soirée de prière"
+              required
+            >
+
+          </div>
+
+
+          <!-- TYPE -->
+
+          <div class="form-group">
+
+            <label for="type">
+              Type / catégorie
+            </label>
+
+            <select id="type">
+
+              <option value="Activité">
+                Activité
+              </option>
+
+              <option value="Culte">
+                Culte
+              </option>
+
+              <option value="Jeunesse">
+                Jeunesse
+              </option>
+
+              <option value="Prière">
+                Prière
+              </option>
+
+              <option value="Évangélisation">
+                Évangélisation
+              </option>
+
+              <option value="Annonce">
+                Annonce
+              </option>
+
+              <option value="Événement">
+                Événement
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <div class="form-group full">
+
+            <label for="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              placeholder="Écrivez les détails de l'activité..."
+            ></textarea>
+
+          </div>
+
+
+          <!-- DATE -->
+
+          <div class="form-group">
+
+            <label for="date">
+              Date
+            </label>
+
+            <input
+              type="date"
+              id="date"
+            >
+
+          </div>
+
+
+          <!-- HEURE -->
+
+          <div class="form-group">
+
+            <label for="time">
+              Heure
+            </label>
+
+            <input
+              type="text"
+              id="time"
+              placeholder="Ex : 17h00 — 19h30"
+            >
+
+          </div>
+
+
+          <!-- LIEU -->
+
+          <div class="form-group full">
+
+            <label for="location">
+              Lieu
+            </label>
+
+            <input
+              type="text"
+              id="location"
+              placeholder="Ex : MI.C.L.A — Cité de Refuge"
+            >
+
+          </div>
+
+
+          <!-- AFFICHE -->
+
+          <div class="form-group full">
+
+            <label for="poster">
+              Affiche / photo
+            </label>
+
+            <input
+              type="file"
+              id="poster"
+              accept="image/*"
+            >
+
+          </div>
+
+
+          <!-- VIDÉO -->
+
+          <div class="form-group full">
+
+            <label for="video">
+              Lien vidéo
+            </label>
+
+            <input
+              type="url"
+              id="video"
+              placeholder="https://..."
+            >
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <div class="form-group">
+
+            <label for="whatsapp">
+              Lien WhatsApp
+            </label>
+
+            <input
+              type="url"
+              id="whatsapp"
+              placeholder="https://wa.me/..."
+            >
+
+          </div>
+
+
+          <!-- LIEN -->
+
+          <div class="form-group">
+
+            <label for="link">
+              Autre lien
+            </label>
+
+            <input
+              type="url"
+              id="link"
+              placeholder="https://..."
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- APERÇU -->
+
+        <div
+          class="preview"
+          id="preview"
+        >
+
+          <div class="preview-title">
+            APERÇU DE L'AFFICHE
+          </div>
+
+          <img
+            id="preview-image"
+            alt="Aperçu de l'affiche"
+          >
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="saveButton"
+          >
+            Publier l'activité
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="cancelButton"
+            style="display:none;"
+          >
+            Annuler
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <!-- LISTE -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="section-title">
+
+          <div class="section-title-icon">
+            📋
+          </div>
+
+          <div>
+
+            <h2>
+              Activités enregistrées
+            </h2>
+
+            <p>
+              Gérez les publications existantes.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="activitiesList"
+        class="activity-list"
+      ></div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script>
+
+  const STORAGE_KEY = "micla_activities";
+
+  let activities = [];
+  let editingId = null;
+  let selectedPoster = null;
+
+
+  /* =========================
+     ÉLÉMENTS
+  ========================= */
+
+  const form = document.getElementById("activityForm");
+
+  const titleInput = document.getElementById("title");
+  const typeInput = document.getElementById("type");
+  const descriptionInput = document.getElementById("description");
+  const dateInput = document.getElementById("date");
+  const timeInput = document.getElementById("time");
+  const locationInput = document.getElementById("location");
+  const posterInput = document.getElementById("poster");
+  const videoInput = document.getElementById("video");
+  const whatsappInput = document.getElementById("whatsapp");
+  const linkInput = document.getElementById("link");
+
+  const preview = document.getElementById("preview");
+  const previewImage = document.getElementById("preview-image");
+
+  const activitiesList =
+    document.getElementById("activitiesList");
+
+  const totalActivities =
+    document.getElementById("totalActivities");
+
+  const activeActivities =
+    document.getElementById("activeActivities");
+
+  const inactiveActivities =
+    document.getElementById("inactiveActivities");
+
+  const message =
+    document.getElementById("message");
+
+  const formTitle =
+    document.getElementById("formTitle");
+
+  const saveButton =
+    document.getElementById("saveButton");
+
+  const cancelButton =
+    document.getElementById("cancelButton");
+
+
+  /* =========================
+     CHARGEMENT
+  ========================= */
+
+  function loadActivities() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(STORAGE_KEY);
+
+      activities =
+        saved ? JSON.parse(saved) : [];
+
+      if (!Array.isArray(activities)) {
+        activities = [];
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      activities = [];
+
+    }
+
+    render();
+  }
+
+
+  /* =========================
+     SAUVEGARDE
+  ========================= */
+
+  function saveActivities() {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(activities)
+    );
+
+  }
+
+
+  /* =========================
+     MESSAGE
+  ========================= */
+
+  function showMessage(text, type = "success") {
+
+    message.textContent = text;
+
+    message.className = type;
+
+    setTimeout(() => {
+
+      message.className = "";
+
+      message.textContent = "";
+
+    }, 3000);
+
+  }
+
+
+  /* =========================
+     APERÇU IMAGE
+  ========================= */
+
+  posterInput.addEventListener(
+    "change",
+    function () {
+
+      const file = this.files[0];
+
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+
+        selectedPoster =
+          event.target.result;
+
+        previewImage.src =
+          selectedPoster;
+
+        preview.classList.add("active");
+
+      };
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+
+  /* =========================
+     AJOUT / MODIFICATION
+  ========================= */
+
+  form.addEventListener(
+    "submit",
+    function (event) {
+
+      event.preventDefault();
+
+      const title =
+        titleInput.value.trim();
+
+      if (!title) {
+
+        showMessage(
+          "Veuillez saisir le titre de l'activité.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const activity = {
+
+        id:
+          editingId ||
+          Date.now().toString(),
+
+        poster:
+          selectedPoster || "",
+
+        title:
+          title,
+
+        type:
+          typeInput.value,
+
+        description:
+          descriptionInput.value.trim(),
+
+        date:
+          dateInput.value,
+
+        time:
+          timeInput.value.trim(),
+
+        location:
+          locationInput.value.trim(),
+
+        video:
+          videoInput.value.trim(),
+
+        whatsapp:
+          whatsappInput.value.trim(),
+
+        link:
+          linkInput.value.trim(),
+
+        active:
+          editingId
+            ? getEditingActivity().active
+            : true,
+
+        createdAt:
+          editingId
+            ? getEditingActivity().createdAt
+            : new Date().toISOString(),
+
+        updatedAt:
+          new Date().toISOString()
+
+      };
+
+
+      if (editingId) {
+
+        activities =
+          activities.map(item =>
+            item.id === editingId
+              ? activity
+              : item
+          );
+
+        showMessage(
+          "Activité modifiée avec succès."
+        );
+
+      } else {
+
+        activities.unshift(activity);
+
+        showMessage(
+          "Activité publiée avec succès."
+        );
+
+      }
+
+
+      saveActivities();
+
+      resetForm();
+
+      render();
+
+    }
+  );
+
+
+  /* =========================
+     ACTIVITÉ EN COURS
+  ========================= */
+
+  function getEditingActivity() {
+
+    return activities.find(
+      item => item.id === editingId
+    ) || {
+      active: true,
+      createdAt:
+        new Date().toISOString()
+    };
+
+  }
+
+
+  /* =========================
+     MODIFIER
+  ========================= */
+
+  function editActivity(id) {
+
+    const activity =
+      activities.find(
+        item => item.id === id
+      );
+
+    if (!activity) return;
+
+    editingId = id;
+
+    titleInput.value =
+      activity.title || "";
+
+    typeInput.value =
+      activity.type || "Activité";
+
+    descriptionInput.value =
+      activity.description || "";
+
+    dateInput.value =
+      activity.date || "";
+
+    timeInput.value =
+      activity.time || "";
+
+    locationInput.value =
+      activity.location || "";
+
+    videoInput.value =
+      activity.video || "";
+
+    whatsappInput.value =
+      activity.whatsapp || "";
+
+    linkInput.value =
+      activity.link || "";
+
+
+    selectedPoster =
+      activity.poster || null;
+
+
+    if (selectedPoster) {
+
+      previewImage.src =
+        selectedPoster;
+
+      preview.classList.add("active");
+
+    } else {
+
+      preview.classList.remove("active");
+
+    }
+
+
+    formTitle.textContent =
+      "Modifier l'activité";
+
+    saveButton.textContent =
+      "Enregistrer les modifications";
+
+    cancelButton.style.display =
+      "block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     ANNULER
+  ========================= */
+
+  cancelButton.addEventListener(
+    "click",
+    function () {
+
+      resetForm();
+
+    }
+  );
+
+
+  /* =========================
+     SUPPRIMER
+  ========================= */
+
+  function deleteActivity(id) {
+
+    const activity =
+      activities.find(
+        item => item.id === id
+      );
+
+    if (!activity) return;
+
+
+    const confirmed =
+      confirm(
+        "Voulez-vous vraiment supprimer cette activité ?"
+      );
+
+    if (!confirmed) return;
+
+
+    activities =
+      activities.filter(
+        item => item.id !== id
+      );
+
+
+    saveActivities();
+
+    render();
+
+    showMessage(
+      "Activité supprimée."
+    );
+
+  }
+
+
+  /* =========================
+     ACTIVER / DÉSACTIVER
+  ========================= */
+
+  function toggleActivity(id) {
+
+    activities =
+      activities.map(item => {
+
+        if (item.id === id) {
+
+          return {
+            ...item,
+            active: item.active === false,
+            updatedAt:
+              new Date().toISOString()
+          };
+
+        }
+
+        return item;
+
+      });
+
+
+    saveActivities();
+
+    render();
+
+    showMessage(
+      "Statut de l'activité mis à jour."
+    );
+
+  }
+
+
+  /* =========================
+     RESET
+  ========================= */
+
+  function resetForm() {
+
+    editingId = null;
+
+    selectedPoster = null;
+
+    form.reset();
+
+    preview.classList.remove("active");
+
+    previewImage.removeAttribute("src");
+
+    formTitle.textContent =
+      "Ajouter une activité";
+
+    saveButton.textContent =
+      "Publier l'activité";
+
+    cancelButton.style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     RENDU
+  ========================= */
+
+  function render() {
+
+    totalActivities.textContent =
+      activities.length;
+
+    activeActivities.textContent =
+      activities.filter(
+        item => item.active !== false
+      ).length;
+
+    inactiveActivities.textContent =
+      activities.filter(
+        item => item.active === false
+      ).length;
+
+
+    if (!activities.length) {
+
+      activitiesList.innerHTML = `
+
+        <div style="
+          text-align:center;
+          padding:35px 15px;
+          color:#8997aa;
+        ">
+
+          <div style="
+            font-size:35px;
+            margin-bottom:10px;
+          ">
+            📭
+          </div>
+
+          <div style="
+            color:#f1d98b;
+            font-weight:bold;
+            margin-bottom:6px;
+          ">
+            Aucune activité
+          </div>
+
+          <div style="
+            font-size:12px;
+          ">
+            Les activités que vous publierez apparaîtront ici.
+          </div>
+
+        </div>
+
+      `;
+
+      return;
+    }
+
+
+    activitiesList.innerHTML =
+      activities.map(activity => {
+
+        const status =
+          activity.active !== false;
+
+        const poster =
+          activity.poster ||
+          "admin-logo.png";
+
+
+        return `
+
+          <article class="activity-item">
+
+            <img
+              src="${escapeHTML(poster)}"
+              class="activity-thumb"
+              alt=""
+            >
+
+            <div class="activity-info">
+
+              <h3>
+                ${escapeHTML(
+                  activity.title || "Sans titre"
+                )}
+              </h3>
+
+              <p>
+                ${escapeHTML(
+                  activity.type || "Activité"
+                )}
+                ${activity.date
+                  ? " • " + escapeHTML(activity.date)
+                  : ""}
+              </p>
+
+              <div class="
+                status
+                ${status
+                  ? "status-active"
+                  : "status-inactive"}
+              ">
+
+                ${status
+                  ? "Publiée"
+                  : "Masquée"}
+
+              </div>
+
+            </div>
+
+
+            <div class="item-actions">
+
+              <button
+                class="icon-btn"
+                title="${status ? "Masquer" : "Publier"}"
+                onclick="toggleActivity('${activity.id}')"
+              >
+                ${status ? "👁️" : "🚫"}
+              </button>
+
+              <button
+                class="icon-btn"
+                title="Modifier"
+                onclick="editActivity('${activity.id}')"
+              >
+                ✏️
+              </button>
+
+              <button
+                class="icon-btn delete-btn"
+                title="Supprimer"
+                onclick="deleteActivity('${activity.id}')"
+              >
+                🗑️
+              </button>
+
+            </div>
+
+          </article>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  /* =========================
+     PROTECTION HTML
+  ========================= */
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =========================
+     DÉMARRAGE
+  ========================= */
+
+  loadActivities();
+
+</script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

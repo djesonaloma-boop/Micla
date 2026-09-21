@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Support — MI.C.L.A | Cité de Refuge</title>
+
+  <meta name="theme-color" content="#060b14">
+  <meta
+    name="description"
+    content="Support et accompagnement de MI.C.L.A — Cité de Refuge."
+  >
+
+  <style>
+    :root{
+      --bg:#060b14;
+      --bg-2:#09111f;
+      --surface:#0e1726;
+      --surface-2:#121e30;
+      --surface-3:#17263b;
+
+      --gold:#d6ad55;
+      --gold-light:#f1d58b;
+      --gold-soft:rgba(214,173,85,.10);
+
+      --white:#fff;
+      --text:#e8eef7;
+      --muted:#8d9bb0;
+      --muted-2:#68778d;
+
+      --green:#25d366;
+      --green-dark:#19b957;
+
+      --border:rgba(255,255,255,.075);
+      --border-gold:rgba(214,173,85,.24);
+
+      --radius:18px;
+      --radius-lg:26px;
+
+      --shadow:0 20px 60px rgba(0,0,0,.32);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      color:var(--text);
+
+      background:
+        radial-gradient(
+          circle at 15% 0%,
+          rgba(214,173,85,.08),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(35,87,150,.12),
+          transparent 32%
+        ),
+        linear-gradient(
+          180deg,
+          var(--bg),
+          var(--bg-2)
+        );
+
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+
+      position:fixed;
+      inset:0;
+
+      pointer-events:none;
+
+      opacity:.18;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.015) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.015) 1px,
+          transparent 1px
+        );
+
+      background-size:42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+    }
+
+    /* =========================
+       CONTENEUR
+    ========================== */
+
+    .container{
+      width:min(780px,94%);
+      margin:auto;
+      padding-bottom:40px;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header{
+      position:relative;
+      text-align:center;
+      padding-bottom:32px;
+    }
+
+    .church-image{
+      width:100%;
+      height:290px;
+
+      display:block;
+
+      object-fit:cover;
+
+      border-radius:0 0 28px 28px;
+
+      border:1px solid var(--border-gold);
+      border-top:0;
+
+      box-shadow:
+        0 22px 55px rgba(0,0,0,.42);
+
+      animation:fadeUp .8s ease both;
+    }
+
+    .hero-overlay{
+      position:absolute;
+
+      left:0;
+      right:0;
+      top:0;
+
+      height:290px;
+
+      border-radius:0 0 28px 28px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(3,7,14,.08),
+          rgba(3,7,14,.72)
+        );
+
+      pointer-events:none;
+    }
+
+    .brand{
+      position:relative;
+
+      margin-top:-38px;
+
+      z-index:3;
+
+      animation:fadeUp .8s .08s ease both;
+    }
+
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+
+      min-width:150px;
+
+      padding:12px 24px;
+
+      background:
+        rgba(7,12,22,.91);
+
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+
+      border:1px solid var(--border-gold);
+
+      border-radius:16px;
+
+      color:var(--gold-light);
+
+      font-size:28px;
+      font-weight:900;
+
+      letter-spacing:3px;
+
+      box-shadow:
+        0 16px 38px rgba(0,0,0,.38);
+    }
+
+    .subtitle{
+      margin-top:10px;
+
+      color:var(--muted);
+
+      font-size:11px;
+      font-weight:800;
+
+      letter-spacing:3px;
+    }
+
+    /* =========================
+       SUPPORT PHOTO
+    ========================== */
+
+    .support-photo-box{
+      position:relative;
+
+      padding:14px;
+
+      margin-bottom:32px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(214,173,85,.12),
+          rgba(8,18,37,.96)
+        );
+
+      border:1px solid var(--border-gold);
+
+      border-radius:25px;
+
+      box-shadow:var(--shadow);
+
+      overflow:hidden;
+
+      animation:fadeUp .8s .15s ease both;
+    }
+
+    .support-photo-box::before{
+      content:"";
+
+      position:absolute;
+
+      top:0;
+      left:15%;
+      right:15%;
+
+      height:1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+    }
+
+    .support-photo-box::after{
+      content:"";
+
+      position:absolute;
+
+      width:180px;
+      height:180px;
+
+      top:-90px;
+      right:-80px;
+
+      border-radius:50%;
+
+      background:
+        rgba(214,173,85,.07);
+
+      filter:blur(5px);
+
+      pointer-events:none;
+    }
+
+    .support-image{
+      width:100%;
+      height:380px;
+
+      display:block;
+
+      object-fit:cover;
+
+      border-radius:18px;
+
+      border:2px solid var(--gold);
+
+      background:var(--surface-3);
+
+      box-shadow:
+        0 14px 38px rgba(0,0,0,.36);
+
+      transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+    }
+
+    .support-photo-box:hover .support-image{
+      transform:scale(1.012);
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .photo-caption{
+      position:relative;
+
+      z-index:2;
+
+      text-align:center;
+
+      color:var(--gold-light);
+
+      font-size:13px;
+      font-weight:800;
+
+      margin-top:14px;
+
+      line-height:1.5;
+    }
+
+    /* =========================
+       INTRO
+    ========================== */
+
+    .intro{
+      text-align:center;
+
+      margin-bottom:30px;
+
+      animation:fadeUp .75s .20s ease both;
+    }
+
+    .title{
+      color:var(--white);
+
+      font-size:
+        clamp(
+          27px,
+          6vw,
+          37px
+        );
+
+      line-height:1.15;
+
+      margin-bottom:12px;
+    }
+
+    .title span{
+      color:var(--gold-light);
+    }
+
+    .description{
+      max-width:650px;
+
+      margin:auto;
+
+      color:var(--muted);
+
+      font-size:14px;
+
+      line-height:1.8;
+    }
+
+    /* =========================
+       CARDS
+    ========================== */
+
+    .card{
+      position:relative;
+
+      padding:23px;
+
+      margin-bottom:17px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18,30,48,.97),
+          rgba(9,17,29,.98)
+        );
+
+      border:1px solid var(--border);
+
+      border-radius:21px;
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.23);
+
+      overflow:hidden;
+
+      animation:fadeUp .7s ease both;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card::before{
+      content:"";
+
+      position:absolute;
+
+      top:0;
+      left:0;
+      right:0;
+
+      height:1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(214,173,85,.45),
+          transparent
+        );
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+
+      border-color:var(--border-gold);
+
+      box-shadow:
+        0 22px 48px rgba(0,0,0,.30);
+    }
+
+    .card-header{
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
+
+      margin-bottom:11px;
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+
+      flex:none;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      border-radius:13px;
+
+      background:
+        rgba(214,173,85,.10);
+
+      border:1px solid var(--border-gold);
+
+      font-size:19px;
+    }
+
+    .card h2{
+      color:var(--gold-light);
+
+      font-size:18px;
+
+      line-height:1.3;
+    }
+
+    .card p{
+      color:#c7d1de;
+
+      font-size:13px;
+
+      line-height:1.75;
+
+      margin-bottom:18px;
+    }
+
+    /* =========================
+       WHATSAPP
+    ========================== */
+
+    .request{
+      width:100%;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      gap:9px;
+
+      min-height:49px;
+
+      padding:13px 17px;
+
+      border-radius:14px;
+
+      color:#fff;
+
+      text-decoration:none;
+
+      font-size:13px;
+
+      font-weight:850;
+
+      border:1px solid rgba(255,255,255,.10);
+
+      transition:
+        transform .25s ease,
+        filter .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .whatsapp{
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+
+      box-shadow:
+        0 10px 26px rgba(37,211,102,.15);
+    }
+
+    .whatsapp:hover{
+      transform:translateY(-2px);
+
+      filter:brightness(1.06);
+
+      box-shadow:
+        0 14px 32px rgba(37,211,102,.23);
+    }
+
+    .whatsapp:active{
+      transform:scale(.98);
+    }
+
+    .wa-icon{
+      width:19px;
+      height:19px;
+
+      flex:none;
+    }
+
+    /* =========================
+       INFO BOX
+    ========================== */
+
+    .info-box{
+      margin-top:13px;
+
+      padding:16px 17px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,173,85,.08),
+          rgba(12,25,46,.90)
+        );
+
+      border-left:4px solid var(--gold);
+
+      border-radius:13px;
+
+      color:#cbd5e4;
+
+      font-size:12px;
+
+      line-height:1.75;
+    }
+
+    .contact-line{
+      display:flex;
+
+      align-items:center;
+
+      gap:8px;
+
+      margin-top:10px;
+
+      color:var(--gold-light);
+
+      font-weight:800;
+    }
+
+    /* =========================
+       RETOUR
+    ========================== */
+
+    .back{
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      width:max-content;
+
+      margin:30px auto;
+
+      padding:12px 20px;
+
+      color:var(--gold-light);
+
+      background:
+        rgba(214,173,85,.06);
+
+      border:1px solid var(--border-gold);
+
+      border-radius:13px;
+
+      text-decoration:none;
+
+      font-size:12px;
+
+      font-weight:850;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .back:hover{
+      transform:translateY(-2px);
+
+      background:
+        rgba(214,173,85,.12);
+
+      border-color:
+        rgba(214,173,85,.42);
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      padding:25px 10px 12px;
+
+      text-align:center;
+
+      color:var(--muted-2);
+
+      font-size:11px;
+
+      line-height:1.8;
+
+      border-top:1px solid var(--border);
+    }
+
+    footer strong{
+      color:var(--gold-light);
+
+      letter-spacing:.9px;
+    }
+
+    /* =========================
+       FLOATING WHATSAPP
+    ========================== */
+
+    .floating-whatsapp{
+      position:fixed;
+
+      right:18px;
+      bottom:18px;
+
+      width:54px;
+      height:54px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      border-radius:50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #25d366,
+          #18b955
+        );
+
+      color:#fff;
+
+      text-decoration:none;
+
+      box-shadow:
+        0 12px 30px rgba(37,211,102,.28);
+
+      z-index:50;
+
+      animation:
+        whatsappFloat 3s ease-in-out infinite,
+        whatsappPulse 2.8s ease-in-out infinite;
+    }
+
+    .floating-whatsapp svg{
+      width:25px;
+      height:25px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes fadeUp{
+
+      from{
+        opacity:0;
+
+        transform:
+          translateY(18px);
+      }
+
+      to{
+        opacity:1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+    @keyframes whatsappFloat{
+
+      0%,
+      100%{
+        transform:translateY(0);
+      }
+
+      50%{
+        transform:translateY(-5px);
+      }
+    }
+
+    @keyframes whatsappPulse{
+
+      0%,
+      100%{
+        box-shadow:
+          0 12px 30px rgba(37,211,102,.25);
+      }
+
+      50%{
+        box-shadow:
+          0 14px 36px rgba(37,211,102,.40);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media(max-width:600px){
+
+      .container{
+        width:94%;
+      }
+
+      .church-image{
+        height:220px;
+
+        border-radius:
+          0 0 22px 22px;
+      }
+
+      .hero-overlay{
+        height:220px;
+
+        border-radius:
+          0 0 22px 22px;
+      }
+
+      .logo{
+        min-width:135px;
+
+        font-size:24px;
+
+        padding:10px 18px;
+      }
+
+      .subtitle{
+        font-size:10px;
+      }
+
+      .support-photo-box{
+        padding:10px;
+
+        border-radius:20px;
+      }
+
+      .support-image{
+        height:290px;
+
+        border-radius:14px;
+      }
+
+      .photo-caption{
+        font-size:12px;
+      }
+
+      .title{
+        font-size:27px;
+      }
+
+      .description{
+        font-size:13px;
+      }
+
+      .card{
+        padding:18px;
+
+        border-radius:18px;
+      }
+
+      .card h2{
+        font-size:17px;
+      }
+
+      .card p{
+        font-size:12.5px;
+      }
+
+      .request{
+        font-size:12px;
+
+        min-height:47px;
+
+        padding:12px;
+      }
+
+      .floating-whatsapp{
+        right:15px;
+        bottom:15px;
+
+        width:51px;
+        height:51px;
+      }
+    }
+
+    @media(max-width:400px){
+
+      .church-image{
+        height:195px;
+      }
+
+      .hero-overlay{
+        height:195px;
+      }
+
+      .support-image{
+        height:250px;
+      }
+
+      .title{
+        font-size:24px;
+      }
+
+      .card{
+        padding:16px;
+      }
+
+      .icon{
+        width:39px;
+        height:39px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <img
+        src="assets/images/eglise.jpg"
+        alt="MI.C.L.A — Cité de Refuge"
+        class="church-image"
+      >
+
+      <div class="hero-overlay"></div>
+
+      <div class="brand">
+
+        <div class="logo">
+          MI.C.L.A
+        </div>
+
+        <div class="subtitle">
+          CITÉ DE REFUGE
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         PHOTO SUPPORT
+    ========================== -->
+
+    <section class="support-photo-box">
+
+      <img
+        src="Support.jpg"
+        alt="Support MI.C.L.A — Cité de Refuge"
+        class="support-image"
+      >
+
+      <div class="photo-caption">
+        🙏 Support & accompagnement — MI.C.L.A
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INTRODUCTION
+    ========================== -->
+
+    <section class="intro">
+
+      <h1 class="title">
+        🙏 Besoin de <span>soutien</span> ?
+      </h1>
+
+      <p class="description">
+        La Cité de Refuge est à vos côtés pour la prière,
+        l'écoute, l'accompagnement et les besoins liés à
+        la vie chrétienne.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         PRIÈRE
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          🙏
+        </div>
+
+        <h2>
+          Demande de prière
+        </h2>
+
+      </div>
+
+      <p>
+        Tu peux envoyer ton sujet de prière.
+        Ta demande sera transmise afin d'être portée
+        dans la prière.
+      </p>
+
+      <a
+        class="request whatsapp"
+        href="https://wa.me/243904490937?text=%F0%9F%99%8F%20Bonjour%2C%20je%20souhaite%20faire%20une%20demande%20de%20pri%C3%A8re.%0A%0AMon%20sujet%20%3A%20"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <svg
+          class="wa-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.55 0 .24 5.31.24 11.84c0 2.09.55 4.13 1.59 5.92L.13 24l6.4-1.68a11.83 11.83 0 0 0 5.55 1.38h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.17-1.23-6.15-3.43-8.36Z"
+            fill="white"
+          />
+          <path
+            d="M17.48 13.92c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.46-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.07-.12-.27-.2-.57-.35Z"
+            fill="#25d366"
+          />
+        </svg>
+
+        🙏 Envoyer ma demande de prière
+
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         ACCOMPAGNEMENT
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          🤝
+        </div>
+
+        <h2>
+          Besoin d'accompagnement
+        </h2>
+
+      </div>
+
+      <p>
+        Si tu traverses une situation difficile ou si tu
+        souhaites recevoir un accompagnement dans la prière
+        et dans la foi, tu peux nous écrire.
+      </p>
+
+      <a
+        class="request whatsapp"
+        href="https://wa.me/243904490937?text=%F0%9F%A4%9D%20Bonjour%2C%20j%E2%80%99aimerais%20recevoir%20un%20accompagnement%20dans%20la%20pri%C3%A8re.%0A%0AMon%20besoin%20%3A%20"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🤝 Demander un accompagnement
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         TÉMOIGNAGE
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          ❤️
+        </div>
+
+        <h2>
+          Témoignage
+        </h2>
+
+      </div>
+
+      <p>
+        Tu peux partager ce que Dieu a fait dans ta vie,
+        une grâce reçue ou un témoignage que tu souhaites
+        transmettre.
+      </p>
+
+      <a
+        class="request whatsapp"
+        href="https://wa.me/243904490937?text=%E2%9D%A4%EF%B8%8F%20Bonjour%2C%20je%20souhaite%20partager%20un%20t%C3%A9moignage.%0A%0AMon%20t%C3%A9moignage%20%3A%20"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ❤️ Envoyer mon témoignage
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         QUESTION
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          ❓
+        </div>
+
+        <h2>
+          Question
+        </h2>
+
+      </div>
+
+      <p>
+        Une question concernant la foi, la Bible ou
+        la vie de l'église ? Tu peux nous écrire directement.
+      </p>
+
+      <a
+        class="request whatsapp"
+        href="https://wa.me/243904490937?text=%E2%9D%93%20Bonjour%2C%20j%E2%80%99ai%20une%20question.%0A%0AMa%20question%20%3A%20"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ❓ Poser ma question
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         AUTRE BESOIN
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          💬
+        </div>
+
+        <h2>
+          Autre besoin
+        </h2>
+
+      </div>
+
+      <p>
+        Si ta demande ne correspond pas aux catégories
+        ci-dessus, explique simplement ton besoin.
+      </p>
+
+      <a
+        class="request whatsapp"
+        href="https://wa.me/243904490937?text=%F0%9F%92%AC%20Bonjour%2C%20j%E2%80%99ai%20une%20autre%20demande.%0A%0AMa%20demande%20%3A%20"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        💬 Présenter ma demande
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         INFORMATIONS
+    ========================== -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="icon">
+          ✨
+        </div>
+
+        <h2>
+          Cité de Refuge
+        </h2>
+
+      </div>
+
+      <p>
+        Nous voulons être une communauté de foi,
+        de prière, d'amour et d'espérance.
+      </p>
+
+      <div class="info-box">
+
+        🙏 Utilise les boutons ci-dessus pour transmettre
+        directement ta demande par WhatsApp au service
+        de support de MI.C.L.A.
+
+        <div class="contact-line">
+          📱 Support WhatsApp : +243 904 490 937
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         RETOUR
+    ========================== -->
+
+    <a
+      href="index.html"
+      class="back"
+    >
+      ← Retour à l'accueil
+    </a>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+      <strong>
+        MI.C.L.A — CITÉ DE REFUGE
+      </strong>
+
+      <br>
+
+      Une maison de foi, de prière, d'amour et d'espérance.
+
+      <br><br>
+
+      ©
+      <span id="year"></span>
+      MI.C.L.A — Tous droits réservés.
+
+    </footer>
+
+  </main>
+
+
+  <!-- =========================
+       WHATSAPP FLOTTANT
+  ========================== -->
+
+  <a
+    class="floating-whatsapp"
+    href="https://wa.me/243904490937?text=Bonjour%2C%20je%20contacte%20le%20support%20de%20MI.C.L.A."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contacter le support MI.C.L.A sur WhatsApp"
+  >
+
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.55 0 .24 5.31.24 11.84c0 2.09.55 4.13 1.59 5.92L.13 24l6.4-1.68a11.83 11.83 0 0 0 5.55 1.38h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.17-1.23-6.15-3.43-8.36Z"
+        fill="white"
+      />
+
+      <path
+        d="M17.48 13.92c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.46-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.07-.12-.27-.2-.57-.35Z"
+        fill="#25d366"
+      />
+    </svg>
+
+  </a>
+
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

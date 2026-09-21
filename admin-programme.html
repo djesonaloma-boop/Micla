@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>Administration — Programme | MI.C.L.A</title>
+
+  <style>
+    :root{
+      --bg:#080d18;
+      --surface:#101827;
+      --surface-2:#151f30;
+      --surface-3:#1a2639;
+      --primary:#d6ad55;
+      --primary-light:#f0d58b;
+      --text:#f5f7fb;
+      --text-secondary:#a8b3c5;
+      --text-muted:#6f7c91;
+      --border:rgba(255,255,255,.07);
+      --border-hover:rgba(214,173,85,.28);
+      --success:#38c793;
+      --danger:#e85d6a;
+      --info:#5b9df9;
+      --radius:16px;
+      --radius-small:11px;
+      --shadow:0 10px 35px rgba(0,0,0,.25);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 15% 10%,rgba(214,173,85,.06),transparent 28%),
+        radial-gradient(circle at 90% 20%,rgba(55,100,180,.07),transparent 30%),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,
+    input,
+    textarea,
+    select{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    /* ================= HEADER ================= */
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      background:rgba(8,13,24,.86);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+    }
+
+    .brand img{
+      width:45px;
+      height:45px;
+      object-fit:contain;
+      border-radius:12px;
+      border:1px solid rgba(214,173,85,.25);
+      box-shadow:0 0 22px rgba(214,173,85,.08);
+      transition:.3s ease;
+    }
+
+    .brand img:hover{
+      transform:rotate(-3deg) scale(1.04);
+    }
+
+    .brand-text strong{
+      display:block;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+
+    .brand-text span{
+      display:block;
+      color:var(--primary);
+      font-size:11px;
+      margin-top:2px;
+    }
+
+    .menu-btn{
+      display:none;
+      width:43px;
+      height:43px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--surface);
+      color:white;
+      font-size:21px;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .nav a{
+      padding:10px 13px;
+      color:var(--text-secondary);
+      font-size:13px;
+      border-radius:10px;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      color:var(--primary-light);
+      background:rgba(214,173,85,.07);
+    }
+
+    /* ================= PAGE ================= */
+
+    .page{
+      width:min(1250px,calc(100% - 36px));
+      margin:0 auto;
+      padding:34px 0 70px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:220px;
+      display:flex;
+      align-items:flex-end;
+      border:1px solid var(--border);
+      border-radius:24px;
+      margin-bottom:25px;
+      background:
+        linear-gradient(90deg,rgba(5,10,19,.94),rgba(5,10,19,.60)),
+        url("assets/images/eglise.jpg") center/cover;
+      box-shadow:var(--shadow);
+      animation:fadeUp .6s ease both;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-80px;
+      top:-100px;
+      border-radius:50%;
+      background:rgba(214,173,85,.08);
+      filter:blur(5px);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      padding:30px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 11px;
+      border:1px solid rgba(214,173,85,.22);
+      border-radius:999px;
+      background:rgba(214,173,85,.07);
+      color:var(--primary-light);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      margin-bottom:13px;
+    }
+
+    .badge::before{
+      content:"";
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--primary);
+      box-shadow:0 0 10px rgba(214,173,85,.7);
+    }
+
+    .hero h1{
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.1;
+      margin-bottom:9px;
+    }
+
+    .hero p{
+      color:var(--text-secondary);
+      max-width:650px;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    /* ================= GRID ================= */
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1.35fr;
+      gap:22px;
+    }
+
+    .card{
+      background:linear-gradient(
+        145deg,
+        rgba(16,24,39,.96),
+        rgba(12,19,32,.96)
+      );
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      animation:fadeUp .6s ease both;
+      transition:.3s ease;
+    }
+
+    .card:hover{
+      border-color:var(--border-hover);
+      transform:translateY(-2px);
+    }
+
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .card-title{
+      font-size:17px;
+      font-weight:750;
+    }
+
+    .card-subtitle{
+      color:var(--text-muted);
+      font-size:12px;
+      line-height:1.5;
+      margin-top:5px;
+    }
+
+    .icon-box{
+      flex:0 0 auto;
+      width:40px;
+      height:40px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:rgba(214,173,85,.08);
+      border:1px solid rgba(214,173,85,.14);
+      color:var(--primary-light);
+      font-size:18px;
+    }
+
+    /* ================= FORM ================= */
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .field{
+      margin-bottom:15px;
+    }
+
+    .field.full{
+      grid-column:1/-1;
+    }
+
+    label{
+      display:block;
+      color:var(--text-secondary);
+      font-size:12px;
+      font-weight:650;
+      margin-bottom:7px;
+    }
+
+    input,
+    textarea,
+    select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:var(--radius-small);
+      background:#0b1321;
+      color:var(--text);
+      outline:none;
+      padding:12px 13px;
+      transition:.25s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder{
+      color:#59677d;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus{
+      border-color:rgba(214,173,85,.45);
+      box-shadow:0 0 0 3px rgba(214,173,85,.07);
+      background:#0d1727;
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    select{
+      appearance:auto;
+    }
+
+    .section-label{
+      grid-column:1/-1;
+      color:var(--primary-light);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
+      padding:7px 0 2px;
+      border-bottom:1px solid var(--border);
+      margin-bottom:2px;
+    }
+
+    /* ================= BUTTONS ================= */
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:5px;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      border-radius:11px;
+      padding:11px 15px;
+      background:var(--surface-2);
+      color:var(--text);
+      font-weight:700;
+      font-size:13px;
+      transition:.25s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:var(--border-hover);
+      background:var(--surface-3);
+    }
+
+    .btn-primary{
+      color:#111;
+      border-color:transparent;
+      background:linear-gradient(
+        135deg,
+        var(--primary-light),
+        var(--primary)
+      );
+      box-shadow:0 8px 22px rgba(214,173,85,.12);
+    }
+
+    .btn-primary:hover{
+      box-shadow:0 12px 28px rgba(214,173,85,.2);
+    }
+
+    .btn-danger{
+      color:#ffb1b8;
+      border-color:rgba(232,93,106,.18);
+      background:rgba(232,93,106,.07);
+    }
+
+    .btn-success{
+      color:#8ee4c2;
+      border-color:rgba(56,199,147,.18);
+      background:rgba(56,199,147,.07);
+    }
+
+    /* ================= STATUS ================= */
+
+    #status{
+      min-height:18px;
+      margin-top:13px;
+      font-size:12px;
+      color:var(--text-secondary);
+    }
+
+    /* ================= DAYS ================= */
+
+    .days{
+      display:grid;
+      gap:12px;
+    }
+
+    .day-card{
+      border:1px solid var(--border);
+      background:rgba(8,13,24,.62);
+      border-radius:14px;
+      overflow:hidden;
+      transition:.3s ease;
+    }
+
+    .day-card:hover{
+      border-color:var(--border-hover);
+      transform:translateX(2px);
+    }
+
+    .day-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 15px;
+      background:rgba(255,255,255,.025);
+      border-bottom:1px solid var(--border);
+    }
+
+    .day-name{
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .day-time{
+      color:var(--primary-light);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .day-body{
+      padding:14px;
+      display:grid;
+      gap:9px;
+    }
+
+    .role-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      font-size:12px;
+      padding-bottom:8px;
+      border-bottom:1px dashed rgba(255,255,255,.06);
+    }
+
+    .role-row:last-child{
+      border-bottom:0;
+      padding-bottom:0;
+    }
+
+    .role{
+      color:var(--text-muted);
+    }
+
+    .person{
+      color:var(--text-secondary);
+      text-align:right;
+      font-weight:600;
+    }
+
+    .empty{
+      color:var(--text-muted);
+      font-size:12px;
+      text-align:center;
+      padding:25px 10px;
+    }
+
+    /* ================= NOTICE ================= */
+
+    .notice{
+      margin-top:18px;
+      padding:13px 14px;
+      border-radius:12px;
+      border:1px solid rgba(91,157,249,.15);
+      background:rgba(91,157,249,.055);
+      color:#9fc3ff;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer{
+      text-align:center;
+      color:var(--text-muted);
+      font-size:11px;
+      padding-top:30px;
+    }
+
+    .footer strong{
+      color:var(--primary);
+    }
+
+    /* ================= ANIMATION ================= */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(15px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:900px){
+
+      .topbar{
+        padding:0 17px;
+      }
+
+      .menu-btn{
+        display:block;
+      }
+
+      .nav{
+        position:absolute;
+        top:76px;
+        left:14px;
+        right:14px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        padding:10px;
+        background:rgba(12,19,32,.97);
+        border:1px solid var(--border);
+        border-radius:16px;
+        box-shadow:var(--shadow);
+      }
+
+      .nav.open{
+        display:flex;
+        animation:fadeUp .25s ease both;
+      }
+
+      .nav a{
+        padding:13px;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:620px){
+
+      .page{
+        width:min(100% - 24px,1250px);
+        padding-top:18px;
+      }
+
+      .hero{
+        min-height:240px;
+        border-radius:19px;
+      }
+
+      .hero-content{
+        padding:23px 19px;
+      }
+
+      .card{
+        padding:17px;
+        border-radius:15px;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+        gap:0;
+      }
+
+      .field.full,
+      .section-label{
+        grid-column:auto;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .day-header{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .role-row{
+        flex-direction:column;
+        gap:4px;
+      }
+
+      .person{
+        text-align:left;
+      }
+
+      .brand-text span{
+        display:none;
+      }
+    }
+
+    @media(max-width:380px){
+      .brand-text strong{
+        font-size:13px;
+      }
+
+      .brand img{
+        width:40px;
+        height:40px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        animation:none!important;
+        transition:none!important;
+        scroll-behavior:auto!important;
+      }
+    }
+  </style>
+<script src="admin-auth.js"></script>
+<script src="admin.js"></script>
+</head>
+
+<body>
+
+  <!-- ================= TOPBAR ================= -->
+
+  <header class="topbar">
+
+    <a href="admin.html" class="brand">
+      <img src="admin-logo.png" alt="MI.C.L.A">
+      <div class="brand-text">
+        <strong>MI.C.L.A — Administration</strong>
+        <span>Cité de Refuge</span>
+      </div>
+    </a>
+
+    <button class="menu-btn" id="menu" type="button" aria-label="Ouvrir le menu">
+      ☰
+    </button>
+
+    <nav class="nav" id="links">
+      <a href="admin.html">Tableau de bord</a>
+      <a href="admin-programme.html">Programme</a>
+      <a href="programme.html">Voir le site</a>
+      <a href="index.html">Accueil</a>
+    </nav>
+
+  </header>
+
+
+  <!-- ================= CONTENT ================= -->
+
+  <main class="page">
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="badge">
+          Gestion du programme
+        </div>
+
+        <h1>Programme de l'Église</h1>
+
+        <p>
+          Organisez les cultes, réunions, responsables et différents
+          départements de MI.C.L.A — Cité de Refuge.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <div class="grid">
+
+      <!-- ================= FORM ================= -->
+
+      <section class="card">
+
+        <div class="card-head">
+
+          <div>
+            <div class="card-title">Modifier le programme</div>
+            <div class="card-subtitle">
+              Configurez les activités et les responsables de chaque journée.
+            </div>
+          </div>
+
+          <div class="icon-box">📅</div>
+
+        </div>
+
+
+        <form id="form">
+
+          <div class="form-grid">
+
+            <div class="section-label">
+              Informations du programme
+            </div>
+
+            <div class="field">
+              <label for="day">Jour</label>
+
+              <select id="day">
+                <option value="lundi">Lundi</option>
+                <option value="mardi">Mardi</option>
+                <option value="mercredi">Mercredi</option>
+                <option value="jeudi">Jeudi</option>
+                <option value="vendredi">Vendredi</option>
+                <option value="samedi">Samedi</option>
+                <option value="dimanche">Dimanche</option>
+              </select>
+            </div>
+
+
+            <div class="field">
+              <label for="activity">Activité</label>
+
+              <input
+                id="activity"
+                type="text"
+                placeholder="Ex : Culte d'enseignement"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="time">Horaire</label>
+
+              <input
+                id="time"
+                type="text"
+                placeholder="Ex : 17h30 – 19h30"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="location">Lieu</label>
+
+              <input
+                id="location"
+                type="text"
+                placeholder="Ex : Temple Cité de Refuge"
+              >
+            </div>
+
+
+            <div class="field full">
+              <label for="description">Description</label>
+
+              <textarea
+                id="description"
+                placeholder="Description de l'activité..."
+              ></textarea>
+            </div>
+
+
+            <div class="section-label">
+              Responsables
+            </div>
+
+
+            <div class="field">
+              <label for="preacher">Prédicateur / Orateur</label>
+
+              <input
+                id="preacher"
+                type="text"
+                placeholder="Nom du prédicateur"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="moderator">Modérateur</label>
+
+              <input
+                id="moderator"
+                type="text"
+                placeholder="Nom du modérateur"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="protocol">Protocole</label>
+
+              <input
+                id="protocol"
+                type="text"
+                placeholder="Responsable protocole"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="security">Sécurité</label>
+
+              <input
+                id="security"
+                type="text"
+                placeholder="Responsable sécurité"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="singers">Chantres</label>
+
+              <input
+                id="singers"
+                type="text"
+                placeholder="Ex : Betty, Prodige..."
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="intercession">Intercession</label>
+
+              <input
+                id="intercession"
+                type="text"
+                placeholder="Responsable intercession"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="bibleReader">Lecteur biblique</label>
+
+              <input
+                id="bibleReader"
+                type="text"
+                placeholder="Nom du lecteur"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="media">Média</label>
+
+              <input
+                id="media"
+                type="text"
+                placeholder="Responsable média"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="music">Musique</label>
+
+              <input
+                id="music"
+                type="text"
+                placeholder="Responsable musique"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="welcome">Accueil</label>
+
+              <input
+                id="welcome"
+                type="text"
+                placeholder="Responsable accueil"
+              >
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="save"
+            >
+              ✓ Enregistrer
+            </button>
+
+            <button
+              type="button"
+              class="btn"
+              id="reset"
+            >
+              ↺ Réinitialiser
+            </button>
+
+          </div>
+
+
+          <div id="status"></div>
+
+        </form>
+
+
+        <div class="notice">
+          Les modifications sont enregistrées dans les données locales du
+          navigateur. Pour un vrai système administrateur en ligne,
+          une base de données et une authentification sécurisée seront
+          nécessaires.
+        </div>
+
+      </section>
+
+
+      <!-- ================= PREVIEW ================= -->
+
+      <section class="card">
+
+        <div class="card-head">
+
+          <div>
+            <div class="card-title">Aperçu du programme</div>
+
+            <div class="card-subtitle">
+              Vérifiez rapidement les activités programmées.
+            </div>
+          </div>
+
+          <div class="icon-box">✦</div>
+
+        </div>
+
+
+        <div class="days" id="programList">
+
+          <!-- Le contenu est généré par admin-programme.js -->
+
+          <div class="empty">
+            Chargement du programme...
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <div class="footer">
+      MI.C.L.A — <strong>Cité de Refuge</strong> · Administration
+      <span id="year"></span>
+    </div>
+
+  </main>
+
+
+  <!-- ================= JS ================= -->
+
+  <script>
+
+    /* Menu mobile */
+    const menu = document.getElementById("menu");
+    const links = document.getElementById("links");
+
+    if(menu && links){
+      menu.addEventListener("click", () => {
+        links.classList.toggle("open");
+      });
+
+      links.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          links.classList.remove("open");
+        });
+      });
+    }
+
+    /* Année */
+    const year = document.getElementById("year");
+
+    if(year){
+      year.textContent = new Date().getFullYear();
+    }
+
+  </script>
+
+  <script src="admin-programme.js"></script>
+
+<script>requireMiclaAdmin();</script>
+</body>
+</html>

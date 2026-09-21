@@ -1,0 +1,1410 @@
+/* =====================================================
+   MI.C.L.A — CITÉ DE REFUGE
+   STYLE PRINCIPAL
+   ===================================================== */
+
+
+/* =========================
+   VARIABLES
+   ========================= */
+
+:root {
+    --navy: #07152f;
+    --navy-2: #0b2044;
+    --blue: #123d78;
+    --gold: #d6a84f;
+    --gold-light: #f0cf7a;
+    --white: #ffffff;
+    --light: #f5f7fb;
+    --text: #172033;
+    --muted: #6b7280;
+    --border: rgba(7, 21, 47, 0.10);
+    --shadow: 0 15px 40px rgba(7, 21, 47, 0.12);
+    --radius: 20px;
+}
+
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header {
+    width: 100%;
+    min-height: 78px;
+
+    background: rgba(7, 21, 47, 0.97);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 6%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--white);
+}
+
+.logo-icon {
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid var(--gold);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-light);
+
+    font-size: 22px;
+
+    background: rgba(214, 168, 79, 0.08);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text strong {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.logo-text span {
+    color: var(--gold-light);
+    font-size: 12px;
+}
+
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+nav a {
+    color: #e9eef8;
+
+    padding: 9px 11px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    transition: 0.25s ease;
+}
+
+nav a:hover {
+    color: var(--gold-light);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* MENU MOBILE */
+
+.menu-button {
+    display: none;
+
+    background: transparent;
+    border: none;
+
+    color: var(--white);
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+    min-height: 650px;
+
+    padding: 75px 7%;
+
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+
+    align-items: center;
+
+    gap: 60px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(214, 168, 79, 0.13),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--navy),
+            var(--navy-2)
+        );
+
+    color: var(--white);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    border: 1px solid rgba(214, 168, 79, 0.12);
+
+    border-radius: 50%;
+
+    right: -180px;
+    top: -160px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(240, 207, 122, 0.35);
+
+    border-radius: 50px;
+
+    color: var(--gold-light);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 82px);
+
+    line-height: 0.95;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--gold-light);
+}
+
+.hero-subtitle {
+    max-width: 570px;
+
+    color: #dbe4f3;
+
+    font-size: 18px;
+
+    margin-bottom: 32px;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 12px 20px;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    transition: 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    background: rgba(255, 255, 255, 0.07);
+
+    color: var(--white);
+}
+
+.btn-whatsapp:hover {
+    background: rgba(255, 255, 255, 0.14);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   PASTEUR CARD
+   ========================= */
+
+.pastor-card {
+    position: relative;
+
+    max-width: 430px;
+
+    width: 100%;
+
+    margin: auto;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(8px);
+}
+
+.pastor-photo {
+    width: 100%;
+    height: 440px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #142e58,
+            #07152f
+        );
+
+    overflow: hidden;
+}
+
+.pastor-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.pastor-photo img[src=""] {
+    display: none;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    color: var(--gold-light);
+
+    font-size: 60px;
+}
+
+.photo-placeholder small {
+    font-size: 14px;
+
+    color: #cbd5e1;
+
+    margin-top: 10px;
+}
+
+.pastor-info {
+    padding: 22px;
+}
+
+.pastor-info > span {
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.pastor-info h2 {
+    margin: 6px 0 15px;
+
+    font-size: 23px;
+}
+
+.phone-button {
+    display: inline-flex;
+
+    padding: 9px 13px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: var(--white);
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   SECTIONS
+   ========================= */
+
+.section {
+    padding: 85px 7%;
+}
+
+.section-heading {
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 45px;
+}
+
+.section-heading > span {
+    color: #9b7025;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    color: var(--navy);
+
+    font-size: clamp(30px, 5vw, 46px);
+
+    line-height: 1.1;
+
+    margin: 8px 0;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+
+/* =========================
+   INFO CARDS
+   ========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+.info-card {
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 30px;
+
+    box-shadow: var(--shadow);
+
+    transition: 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-6px);
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: rgba(214, 168, 79, 0.13);
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+}
+
+.info-card h3 {
+    color: var(--navy);
+
+    margin-bottom: 9px;
+
+    font-size: 20px;
+}
+
+.info-card p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   PROGRAMME
+   ========================= */
+
+.program-section {
+    background: #edf1f7;
+}
+
+.program-list {
+    max-width: 950px;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.program-item {
+    display: grid;
+
+    grid-template-columns:
+        70px 1fr auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    background: var(--white);
+
+    padding: 17px 20px;
+
+    border-radius: 15px;
+
+    border: 1px solid var(--border);
+
+    box-shadow: 0 5px 18px rgba(7, 21, 47, 0.05);
+}
+
+.program-day {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--navy);
+
+    color: var(--gold-light);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.program-details h3 {
+    color: var(--navy);
+
+    font-size: 17px;
+}
+
+.program-details p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.program-item > strong {
+    color: #86631f;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+}
+
+.program-item.sunday {
+    border: 1px solid rgba(214, 168, 79, 0.45);
+}
+
+.more-button,
+.more-link {
+    display: block;
+
+    width: fit-content;
+
+    margin: 28px auto 0;
+
+    color: var(--navy);
+
+    font-weight: 800;
+
+    font-size: 14px;
+}
+
+.more-button:hover,
+.more-link:hover {
+    color: #9b7025;
+}
+
+
+/* =========================
+   PRIÈRE
+   ========================= */
+
+.prayer-section {
+    padding: 90px 7%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--navy),
+            #102e5b
+        );
+
+    color: var(--white);
+}
+
+.prayer-content {
+    max-width: 800px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.prayer-content > span {
+    color: var(--gold-light);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.prayer-content h2 {
+    font-size: clamp(30px, 5vw, 46px);
+
+    line-height: 1.1;
+
+    margin: 12px 0 15px;
+}
+
+.prayer-content > p {
+    color: #d6e0ef;
+
+    max-width: 620px;
+
+    margin: 0 auto 25px;
+}
+
+.audio-card {
+    max-width: 600px;
+
+    margin: 25px auto;
+
+    padding: 15px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 16px;
+}
+
+.audio-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(214, 168, 79, 0.18);
+
+    font-size: 24px;
+}
+
+.audio-info {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+}
+
+.audio-info strong {
+    font-size: 15px;
+}
+
+.audio-info small {
+    color: #b9c5d7;
+
+    font-size: 12px;
+}
+
+.play-button {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.amen-button {
+    border: 1px solid rgba(240, 207, 122, 0.5);
+
+    background: rgba(214, 168, 79, 0.12);
+
+    color: var(--gold-light);
+
+    border-radius: 50px;
+
+    padding: 12px 22px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.amen-button:hover {
+    background: rgba(214, 168, 79, 0.22);
+
+    transform: scale(1.03);
+}
+
+.amen-button span {
+    margin-left: 8px;
+}
+
+.amen-message {
+    min-height: 24px;
+
+    color: var(--gold-light) !important;
+
+    margin-top: 10px !important;
+}
+
+
+/* =========================
+   JEUNESSE
+   ========================= */
+
+.youth-section {
+    background: var(--white);
+}
+
+.youth-preview {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+.leader-card {
+    overflow: hidden;
+
+    background: var(--light);
+
+    border-radius: 20px;
+
+    border: 1px solid var(--border);
+
+    text-align: center;
+
+    padding-bottom: 22px;
+
+    box-shadow: 0 10px 25px rgba(7, 21, 47, 0.07);
+}
+
+.leader-card img {
+    width: 100%;
+    height: 270px;
+
+    object-fit: cover;
+
+    background: #dfe5ee;
+}
+
+.leader-card h3 {
+    color: var(--navy);
+
+    margin: 18px 10px 3px;
+}
+
+.leader-card p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.leader-card a {
+    display: inline-block;
+
+    padding: 8px 13px;
+
+    border-radius: 9px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   ACTIVITÉS
+   ========================= */
+
+.activities-section {
+    background: #f1f4f8;
+}
+
+.activities-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    background: var(--white);
+
+    border: 1px dashed #c7cfdd;
+
+    border-radius: 18px;
+
+    padding: 50px 20px;
+
+    color: var(--muted);
+}
+
+.empty-state > div,
+.empty-state:first-letter {
+    font-size: 42px;
+}
+
+.empty-state h3 {
+    color: var(--navy);
+
+    margin: 10px 0 4px;
+}
+
+
+/* =========================
+   GALERIE
+   ========================= */
+
+.gallery-section {
+    background: var(--white);
+}
+
+.gallery-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.gallery-grid .empty-state {
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================
+   CONTACT
+   ========================= */
+
+.contact-section {
+    padding: 85px 7%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0a1c3b,
+            #07152f
+        );
+
+    color: var(--white);
+
+    text-align: center;
+}
+
+.contact-content {
+    max-width: 750px;
+
+    margin: auto;
+}
+
+.contact-content > span {
+    color: var(--gold-light);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.contact-content h2 {
+    font-size: clamp(30px, 5vw, 48px);
+
+    margin: 10px 0;
+}
+
+.contact-content p {
+    color: #ccd7e7;
+
+    margin-bottom: 25px;
+}
+
+.whatsapp-large {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 14px 23px;
+
+    border-radius: 12px;
+
+    background: var(--gold);
+
+    color: var(--navy);
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+.whatsapp-large:hover {
+    background: var(--gold-light);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    padding: 35px 7%;
+
+    background: #040d1e;
+
+    color: #aeb9c9;
+
+    text-align: center;
+}
+
+.footer-logo {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+    color: var(--white);
+}
+
+.footer-logo .logo-mark {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--gold);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-light);
+}
+
+.footer-logo > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+}
+
+.footer-logo span {
+    color: var(--gold-light);
+
+    font-size: 11px;
+}
+
+.footer p {
+    font-size: 12px;
+}
+
+.footer-credit {
+    margin-top: 5px;
+
+    color: #65748b;
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content,
+.pastor-card {
+    animation: fadeUp 0.8s ease both;
+}
+
+
+/* =========================
+   RESPONSIVE TABLET
+   ========================= */
+
+@media (max-width: 1050px) {
+
+    .header {
+        padding: 14px 4%;
+    }
+
+    nav {
+        gap: 0;
+    }
+
+    nav a {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr 0.8fr;
+
+        gap: 35px;
+
+        padding: 65px 5%;
+    }
+
+    .section,
+    .prayer-section,
+    .contact-section {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+}
+
+
+/* =========================
+   RESPONSIVE MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .header {
+        min-height: 68px;
+
+        padding: 11px 18px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    nav {
+        display: none;
+
+        position: absolute;
+
+        top: 68px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 10px 15px 18px;
+
+        background: var(--navy);
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        padding: 13px 15px;
+
+        border-bottom:
+            1px solid rgba(255, 255, 255, 0.06);
+
+        font-size: 14px;
+    }
+
+
+    .hero {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        padding: 55px 20px 45px;
+
+        text-align: center;
+
+        gap: 35px;
+    }
+
+    .hero h1 {
+        font-size: 53px;
+
+        letter-spacing: -2px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .pastor-card {
+        max-width: 390px;
+    }
+
+    .pastor-photo {
+        height: 390px;
+    }
+
+
+    .section {
+        padding: 65px 20px;
+    }
+
+    .section-heading {
+        margin-bottom: 32px;
+    }
+
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 24px;
+    }
+
+
+    .program-item {
+        grid-template-columns:
+            55px 1fr;
+
+        padding: 14px;
+    }
+
+    .program-item > strong {
+        grid-column: 2;
+
+        font-size: 13px;
+    }
+
+    .program-day {
+        width: 48px;
+        height: 48px;
+    }
+
+
+    .prayer-section {
+        padding: 65px 20px;
+    }
+
+    .audio-card {
+        padding: 12px;
+    }
+
+
+    .youth-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .leader-card {
+        max-width: 390px;
+
+        width: 100%;
+
+        margin: auto;
+    }
+
+    .leader-card img {
+        height: 330px;
+    }
+
+
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .gallery-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .contact-section {
+        padding: 65px 20px;
+    }
+
+}
+
+
+/* =========================
+   PETIT TÉLÉPHONE
+   ========================= */
+
+@media (max-width: 430px) {
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 19px;
+    }
+
+    .logo-text strong {
+        font-size: 16px;
+    }
+
+    .hero h1 {
+        font-size: 44px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .pastor-photo {
+        height: 340px;
+    }
+
+    .program-item {
+        gap: 10px;
+    }
+
+    .program-details h3 {
+        font-size: 15px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsapp-large {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================
+   ACCESSIBILITÉ
+   ========================= */
+
+:focus-visible {
+    outline: 3px solid var(--gold-light);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--gold);
+    color: var(--navy);
+}
